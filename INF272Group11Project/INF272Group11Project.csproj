@@ -103,6 +103,12 @@
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
     <Content Include="Views\Voter\Index.cshtml" />
+    <Content Include="Views\Voter\FindVotingStation.cshtml" />
+    <Content Include="Views\Voter\RegisterVoter.cshtml" />
+    <Content Include="Views\Voter\VoterLogin.cshtml" />
+    <Content Include="Views\Voter\VoterHomePage.cshtml" />
+    <Content Include="Views\Voter\UpdateVoterInfo.cshtml" />
+    <Content Include="Views\Voter\ChangePasswordVoter.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
