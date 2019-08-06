@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CandidateController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\VoterController.cs" />
     <Compile Include="Global.asax.cs">
@@ -124,6 +125,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="Views\Candidate\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
