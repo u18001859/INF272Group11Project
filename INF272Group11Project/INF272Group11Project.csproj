@@ -114,6 +114,7 @@
     <Content Include="Views\Voter\ChangePasswordVoter.cshtml" />
     <Content Include="Views\Staff\Index.cshtml" />
     <Content Include="Views\Voter\ForgotPassword.cshtml" />
+    <Content Include="Views\Candidate\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -125,7 +126,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="ViewModels\" />
-    <Folder Include="Views\Candidate\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
