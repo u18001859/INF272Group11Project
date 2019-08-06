@@ -13,6 +13,8 @@
 <body>
     <h1>Update Info!</h1>
     <div>
+        @using (Html.BeginForm("doVoterUpdate", "Voter"))
+        {
         <label>Address: </label>
         <input id="txtAddress" type="text" name="NewAddress" />
         <br />
@@ -29,7 +31,11 @@
         <input id="txtEmail" type="text" name="Email"/>
         <br />
         <input id="BtnUpdate" type="submit" value="Update" />
+        }
+        @using (Html.BeginForm("VoterHomePage", "Voter"))
+        {
         <input id="BtnCancel" type="submit" value="Cancel" />
+        }
     </div>
 </body>
 </html>

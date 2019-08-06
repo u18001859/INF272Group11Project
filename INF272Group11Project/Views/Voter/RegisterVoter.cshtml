@@ -13,6 +13,8 @@
 <body>
     <h1>Register Voter!</h1>
     <div>
+        @using (Html.BeginForm("AddNewVoter", "Voter"))
+        {
         <label>ID Number: </label>
         <input id="txtVoterIDNumber" type="text" name="VoterIDNumber" />
         <br />
@@ -51,7 +53,11 @@
         <br />
         <br />
         <input id="BtnRegister" type="submit" value="Register" />
+        }
+        @using (Html.BeginForm("Index", "Voter"))
+        {
         <input id="BtnCancel" type="submit" value="Cancel" />
+        }
     </div>
 </body>
 </html>

@@ -13,17 +13,23 @@
 <body>
     <h1>Voter Login!</h1>
     <div> 
+        @using (Html.BeginForm("LogVoterIn", "Voter"))
+        {
         <label>Enter ID Number: </label>
         <input id="txtIDNumber" type="text" name="IDNumber"/>
         <br />
         <label>Enter Password: </label>
         <input id="txtPassword" type="password" name="Password"/>
         <br />
-        <a href="EnterURLHERE">Forgot Password?</a>
+        <a href="@Url.Action("ForgotPassword", "Voter")">Forgot Password?</a>
         <br />
         <br />
         <input id="BtnLogin" type="submit" value="Login" name="Login" />
+        }
+        @using (Html.BeginForm("Index", "Voter"))
+        {
         <input id="BtnCancel" type="submit" value="Cancel" name="Cancel" />
+        }
     </div>
 </body>
 </html>

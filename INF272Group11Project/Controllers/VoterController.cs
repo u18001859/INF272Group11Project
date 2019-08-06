@@ -25,9 +25,19 @@ namespace INF272Group11Project.Controllers
             return View();
         }
 
+        public ActionResult AddNewVoter()
+        {
+            return RedirectToAction("VoterLogin");
+        }
+
         public ActionResult VoterLogin()
         {
             return View();
+        }
+
+        public ActionResult LogVoterIn()
+        {
+            return RedirectToAction("VoterHomePage");
         }
 
         public ActionResult VoterHomePage()
@@ -43,6 +53,31 @@ namespace INF272Group11Project.Controllers
         public ActionResult ChangePasswordVoter()
         {
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult doVoterUpdate()
+        {
+            return RedirectToAction("VoterHomePage");
+        }
+
+        public ActionResult doUpdatePassword()
+        {
+            return RedirectToAction("VoterHomePage");
+        }
+
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        public ActionResult doForgotPasswordUpdate()
+        {
+            return RedirectToAction("VoterLogin");
         }
     }
 }
