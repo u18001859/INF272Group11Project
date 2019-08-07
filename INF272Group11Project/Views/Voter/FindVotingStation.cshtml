@@ -18,6 +18,7 @@
         function VotingStationMap(position) {
             var lat = position.coords.latitude;
             var longit = position.coords.longitude;
+            var latlong = {lat: lat, lng: longit};
             var mapProp = {
                 center: new google.maps.LatLng(lat, longit),
                 zoom: 10,
@@ -25,7 +26,7 @@
             };
 
             var map = new google.maps.Map(document.getElementById("GoogleMap"), mapProp);
-            
+            var marker = new google.maps.Marker({ position: latlong, map: map });
 
         }
     </script>
@@ -33,17 +34,29 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCALAZbiKEHc2TL00jC1Sj38G-HoFiSfRA&callback=myMap" type="text/javascript"></script>
 </head>
 <body>
-    <div>
+    <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
+    <h1 class="PageHeading">Voter Home Page!</h1>
+    <label class="Slogan">The simple and better way to vote</label>
+    <br />
+    <ul class="NavigationBar">
+        <li class="BarList"><a href="@Url.Action("Index","Voter")">Home</a></li>
+        <li class="BarList"><a href="@Url.Action("RegisterVoter", "Voter")">Register To Vote</a></li>
+        <li class="BarList"><a href="@Url.Action("VoterLogin", "Voter")">Voter Login</a></li>
+        <li class="BarList"><a class="OnPage" href="@Url.Action("FindVotingStation", "Voter")">Find Voting Station</a></li>
+        <li class="BarList"><a href="@Url.Action("Index","Staff")">Staff Login</a></li>
+    </ul>
+    <div class="Container">
+        <br />
+        <br />
         <label>ID Number: </label>
-        <input id="txtIDNumber" type="text" name="txtIDNumber"/>
+        <input id="txtIDNumber" type="text" name="txtIDNumber" />
+        <br />
         <br />
         <input id="BtnSearch" type="submit" value="Search" />
         <br />
     </div>
-
+    <br />
     <div id="GoogleMap">
     </div>
-
-    
 </body>
 </html>

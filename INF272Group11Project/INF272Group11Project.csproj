@@ -90,6 +90,8 @@
   <ItemGroup>
     <Content Include="Content\INF272Project.css" />
     <Content Include="Global.asax" />
+    <Content Include="kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" />
+    <Content Include="Vote.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

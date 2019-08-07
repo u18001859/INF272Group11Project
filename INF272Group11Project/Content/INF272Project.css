@@ -1,7 +1,75 @@
 ﻿body {
+    background-color: firebrick;
 }
 
 #GoogleMap {
-    width: 400px;
-    height: 400px
+    width: 100%;
+    height: 400px;
+    margin: auto;
 }
+
+.NavigationBar {
+    list-style-type: none;
+    margin: 0;
+    padding:0;
+    overflow: hidden;
+    background-color: black;
+}
+.OnPage{
+    background-color: blue;
+}
+
+.BarList{
+    float: left;
+}
+
+.BarList a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+}
+
+.BarList a:hover{
+    background-color: skyblue;
+}
+
+#Logo {
+    width: 10%;
+    height: 10%;
+    left: 0%;
+}
+
+#HomePageImage {
+    width: 100%;
+    
+}
+
+.PageHeading{
+    position: absolute;
+    left: 10%;
+    top: 0%;
+}
+
+.Slogan{
+    position: absolute;
+    left: 12%;
+    top: 10%;
+}
+
+.Container {
+    border: 2px solid black;
+    text-align: center;
+    margin: auto;
+    width: 500px;
+}
+
+.SecondaryHead{
+    text-align: center;
+}
+.HomePageDetails{
+    border: 2px solid black;
+    width: 500px;
+    text-align: center;
+}
+
