@@ -9,16 +9,20 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>VoterHomePage</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/INF272Project.css" />
 </head>
 <body>
-    <div>
-        <a href="@Url.Action("Vote","Voter")">Vote</a>
-        <a href="@Url.Action("UpdateVoterInfo", "Voter")">Update Personal Info</a>
-        <a href="@Url.Action("ChangePasswordVoter", "Voter")">Change Password</a>
-        <a href="@Url.Action("Logout","Voter")">Logout</a>
-    </div>
-    <h1>Voter Home Page!</h1>
-    <div> 
+    <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
+    <h1 class="PageHeading">Voter Home Page!</h1>
+    <label class="Slogan">The simple and better way to vote</label>
+    <ul class="NavigationBar">
+        <li class="BarList"><a class="OnPage" href="@Url.Action("Vote","Voter")">Vote</a></li>
+        <li class="BarList"><a href="@Url.Action("UpdateVoterInfo", "Voter")">Update Personal Info</a></li>
+        <li class="BarList"><a href="@Url.Action("ChangePasswordVoter", "Voter")">Change Password</a></li>
+        <li class="BarList"><a href="@Url.Action("Logout","Voter")">Logout</a></li>
+    </ul>
+
+    <div class="Container">
     </div>
 </body>
 </html>

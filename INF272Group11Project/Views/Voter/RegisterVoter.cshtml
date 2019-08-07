@@ -9,54 +9,70 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>RegisterVoter</title>
+    <link rel="stylesheet" href="~/Content/INF272Project.css" type="text/css" />
 </head>
 <body>
-    <h1>Register Voter!</h1>
-    <div>
+    <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
+    <h1 class="PageHeading">Voter Home Page!</h1>
+    <label class="Slogan">The simple and better way to vote</label>
+    <h1 class="SecondaryHead">Register Voter!</h1>
+    <div class="Container">
         @using (Html.BeginForm("AddNewVoter", "Voter"))
         {
-        <label>ID Number: </label>
-        <input id="txtVoterIDNumber" type="text" name="VoterIDNumber" />
-        <br />
-        <label>First Name: </label>
-        <input id="txtFirstName" type="text" name="FirstName" />
-        <br />
-        <label>Last Name: </label>
-        <input id="txtLastName" type="text" name="LastName" />
-        <br />
-        <label>Email Address: </label>
-        <input id="txtEmail" type="text" name="Emailz" />
-        <br />
-        <label>Phone Number: </label>
-        <input id="txtPhoneNumber" type="text" name="PhoneNumber" />
-        <br />
-        <label>Street Address: </label>
-        <input id="txtAddress" type="text" name="Address" />
-        <br />
-        <label>Select Province: </label>
-        <input id="txtDropdownList" type="text" name="Dropdownlist" value="This is a placeholder" />
-        <br />
-        <label>Select City/Town: </label>
-        <input id="txtDropdownList" type="text" name="Dropdownlist" value="This is a placeholder" />
-        <br />
-        <label>Password: </label>
-        <input id="txtPassword" type="password" name="Password" />
-        <br />
-        <label>Confirm Password: </label>
-        <input id="txtConfrimPassword" type="password" name="ConfrimPassword" />
-        <br />
-        <label>Select Security Question: </label>
-        <input id="txtDropdownList" type="text" name="Dropdownlist" value="This is a placeholder" />
-        <br />
-        <label>Security Question: </label>
-        <input id="txtSecurityQuestionAnswer" type="text" name="SecurityAnswer"/>
-        <br />
-        <br />
-        <input id="BtnRegister" type="submit" value="Register" />
+            <br />
+            <label>ID Number: </label>
+            <input id="txtVoterIDNumber" type="text" name="VoterIDNumber" />
+            <br />
+            <br />
+            <label>First Name: </label>
+            <input id="txtFirstName" type="text" name="FirstName" />
+            <br />
+            <br />
+            <label>Last Name: </label>
+            <input id="txtLastName" type="text" name="LastName" />
+            <br />
+            <br />
+            <label>Email Address: </label>
+            <input id="txtEmail" type="text" name="Emailz" />
+            <br />
+            <br />
+            <label>Phone Number: </label>
+            <input id="txtPhoneNumber" type="text" name="PhoneNumber" />
+            <br />
+            <br />
+            <label>Street Address: </label>
+            <input id="txtAddress" type="text" name="Address" />
+            <br />
+            <br />
+            <label>Select Province: </label>
+            <input id="txtDropdownList" type="text" name="Dropdownlist" value="This is a placeholder" />
+            <br />
+            <br />
+            <label>Select City/Town: </label>
+            <input id="txtDropdownList" type="text" name="Dropdownlist" value="This is a placeholder" />
+            <br />
+            <br />
+            <label>Password: </label>
+            <input id="txtPassword" type="password" name="Password" />
+            <br />
+            <br />
+            <label>Confirm Password: </label>
+            <input id="txtConfrimPassword" type="password" name="ConfrimPassword" />
+            <br />
+            <br />
+            <label>Select Security Question: </label>
+            <input id="txtDropdownList" type="text" name="Dropdownlist" value="This is a placeholder" />
+            <br />
+            <br />
+            <label>Security Question: </label>
+            <input id="txtSecurityQuestionAnswer" type="text" name="SecurityAnswer" />
+            <br />
+            <br />
+            <input id="BtnRegister" type="submit" value="Register" />
         }
         @using (Html.BeginForm("Index", "Voter"))
         {
-        <input id="BtnCancel" type="submit" value="Cancel" />
+            <input id="BtnCancel" type="submit" value="Cancel" />
         }
     </div>
 </body>

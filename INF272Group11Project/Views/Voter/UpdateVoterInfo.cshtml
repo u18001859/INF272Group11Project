@@ -9,32 +9,43 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>UpdateVoterInfo</title>
+    <link rel="stylesheet" href="~/Content/INF272Project.css" type="text/css" />
 </head>
 <body>
-    <h1>Update Info!</h1>
-    <div>
+    <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
+    <h1 class="PageHeading">Voter Home Page!</h1>
+    <label class="Slogan">The simple and better way to vote</label>
+    <h1 class="SecondaryHead">Update Info!</h1>
+    <div class="Container">
         @using (Html.BeginForm("doVoterUpdate", "Voter"))
         {
-        <label>Address: </label>
-        <input id="txtAddress" type="text" name="NewAddress" />
-        <br />
-        <label>Province: </label>
-        <input id="txtProvince" type="text" name="Province" value="PlaceHolder" />
-        <br />
-        <label>City/Town: </label>
-        <input id="txtProvince" type="text" name="Province" value="PlaceHolder" />
-        <br />
-        <label>Phone Number: </label>
-        <input id="txtPhoneNumber" type="text" name="PhoneNumber"/>
-        <br />
-        <label>Email Address: </label>
-        <input id="txtEmail" type="text" name="Email"/>
-        <br />
-        <input id="BtnUpdate" type="submit" value="Update" />
+            <br />
+            <br />
+            <label>Address: </label>
+            <input id="txtAddress" type="text" name="NewAddress" />
+            <br />
+            <br />
+            <label>Province: </label>
+            <input id="txtProvince" type="text" name="Province" value="PlaceHolder" />
+            <br />
+            <br />
+            <label>City/Town: </label>
+            <input id="txtProvince" type="text" name="Province" value="PlaceHolder" />
+            <br />
+            <br />
+            <label>Phone Number: </label>
+            <input id="txtPhoneNumber" type="text" name="PhoneNumber" />
+            <br />
+            <br />
+            <label>Email Address: </label>
+            <input id="txtEmail" type="text" name="Email" />
+            <br />
+            <br />
+            <input id="BtnUpdate" type="submit" value="Update" />
         }
         @using (Html.BeginForm("VoterHomePage", "Voter"))
         {
-        <input id="BtnCancel" type="submit" value="Cancel" />
+            <input id="BtnCancel" type="submit" value="Cancel" />
         }
     </div>
 </body>
