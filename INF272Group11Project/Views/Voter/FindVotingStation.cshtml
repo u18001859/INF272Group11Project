@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="~/Content/INF272Project.css" type="text/css" />
 
     <script>
-        if (navigator.geolocation) {
+        
             navigator.geolocation.getCurrentPosition(VotingStationMap);
-        }
+        
         function VotingStationMap(position) {
             var lat = position.coords.latitude;
             var longit = position.coords.longitude;
@@ -57,6 +57,18 @@
     </div>
     <br />
     <div id="GoogleMap">
+    </div>
+
+    <div>
+        <h2>Voting Station Info</h2>
+        <table>
+            <tr>
+                <th>Name:</th>
+                <th>Street Address:</th>
+                <th>Opening Time:</th>
+                <th>Closing Time:</th>
+            </tr>
+        </table>
     </div>
 </body>
 </html>
