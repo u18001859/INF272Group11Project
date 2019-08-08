@@ -8,23 +8,23 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>RegisterVoter</title>
+    <title>RegisterStaff</title>
     <link rel="stylesheet" href="~/Content/INF272Project.css" type="text/css" />
 </head>
 <body>
     <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
-    <h1 class="PageHeading">Voter Home Page!</h1>
+    <h1 class="PageHeading">Staff Home Page!</h1>
     <label class="Slogan">The simple and better way to vote</label>
-    <h1 class="SecondaryHead">Register Voter!</h1>
+    <h1 class="SecondaryHead">Register Staff!</h1>
     <div class="Container">
-        @using (Html.BeginForm("AddNewVoter", "Voter"))
+        @using (Html.BeginForm("AddNewStaff", "Staff"))
         {
             <br />
             <label>ID Number: </label>
-            <input id="txtVoterIDNumber" type="text" name="VoterIDNumber" />
+            <input id="txtStaffIDNumber" type="text" name="StaffIDNumber" />
             <br />
             <br />
-            <label>First Names: </label>
+            <label>First Name: </label>
             <input id="txtFirstName" type="text" name="FirstName" />
             <br />
             <br />
@@ -33,27 +33,11 @@
             <br />
             <br />
             <label>Email Address: </label>
-            <input id="txtEmail" type="text" name="Emailz" />
+            <input id="txtEmail" type="text" name="Email" />
             <br />
             <br />
             <label>Phone Number: </label>
             <input id="txtPhoneNumber" type="text" name="PhoneNumber" />
-            <br />
-            <br />
-            <label>Select Province: </label>
-            <input id="txtDropdownList" type="text" name="Dropdownlist" value="This is a placeholder" />
-            <br />
-            <br />
-            <label>Select City/Town: </label>
-            <input id="txtDropdownList" type="text" name="Dropdownlist" value="This is a placeholder" />
-            <br />
-            <br />
-            <label>Select Suburb: </label>
-            <input id="txtDropdownList" type="text" name="DropdownList" value="This is a placeholder" />
-            <br />
-            <br />
-            <label>Street Address: </label>
-            <input id="txtAddress" type="text" name="Address" />
             <br />
             <br />
             <label>Password: </label>
@@ -74,7 +58,7 @@
             <br />
             <input id="BtnRegister" type="submit" value="Register" />
         }
-        @using (Html.BeginForm("Index", "Voter"))
+        @using (Html.BeginForm("StaffHomePage", "Staff"))
         {
             <input id="BtnCancel" type="submit" value="Cancel" />
         }

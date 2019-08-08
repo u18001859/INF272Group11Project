@@ -1,0 +1,87 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RegisterParty</title>
+    <link rel="stylesheet" href="~/Content/INF272Project.css" type="text/css" />
+</head>
+<body>
+    <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
+    <h1 class="PageHeading">Staff Home Page!</h1>
+    <label class="Slogan">The simple and better way to vote</label>
+    <h1 class="SecondaryHead">Register Party!</h1>
+    <div class="Container">
+        @using (Html.BeginForm("AddNewParty", "Staff"))
+        {
+            <br />
+            <label>Party Name: </label>
+            <input id="txtPartyName" type="text" name="PartyName" />
+            <br />
+            <br />
+            <label>Party Acronym: </label>
+            <input id="txtPartyAcronym" type="text" name="PartyAcronym" value="This is a placeholder" />
+            <br />
+            <br />
+            <label>Party Leader First Name: </label>
+            <input id="txtFirstName" type="text" name="FirstName" />
+            <br />
+            <br />
+            <label>Party Leader Last Name: </label>
+            <input id="txtLastName" type="text" name="LastName" />
+            <br />
+            <br />
+            <label>Party Contact Person: </label>
+            <input id="txtContactPerson" type="text" name="ContactPerson" />
+            <br />
+            <br />
+            <label>Phone Number: </label>
+            <input id="txtPhoneNumber" type="text" name="PhoneNumber" />
+            <br />
+            <br />
+            <label>Email Address: </label>
+            <input id="txtEmail" type="text" name="Email" />
+            <br />
+            <br />
+            <label>Fax: </label>
+            <input id="txtFax" type="text" name="Fax" />
+            <br />
+            <br />
+            <label>Headquarters Provice: </label>
+            <input id="txtProvince" type="text" name="Province" value="This is a placeholder"/>
+            <br />
+            <br />
+            <label>Headquarters City/Town: </label>
+            <input id="txtCityTown" type="text" name="CityTown"/>
+            <br />
+            <br />
+            <label>Headquarters Street Address: </label>
+            <input id="txtStreetAddress" type="text" name="StreetAddress" />
+            <br />
+            <br />
+            <label>Headquarters Postal Address: </label>
+            <input id="txtPostalAddress" type="text" name="PostalAddress" />
+            <br />
+            <br />
+            <label>Headquarters Postal Code: </label>
+            <input id="txtPostalCode" type="text" name="PostalCode" />
+            <br />
+            <br />
+            <label>Website: </label>
+            <input id="txtWebsite" type="text" name="Website" />
+            <br />
+            <br />
+            <input id="BtnRegister" type="submit" value="Next" />
+        }
+        @using (Html.BeginForm("StaffHomePage", "Staff"))
+        {
+            <input id="BtnCancel" type="submit" value="Cancel" />
+        }
+    </div>
+</body>
+</html>

@@ -8,16 +8,16 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>VoterLogin</title>
-    <link rel="stylesheet" href="~/Content/INF272Project.css" type="text/css" />
+    <title>StaffLogin</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/INF272Project.css" />
 </head>
 <body>
     <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
-    <h1 class="PageHeading">Voter Home Page!</h1>
+    <h1 class="PageHeading">Voting Made Easy!</h1>
     <label class="Slogan">The simple and better way to vote</label>
-    <h1 class="SecondaryHead">Voter Login!</h1>
+    <h1 class="SecondaryHead">Staff Login!</h1>
     <div class="Container">
-        @using (Html.BeginForm("LogVoterIn", "Voter"))
+        @using (Html.BeginForm("LogStaffIn", "Staff"))
         {
             <br />
             <br />
@@ -28,7 +28,7 @@
             <label>Enter Password: </label>
             <input id="txtPassword" type="password" name="Password" />
             <br />
-            <a href="@Url.Action("ForgotPassword","Voter")">Forgot Password?</a>
+            <a href="@Url.Action("ForgotPassword", "Staff")">Forgot Password?</a>
             <br />
             <input id="BtnLogin" type="submit" value="Login" name="Login" />
         }
@@ -36,8 +36,6 @@
         {
             <input id="BtnCancel" type="submit" value="Cancel" name="Cancel" />
         }
-    </div>
-    
-    
+     </div>
 </body>
 </html>
