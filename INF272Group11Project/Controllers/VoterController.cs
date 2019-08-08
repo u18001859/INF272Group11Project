@@ -79,5 +79,25 @@ namespace INF272Group11Project.Controllers
         {
             return RedirectToAction("VoterLogin");
         }
+
+        public ActionResult VoteParty()
+        {
+            return View();
+        }
+
+        public ActionResult doVoteParty()
+        {
+            return RedirectToAction("VoteProvincial");
+        }
+
+        public ActionResult VoteProvincial()
+        {
+            return View();
+        }
+
+        public ActionResult doVoteProvincial()
+        {
+            return RedirectToAction("Logout");
+        }
     }
 }
