@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: firebrick;
+    background-color: blanchedalmond;
 }
 
 #GoogleMap {
@@ -10,10 +10,13 @@
 
 .NavigationBar {
     list-style-type: none;
-    margin: 0;
-    padding:0;
+    margin: 50px;
+    font-size: 25px;
+    padding:10px;
     overflow: hidden;
-    background-color: black;
+    background-color: orange;
+    color: aliceblue;
+
 }
 .OnPage{
     background-color: blue;
