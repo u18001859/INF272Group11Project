@@ -116,13 +116,20 @@
     <Content Include="Views\Voter\VoterHomePage.cshtml" />
     <Content Include="Views\Voter\UpdateVoterInfo.cshtml" />
     <Content Include="Views\Voter\ChangePasswordVoter.cshtml" />
-    <Content Include="Views\Staff\Index.cshtml" />
     <Content Include="Views\Voter\ForgotPassword.cshtml" />
     <Content Include="Views\Candidate\Index.cshtml" />
     <Content Include="Views\Candidate\TotalVotes.cshtml" />
     <Content Include="Views\VotingStation\AddVotingStation.cshtml" />
     <Content Include="Views\VotingStation\UpdateDeleteVotingStation.cshtml" />
     <Content Include="Views\VotingStation\UpdateVotingStation.cshtml" />
+    <Content Include="Views\Staff\ChangePasswordStaff.cshtml" />
+    <Content Include="Views\Staff\ForgotPassword.cshtml" />
+    <Content Include="Views\Staff\PartyImages.cshtml" />
+    <Content Include="Views\Staff\RegisterParty.cshtml" />
+    <Content Include="Views\Staff\RegisterStaff.cshtml" />
+    <Content Include="Views\Staff\StaffHomePage.cshtml" />
+    <Content Include="Views\Staff\StaffLogin.cshtml" />
+    <Content Include="Views\Staff\UpdateStaffInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
