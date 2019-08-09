@@ -18,24 +18,19 @@
     color: aliceblue;
 
 }
-.OnPage{
-    background-color: blue;
-}
 
 .BarList{
     float: left;
+    padding: 10px;
 }
 
 .BarList a{
     display: block;
-    color: white;
+    color: aliceblue;
     text-align: center;
     padding: 14px 16px;
 }
 
-.BarList a:hover{
-    background-color: skyblue;
-}
 
 #Logo {
     width: 10%;
