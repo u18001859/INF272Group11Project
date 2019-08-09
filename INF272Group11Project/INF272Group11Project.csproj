@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\INF272Project.css" />
+    <Content Include="Content\RobsStuff.css" />
     <Content Include="Global.asax" />
     <Content Include="kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" />
     <Content Include="Vote.jpg" />
@@ -99,6 +100,7 @@
     <Compile Include="Controllers\CandidateController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\VoterController.cs" />
+    <Compile Include="Controllers\VotingStationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -117,6 +119,10 @@
     <Content Include="Views\Staff\Index.cshtml" />
     <Content Include="Views\Voter\ForgotPassword.cshtml" />
     <Content Include="Views\Candidate\Index.cshtml" />
+    <Content Include="Views\Candidate\TotalVotes.cshtml" />
+    <Content Include="Views\VotingStation\AddVotingStation.cshtml" />
+    <Content Include="Views\VotingStation\UpdateDeleteVotingStation.cshtml" />
+    <Content Include="Views\VotingStation\UpdateVotingStation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
