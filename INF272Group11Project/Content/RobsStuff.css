@@ -1,0 +1,62 @@
+﻿body {
+    background-color: blanchedalmond;
+}
+
+table.Logo {
+    font-size: 25px;
+    margin: 50px;
+    padding: 10px;
+}
+
+table.NavBar {
+    margin: 50px;
+    font-size: 25px;
+    background-color: orange;
+    color: aliceblue;
+    padding: 10px;
+    width: 95%;
+    text-align: center;
+}
+
+a {
+    color: aliceblue;
+}
+
+table.GreyBox {
+    margin: 50px;
+    text-align: center;
+    font-size: 25px;
+    background-color: dimgrey;
+    width: 95%;
+    border: solid;
+    border-radius: 25px;
+}
+
+table.Line {
+    border: solid;
+    width: 95%;
+    margin: 50px;
+}
+
+hr {
+    margin: 50px;
+    color: black;
+    border: solid;
+}
+
+textarea {
+    resize: none;
+}
+
+table.AddVotingStation {
+    width: 30%;
+    font-size: 25px;
+}
+img {
+    width: 100px;
+    height: 100px;
+}
+table.UpDelVS {
+    width: 70%;
+    font-size: 25px;
+}

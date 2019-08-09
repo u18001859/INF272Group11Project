@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/RobsStuff.css">
+    <title>AddVotingStation</title>
+</head>
+<body>
+    <div class="VOTE">
+        <table class="Logo">
+            <tr>
+                <td rowspan="3"><img src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt=":)" /></td>
+                <td><h1>VOTING MADE EASY</h1></td>
+            </tr>
+            <tr>
+                <td>Simple and secure voting</td>
+            </tr>
+            <tr>
+                <td>for your specific party</td>
+            </tr>
+        </table>
+
+        <table class="NavBar">
+            <tr>
+                <td><a href="@Url.Action("Index","Voter")">Home</a></td>
+                <td><a href="@Url.Action("RegisterVoter","Voter")">Register Voter</a></td>
+                <td><a href="@Url.Action("VoterLogin","Voter")">Voter Login</a></td>
+                <td><a href="@Url.Action("StaffLogin","Staff")">Staff Login</a></td>
+                <td><a href="@Url.Action("FindVotingStation","Voter")">Find a Voting Station</a></td>
+                <td><a href="@Url.Action("Index","Voter")">About Us</a></td>
+            </tr>
+        </table>
+
+        <table class="UpDelVS" align="center">
+            <tr>
+                <td align="center" colspan="3"><h1>Please Search for a Voting Station:</h1></td>
+            </tr>
+            <tr>
+                <td align="right" >Voting Station Name:</td>
+                <td align="right" ><textarea id="TextArea1" rows="1" cols="50"></textarea></td>
+            </tr>
+            <tr>
+                <td align="right" >Enter Street Address:</td>
+                <td align="right" ><textarea id="TextArea2" rows="1" cols="50"></textarea></td>
+            </tr>
+            <tr>
+                <td align="right" >Voting District Number:</td>
+                <td align="right" ><textarea id="TextArea5" rows="1" cols="50"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="3" align="right" height="100"><input id="Button4" type="button" value="Search" /></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <textarea id="TextArea1" rows="20" cols="200"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" height="100"><input id="Button1" type="button" value="Update" /></td>
+                <td align="center" height="100"><input id="Button2" type="button" value="Cancel" /></td>
+                <td align="right" height="100"><input id="Button3" type="button" value="Delete" /></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

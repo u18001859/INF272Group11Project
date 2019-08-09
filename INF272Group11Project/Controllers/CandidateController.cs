@@ -13,5 +13,10 @@ namespace INF272Group11Project.Controllers
         {
             return View();
         }
+
+        public ActionResult TotalVotes()
+        {
+            return View();
+        }
     }
 }
