@@ -20,11 +20,11 @@
         @using (Html.BeginForm("AddNewStaff", "Staff"))
         {
             <br />
-            <label>ID Number: </label>
+            <label>User Name: </label>
             <input id="txtStaffIDNumber" type="text" name="StaffIDNumber" />
             <br />
             <br />
-            <label>First Name: </label>
+            <label>First Names: </label>
             <input id="txtFirstName" type="text" name="FirstName" />
             <br />
             <br />
@@ -34,6 +34,10 @@
             <br />
             <label>Email Address: </label>
             <input id="txtEmail" type="text" name="Email" />
+            <br />
+            <br />
+            <label>Staff Position:</label>
+            <input type="text" id="txtPosition" name="txtPostion" value="This Is a Place Holder" />
             <br />
             <br />
             <label>Phone Number: </label>
