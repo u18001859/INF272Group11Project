@@ -24,9 +24,37 @@
         <li class="BarList"><a href="@Url.Action("RegisterParty", "Staff")">Register Party</a></li>
         <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
     </ul>
-    <img id="HomePageImage" src="~/Vote.jpg" alt="PeopleVoting" />
-    <div class="HomePageDetails">
-        <label>Welcome to our voting system!</label>
+    
+    <div>
+        @using (Html.BeginForm("RegisterParty", "Staff"))
+        {
+            <input id="BtnRegisterNewPary" type="submit" value="Register New Party" />
+        }
+        @using (Html.BeginForm("AddVotingStation", "VotingStation"))
+        {
+            <input id="BtnAddVotingStation" type="submit" value="Add Voting Station" />
+        }
+        @using (Html.BeginForm("NationalResults", "Staff"))
+        {
+            <input id="BtnNationalResults" type="submit" value="NationalResults" />
+        }
+        @using (Html.BeginForm("Update/DeleteVotingStation", "VotingStation"))
+        {
+            <input id="BtnUpdateDeleteVotingStation" type="submit" value="Update Or Delete A Voting Station" />
+        }
+        @using (Html.BeginForm("RegisterStaff", "Staff"))
+        {
+            <input id="BtnRegisterStaff" type="submit" value="Register Staff" />
+        }
+        @using (Html.BeginForm("TotalVotes", "Staff"))
+        {
+            <input id="BtnTotalVotes" type="submit" value="Total Votes" />
+        }
+        @using (Html.BeginForm("ProvincialResults", "Staff"))
+        {
+            <input id="BtnProvincialResults" type="submit" value="Provincial Results" />
+        }
+
     </div>
 </body>
 </html>
