@@ -81,5 +81,22 @@ namespace INF272Group11Project.Controllers
         {
             return RedirectToAction("StaffHomePage");
         }
+        public ActionResult UpdateOrDeleteParty()
+        {
+            return View();
+        }
+        public ActionResult UpateParty()
+        {
+            return View();
+        }
+        public ActionResult UpdatePartyImages()
+        {
+            return View();
+        }
+
+        public ActionResult DoUpdateImages()
+        {
+            return RedirectToAction("StaffHomePage");
+        }
     }
 }

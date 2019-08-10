@@ -20,8 +20,10 @@
         <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff")">Home</a></li>
         <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff")">Update Personal Info</a></li>
         <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff")">Change Password</a></li>
-        <li class="BarList"><a href="@Url.Action("RegisterStaff", "Staff")">Register Staff</a></li>
-        <li class="BarList"><a href="@Url.Action("RegisterParty", "Staff")">Register Party</a></li>
+        <li class="BarList"><a href="@Url.Action("Index", "Report")">Create a Report</a></li>
+        <li class="BarList"><a href="@Url.Action("TotalVotes","Candidate")">Total Votes</a></li>
+        <li class="BarList"><a href="@Url.Action("StaffHomePage","Staff")">National Results</a></li>
+        <li class="BarList"><a href="@Url.Action("StaffHomePage","Staff")">Provincial Results</a></li>
         <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
     </ul>
     <h1 class="SecondaryHead">You can use the below tools to insert, update, or delete information from the system!</h1>
@@ -30,21 +32,21 @@
         {
             <input id="BtnRegisterNewParty" type="submit" value="Register New Party" />
         }
+        @using (Html.BeginForm("UpdateOrDeleteParty","Staff"))
+        {
+            <input id="BtnUpdateParty" type="submit" value="Update Or Delete Party" />
+        }
         @using (Html.BeginForm("AddCandidate", "Candidate"))
         {
             <input id="BtnAddCandidate" type="submit" value="Add Candidate" name="CandidateAdd"/>
         }
         @using (Html.BeginForm("SearchCandidate", "Candidate"))
         {
-            <input id="BtnSearchCandidate" type="submit" value="Search Candidate" name="SearchCandidate"/>
+            <input id="BtnSearchCandidate" type="submit" value="Update Or Delete Candidate" name="SearchCandidate"/>
         }
         @using (Html.BeginForm("AddVotingStation", "VotingStation"))
         {
             <input id="BtnAddVotingStation" type="submit" value="Add Voting Station" />
-        }
-        @using (Html.BeginForm("NationalResults", "Staff"))
-        {
-            <input id="BtnNationalResults" type="submit" value="NationalResults" />
         }
         @using (Html.BeginForm("UpdateDeleteVotingStation", "VotingStation"))
         {
@@ -53,14 +55,6 @@
         @using (Html.BeginForm("RegisterStaff", "Staff"))
         {
             <input id="BtnRegisterStaff" type="submit" value="Register Staff" />
-        }
-        @using (Html.BeginForm("TotalVotes", "Candidate"))
-        {
-            <input id="BtnTotalVotes" type="submit" value="Total Votes" />
-        }
-        @using (Html.BeginForm("ProvincialResults", "Staff"))
-        {
-            <input id="BtnProvincialResults" type="submit" value="Provincial Results" />
         }
 
     </div>

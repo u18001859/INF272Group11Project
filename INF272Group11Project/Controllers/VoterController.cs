@@ -97,7 +97,12 @@ namespace INF272Group11Project.Controllers
 
         public ActionResult doVoteProvincial()
         {
-            return RedirectToAction("Logout");
+            return RedirectToAction("ThankYou");
+        }
+
+        public ActionResult ThankYou()
+        {
+            return View();
         }
     }
 }

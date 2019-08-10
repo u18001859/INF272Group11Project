@@ -16,7 +16,29 @@
     <h1 class="PageHeading">Voter Home Page!</h1>
     <label class="Slogan">The simple and better way to vote</label>
     <h1 class="SecondaryHead">Vote for Party!</h1>
-    <div class="Container">
-    </div>
+
+    <table>
+        <tr>
+            <th>Party Name:</th>
+            <th>Party Acronym:</th>
+            <th>Party Candidate:</th>
+            <th>Party Candidate Image:</th>
+            <th>Party Logo:</th>
+            <th>Vote:</th>
+        </tr>
+        <tr>
+            <td>Party Name</td>
+            <td>PN</td>
+            <td>Candidate Name</td>
+            <td>Candidate Image</td>
+            <td>Party Logo</td>
+            <td>
+                @using (Html.BeginForm("doVoteParty", "Voter"))
+                {
+                    <input id="BtnVoteParty" type="submit" value="Vote" />
+                }
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

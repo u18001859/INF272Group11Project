@@ -16,7 +16,27 @@
     <h1 class="PageHeading">Voter Home Page!</h1>
     <label class="Slogan">The simple and better way to vote</label>
     <h1 class="SecondaryHead">Vote for Provincial Government!</h1>
-    <div class="Container">
-    </div>
+    
+    <table>
+        <tr>
+            <th>Party Name:</th>
+            <th>Party Acronym:</th>
+            <th>Candidate Name:</th>
+            <th>Party Image:</th>
+            <th>Vote:</th>
+        </tr>
+        <tr>
+            <td>Party Name</td>
+            <td>PN</td>
+            <td>Candidate Name</td>
+            <td>Party Image</td>
+            <td>
+                @using (Html.BeginForm("doVoteProvincial", "Voter"))
+                {
+                    <input id="BtnVote" type="submit" value="Vote"/>
+                }
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
