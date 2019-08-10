@@ -1,0 +1,72 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Update Candidate</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/INF272Project.css" />
+</head>
+<body>
+    <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
+    <h1 class="PageHeading">Voting Made Easy!</h1>
+    <label class="Slogan">The simpler and better way to vote</label>
+    <ul class="NavigationBar">
+        <li class="BarList"><a href="@Url.Action("Index","Voter")">Home</a></li>
+        <li class="BarList"><a href="@Url.Action("RegisterVoter", "Voter")">Register To Vote</a></li>
+        <li class="BarList"><a href="@Url.Action("VoterLogin", "Voter")">Voter Login</a></li>
+        <li class="BarList"><a class="OnPage" href="@Url.Action("FindVotingStation", "Voter")">Find Voting Station</a></li>
+        <li class="BarList"><a href="@Url.Action("StaffLogin","Staff")">Staff Login</a></li>
+    </ul>
+    <h1 class="SecondaryHead">Update Candidate</h1>
+    <div class="Container">
+        @using (Html.BeginForm("Update", "Candidate"))
+        {
+            <br />
+            <p class="error">
+                <label>@ViewBag.Error1</label>
+            </p>
+            <label>First Names:</label>
+            @:&nbsp;
+            <input type="text" id="txtFirstNames" name="FirstNames" />
+            <br />
+            <p class="error">
+                <label>@ViewBag.Error2</label>
+            </p>
+            <label>Last Name:</label>
+            @:&nbsp;
+            <input type="text" id="txtLastName" name="LastName" />
+            <br />
+            <p class="error">
+                <label>@ViewBag.Error3</label>
+            </p>
+            <label>Party:</label>
+            @:&nbsp;
+            <input type="text" id="txtDropdownList1" name="Party" value="(placeholder)" />
+            <br />
+            <p class="error">
+                <label>@ViewBag.Error4</label>
+            </p>
+            <label>Position:</label>
+            @:&nbsp;
+            <input type="text" id="txtDropdownList2" name="Position" value="(placeholder)" />
+            <br />
+            <br />
+            <input type="submit" name="submitButton" id="btnUpdate" value="Update" />
+            @:&nbsp;
+            @:&nbsp;
+            @:&nbsp;
+            @:&nbsp;
+            @:&nbsp;
+            @:&nbsp;
+            @:&nbsp;
+            @:&nbsp;
+            <input type="submit" name="submitButton" id="btnCancel" value="Cancel" />
+        }
+    </div>
+</body>
+</html>
