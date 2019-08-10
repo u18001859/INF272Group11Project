@@ -15,6 +15,17 @@
     <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
     <h1 class="PageHeading">Voting Made Easy!</h1>
     <label class="Slogan">The simple and better way to vote</label>
+    <ul class="NavigationBar">
+        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff")">Home</a></li>
+        <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff")">Update Personal Info</a></li>
+        <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff")">Change Password</a></li>
+        <li class="BarList"><a href="@Url.Action("Index", "Report")">Create a Report</a></li>
+        <li class="BarList"><a href="@Url.Action("TotalVotes","Candidate")">Total Votes</a></li>
+        <li class="BarList"><a href="@Url.Action("StaffHomePage","Staff")">National Results</a></li>
+        <li class="BarList"><a href="@Url.Action("StaffHomePage","Staff")">Provincial Results</a></li>
+        <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
+    </ul>
+
     <h1 class="SecondaryHead">Register Party!</h1>
     <div class="Container">
         @using (Html.BeginForm("AddNewParty", "Staff"))
@@ -45,11 +56,11 @@
             <br />
             <br />
             <label>Headquarters Provice: </label>
-            <input id="txtProvince" type="text" name="Province" value="This is a placeholder"/>
+            <input id="txtProvince" type="text" name="Province" value="This is a placeholder" />
             <br />
             <br />
             <label>Headquarters City/Town: </label>
-            <input id="txtCityTown" type="text" name="CityTown"/>
+            <input id="txtCityTown" type="text" name="CityTown" />
             <br />
             <br />
             <label>Headquarter Suburb: </label>

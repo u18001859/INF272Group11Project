@@ -98,6 +98,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CandidateController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\VoterController.cs" />
     <Compile Include="Controllers\VotingStationController.cs" />
@@ -130,6 +131,16 @@
     <Content Include="Views\Staff\StaffHomePage.cshtml" />
     <Content Include="Views\Staff\StaffLogin.cshtml" />
     <Content Include="Views\Staff\UpdateStaffInfo.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Staff\UpateParty.cshtml" />
+    <Content Include="Views\Staff\UpdateOrDeleteParty.cshtml" />
+    <Content Include="Views\Staff\UpdatePartyImages.cshtml" />
+    <Content Include="Views\Report\ProvincialReport.cshtml" />
+    <Content Include="Views\Report\NationalReport.cshtml" />
+    <Content Include="Views\Report\MakeNationalReport.cshtml" />
+    <Content Include="Views\Voter\VoteParty.cshtml" />
+    <Content Include="Views\Voter\VoteProvincial.cshtml" />
+    <Content Include="Views\Voter\ThankYou.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
