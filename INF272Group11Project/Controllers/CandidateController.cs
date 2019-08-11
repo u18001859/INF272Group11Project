@@ -77,8 +77,8 @@ namespace INF272Group11Project.Controllers
                 ViewBag.Error2 = "Please select a candidate";
             }
             return View();
-        }
-
+ 
+ 
         public ActionResult Choice(string PartyName, string Candidate, string submitButton)
         {
             switch (submitButton)
@@ -165,6 +165,11 @@ namespace INF272Group11Project.Controllers
         public ActionResult Delete()
         {
             return RedirectToAction("UpdateOrDeleteCandidate", "Candidate");
+        }
+        
+        public ActionResult TotalVotes()
+        {
+            return View();
         }
     }
 }
