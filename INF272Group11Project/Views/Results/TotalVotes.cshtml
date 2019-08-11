@@ -2,47 +2,33 @@
 
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="~/Content/RobsStuff.css">
+        <link rel="stylesheet" type="text/css" href="~/Content/INF272Project.css">
     </head>
     <body>
-        <div class="VOTE">
-            <table class="Logo">
-                <tr>
-                    <td rowspan="3" valign="bottom"><img src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt=":)" /></td>
-                    <td><h1>VOTING MADE EASY</h1></td>
-                </tr>
-                <tr>
-                    <td>Simple and secure voting</td>
-                </tr>
-                <tr>
-                    <td>for your specific party</td>
-                </tr>
-            </table>
+            <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
+            <h1 class="PageHeading">Voting Made Easy!</h1>
+            <label class="Slogan">The simpler and better way to vote</label>
+            <ul class="NavigationBar">
+                <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff")">Home</a></li>
+                <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff")">Update Personal Info</a></li>
+                <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff")">Change Password</a></li>
+                <li class="BarList"><a href="@Url.Action("Index", "Report")">Create a Report</a></li>
+                <li class="BarList"><a href="@Url.Action("TotalVotes","Results")">Total Votes</a></li>
+                <li class="BarList"><a href="@Url.Action("NationalResults","Results")">National Results</a></li>
+                <li class="BarList"><a href="@Url.Action("ProvincialResults","Results")">Provincial Results</a></li>
+                <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
+            </ul>
 
-            <table class="NavBar">
-                <tr>
-                    <td><a href="@Url.Action("StaffHomePage","Staff")">Staff Home</a></td>
-                    <td><a href="@Url.Action("RegisterParty","Staff")">Register Party</a></td>
-                    <td><a href="">National Results</a></td>
-                    <td><a href="">Provincial Results</a></td>
-                    <td><a href="@Url.Action("RegisterStaff","Staff")">Staff Register</a></td>
-                </tr>
-            </table>
-
-            <table class="GreyBox">
-                <tr>
-                    <td align="center" colspan="2"><h1>Total Votes:</h1></td>
-                </tr>
-                <tr>
-                    <td align="right">Election Year:</td>
-                    <td align="left">Total Votes:</td>
-                </tr>
-                <tr>
-                    <td align="right"><textarea id="TextArea1" rows="1" cols="20"></textarea></td>
-                    <td align="left"><textarea id="TextArea2" rows="1" cols="20"></textarea></td>
-                </tr>
-            </table>
-            <hr />
-        </div>
+            <h1 class="SecondaryHead">Total Votes!</h1>
+        <table>
+            <tr>
+                <th>Election Date:</th>
+                <th>Total Votes:</th>
+            </tr>
+            <tr>
+                <td>Election Date</td>
+                <td>Total Number Of Votes for Election</td>
+            </tr>
+        </table>
     </body>
 </html>

@@ -33,5 +33,10 @@ namespace INF272Group11Project.Controllers
         {
             return View();
         }
+
+        public ActionResult PrintReport()
+        {
+            return View();
+        }
     }
 }

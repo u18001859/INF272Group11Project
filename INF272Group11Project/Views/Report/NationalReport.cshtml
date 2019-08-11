@@ -55,7 +55,14 @@
             </select>
             <br />
             <br />
-            <input id="BtnCreateReport" type="submit" value="Create Report"/>
+            <label>Order Of Results</label>
+            <select id="dropdowntipo">
+                <option value="ascending">Ascending</option>
+                <option value="descending">Descending</option>
+            </select>
+            <br />
+            <br />
+            <input id="BtnCreateReport" type="submit" value="Create Report" />
         }
         @using (Html.BeginForm("StaffHomePage", "Staff"))
         {

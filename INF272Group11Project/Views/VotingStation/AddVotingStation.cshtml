@@ -11,10 +11,14 @@
         <label class="Slogan">The simple and better way to vote</label>
 
         <ul class="NavigationBar">
-                <li class="BarList"><a href="@Url.Action("StaffHomePage","Staff")">Home</a></li>
-                <li class="BarList"><a href="@Url.Action("RegisterStaff","Staff")">Register Staff</a></li>
-                <li class="BarList"><a href="@Url.Action("RegisterParty","Staff")">Register a Party</a></li>
-                <li class="BarList"><a href="@Url.Action("Logout","Voter")">Logout</a></li>
+            <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff")">Home</a></li>
+            <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff")">Update Personal Info</a></li>
+            <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff")">Change Password</a></li>
+            <li class="BarList"><a href="@Url.Action("Index", "Report")">Create a Report</a></li>
+            <li class="BarList"><a href="@Url.Action("TotalVotes","Candidate")">Total Votes</a></li>
+            <li class="BarList"><a href="@Url.Action("StaffHomePage","Staff")">National Results</a></li>
+            <li class="BarList"><a href="@Url.Action("StaffHomePage","Staff")">Provincial Results</a></li>
+            <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
         </ul>
         <h1 class="SecondaryHead">Please Add A Voting Station!</h1>
         <div class="Container">

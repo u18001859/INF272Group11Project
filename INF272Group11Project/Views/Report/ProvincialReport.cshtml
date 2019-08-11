@@ -26,7 +26,40 @@
         <li class="BarList"><a href="@Url.Action("StaffHomePage","Staff")">Provincial Results</a></li>
         <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
     </ul>
+    <h1 class="SecondaryHead">Please enter the information below in order to create the report</h1>
     <div>
+        @using (Html.BeginForm("MakeProvincialReport", "Report"))
+        {
+            <br />
+            <br />
+            <label>Select Election Start Date: </label>
+            <select id="dropdowntipo">
+                <option value="Election1">ElectionYear1</option>
+                <option value="Election2">ElectionYear2</option>
+                <option value="Election3">ElectionYear3</option>
+            </select>
+            <br />
+            <br />
+            <label>Select Election End Date: </label>
+            <select id="dropdowntipo">
+                <option value="Election1">ElectionYear1</option>
+                <option value="Election2">ElectionYear2</option>
+                <option value="Election3">ElectionYear3</option>
+            </select>
+            <br />
+            <br />
+            <select id="dropdowntipo">
+                <option value="ascending">Ascending</option>
+                <option value="descending">Descending</option>
+            </select>
+            <br />
+            <br />
+            <input id="BtnCreateReport" type="submit" value="Create Report" />
+        }
+        @using (Html.BeginForm("StaffHomePage", "Staff"))
+        {
+            <input id="BtnCancel" type="submit" value="Cancel" />
+        }
     </div>
 </body>
 </html>

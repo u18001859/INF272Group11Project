@@ -21,13 +21,14 @@
         <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff")">Update Personal Info</a></li>
         <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff")">Change Password</a></li>
         <li class="BarList"><a href="@Url.Action("Index", "Report")">Create a Report</a></li>
-        <li class="BarList"><a href="@Url.Action("TotalVotes","Candidate")">Total Votes</a></li>
-        <li class="BarList"><a href="@Url.Action("StaffHomePage","Staff")">National Results</a></li>
-        <li class="BarList"><a href="@Url.Action("StaffHomePage","Staff")">Provincial Results</a></li>
+        <li class="BarList"><a href="@Url.Action("TotalVotes","Results")">Total Votes</a></li>
+        <li class="BarList"><a href="@Url.Action("NationalResults","Results")">National Results</a></li>
+        <li class="BarList"><a href="@Url.Action("ProvincialResults","Results")">Provincial Results</a></li>
         <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
     </ul>
     <h1 class="SecondaryHead">You can use the below tools to insert, update, or delete information from the system!</h1>
     <div class="Container">
+
         @using (Html.BeginForm("RegisterParty", "Staff"))
         {
             <input id="BtnRegisterNewParty" type="submit" value="Register New Party" />
@@ -43,13 +44,6 @@
         @using (Html.BeginForm("UpdateOrDeleteCandidate", "Candidate"))
         {
             <input id="BtnSearchCandidate" type="submit" value="Update Or Delete Candidate" name="UpdateOrDeleteCandidate"/>
-        @using (Html.BeginForm("AddCandidate", "Candidate"))
-        {
-            <input id="BtnAddCandidate" type="submit" value="Add Candidate" name="CandidateAdd"/>
-        }
-        @using (Html.BeginForm("SearchCandidate", "Candidate"))
-        {
-            <input id="BtnSearchCandidate" type="submit" value="Update Or Delete Candidate" name="SearchCandidate"/>
         }
         @using (Html.BeginForm("AddVotingStation", "VotingStation"))
         {
