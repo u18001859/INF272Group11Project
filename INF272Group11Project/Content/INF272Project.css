@@ -1,5 +1,6 @@
-﻿body {
+body {
     background-color: blanchedalmond;
+    font-family: Calibre;
 }
 
 #GoogleMap {
@@ -81,3 +82,85 @@ table, tr, th, td{
 h2{
     text-align: center;
 }
+
+.NavigationBar {
+    list-style-type: none;
+    margin: 50px;
+    font-size: 25px;
+    padding:10px;
+    overflow: hidden;
+    background-color: orange;
+    color: aliceblue;
+
+}
+
+.BarList{
+    float: left;
+    padding: 10px;
+}
+
+.BarList a{
+    display: block;
+    color: aliceblue;
+    text-align: center;
+    padding: 14px 16px;
+}
+
+
+#Logo {
+    width: 10%;
+    height: 10%;
+    left: 0%;
+}
+
+.HomePageImage {
+    margin: auto;
+    width: 100%;
+    
+}
+
+.PageHeading{
+    position: absolute;
+    left: 10%;
+    top: 0%;
+}
+
+.Slogan{
+    position: absolute;
+    left: 12%;
+    top: 10%;
+}
+
+.Container {
+    background-color: lightgoldenrodyellow;
+    border: 2px solid black;
+    text-align: center;
+    margin: auto;
+    width: 500px;
+}
+
+.SecondaryHead{
+    text-align: center;
+}
+.HomePageDetails{
+    border: 2px solid black;
+    width: 500px;
+    text-align: center;
+}
+
+table, tr, th, td {
+    border: 2px solid black;
+    text-align: center;
+    margin: auto;
+    font-size: 16px;
+    border-collapse: collapse;
+    background-color: tan;
+}
+
+h2{
+    text-align: center;
+}
+.error {
+    color: maroon;
+}
+

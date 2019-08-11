@@ -99,6 +99,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CandidateController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\VoterController.cs" />
     <Compile Include="Controllers\VotingStationController.cs" />
@@ -118,6 +119,7 @@
     <Content Include="Views\Voter\UpdateVoterInfo.cshtml" />
     <Content Include="Views\Voter\ChangePasswordVoter.cshtml" />
     <Content Include="Views\Voter\ForgotPassword.cshtml" />
+    <Content Include="Views\Results\TotalVotes.cshtml" />
     <Content Include="Views\Candidate\Index.cshtml" />
     <Content Include="Views\Candidate\TotalVotes.cshtml" />
     <Content Include="Views\VotingStation\AddVotingStation.cshtml" />
@@ -140,7 +142,12 @@
     <Content Include="Views\Report\MakeNationalReport.cshtml" />
     <Content Include="Views\Voter\VoteParty.cshtml" />
     <Content Include="Views\Voter\VoteProvincial.cshtml" />
-    <Content Include="Views\Voter\ThankYou.cshtml" />
+    <Content Include="Views\Voter\ThankYou.cshtml"/>
+    <Content Include="Views\Candidate\RegisterCandidate.cshtml" />
+    <Content Include="Views\Candidate\UpdateOrDeleteCandidate.cshtml" />
+    <Content Include="Views\Candidate\UpdateCandidate.cshtml" />
+    <Content Include="Views\Results\NationalResults.cshtml" />
+    <Content Include="Views\Results\ProvincialResults.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

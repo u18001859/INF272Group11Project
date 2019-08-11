@@ -36,6 +36,13 @@
         {
             <input id="BtnUpdateParty" type="submit" value="Update Or Delete Party" />
         }
+        @using (Html.BeginForm("RegisterCandidate", "Candidate"))
+        {
+            <input id="BtnRegisterCandidate" type="submit" value="Register Candidate" name="RegisterCandidate"/>
+        }
+        @using (Html.BeginForm("UpdateOrDeleteCandidate", "Candidate"))
+        {
+            <input id="BtnSearchCandidate" type="submit" value="Update Or Delete Candidate" name="UpdateOrDeleteCandidate"/>
         @using (Html.BeginForm("AddCandidate", "Candidate"))
         {
             <input id="BtnAddCandidate" type="submit" value="Add Candidate" name="CandidateAdd"/>
