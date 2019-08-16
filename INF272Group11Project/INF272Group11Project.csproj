@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
+    <Content Include="National Results.pdf" />
     <None Include="packages.config" />
     <Content Include="Views\Voter\Index.cshtml" />
     <Content Include="Views\Voter\FindVotingStation.cshtml" />
@@ -120,7 +121,6 @@
     <Content Include="Views\Voter\ChangePasswordVoter.cshtml" />
     <Content Include="Views\Voter\ForgotPassword.cshtml" />
     <Content Include="Views\Results\TotalVotes.cshtml" />
-    <Content Include="Views\Candidate\TotalVotes.cshtml" />
     <Content Include="Views\VotingStation\AddVotingStation.cshtml" />
     <Content Include="Views\VotingStation\UpdateDeleteVotingStation.cshtml" />
     <Content Include="Views\VotingStation\UpdateVotingStation.cshtml" />
@@ -148,6 +148,7 @@
     <Content Include="Views\Results\NationalResults.cshtml" />
     <Content Include="Views\Results\ProvincialResults.cshtml" />
     <Content Include="Views\Report\MakeProvincialReport.cshtml" />
+    <Content Include="Provincial Results.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

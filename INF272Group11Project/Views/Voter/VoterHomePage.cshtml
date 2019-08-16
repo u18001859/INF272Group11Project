@@ -16,6 +16,7 @@
     <h1 class="PageHeading">Voting Made Easy!</h1>
     <label class="Slogan">The simple and better way to vote</label>
     <ul class="NavigationBar">
+        <li class="BarList"><a href="@Url.Action("VoterHomePage","Voter")"></a></li>
         <li class="BarList"><a class="OnPage" href="@Url.Action("VoteParty","Voter")">Vote</a></li>
         <li class="BarList"><a href="@Url.Action("UpdateVoterInfo", "Voter")">Update Personal Info</a></li>
         <li class="BarList"><a href="@Url.Action("ChangePasswordVoter", "Voter")">Change Password</a></li>
@@ -26,6 +27,7 @@
     <br />
     <br />
     <br />
+    <h1 class="SecondaryHead">Welcome To The Voter Home Page Here You Can Vote For A Party And Update Your Information</h1>
     <h2>Your Personal Details</h2>
     <table>
         <tr>
@@ -39,7 +41,14 @@
             <th>Street Address:</th>
         </tr>
         <tr>
-
+            <td>Voters First Name</td>
+            <td>Voters Last Name</td>
+            <td>Voters Email Address</td>
+            <td>Voters Phone Number</td>
+            <td>Voters Province</td>
+            <td>Voters City/Town</td>
+            <td>Voters Suburb</td>
+            <td>Voters Street Address</td>
         </tr>
     </table>
 </body>

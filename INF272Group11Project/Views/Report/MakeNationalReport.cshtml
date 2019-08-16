@@ -15,28 +15,25 @@
     <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
     <h1 class="PageHeading">Voting Made Easy!</h1>
     <label class="Slogan">The simple and better way to vote</label>
+    <br />
+    <ul class="NavigationBar">
+        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff")">Home</a></li>
+        <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff")">Update Personal Info</a></li>
+        <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff")">Change Password</a></li>
+        <li class="BarList"><a href="@Url.Action("Index", "Report")">Create a Report</a></li>
+        <li class="BarList"><a href="@Url.Action("TotalVotes","Candidate")">Total Votes</a></li>
+        <li class="BarList"><a href="@Url.Action("StaffHomePage","Staff")">National Results</a></li>
+        <li class="BarList"><a href="@Url.Action("StaffHomePage","Staff")">Provincial Results</a></li>
+        <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
+    </ul>
     <h1 class="SecondaryHead">Here is a preview of the report!</h1>
-    @using (Html.BeginForm("PrintReport","Report"))
+    @using (Html.BeginForm("PrintReport", "Report"))
     {
-    <table>
-        <tr>
-            <th>Election Date:</th>
-            <th>Province:</th>
-            <th>Party:</th>
-            <th>Total Votes:</th>
-            <th>Vote Percentage:</th>
-        </tr>
-        <tr>
-            <td>Election Date</td>
-            <td>Province Name</td>
-            <td>Parties</td>
-            <td>Votes Per Party</td>
-            <td>Vote Percentage Per Party</td>
-        </tr>
-    </table>
-    <input id="BtnPrintReport" type="submit" value="Print Report" />
+        <object id="ReadReport" data="@Url.Action("GetNationalReport","Report")" type="application/pdf"></object>
+
+        <input id="BtnPrintReport" type="submit" value="Print Report" />
     }
-    @using (Html.BeginForm("StaffHomePage","Staff"))
+    @using (Html.BeginForm("NationalReport", "Report"))
     {
         <input id="BtnCancel" type="submit" value="Cancel" />
     }

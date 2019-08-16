@@ -27,7 +27,7 @@
         <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
     </ul>
     <h1 class="SecondaryHead">Please enter the information below in order to create the report</h1>
-    <div>
+    <div class="Container">
         @using (Html.BeginForm("MakeProvincialReport", "Report"))
         {
             <br />
@@ -48,6 +48,7 @@
             </select>
             <br />
             <br />
+            <label>Select Listing Order:</label>
             <select id="dropdowntipo">
                 <option value="ascending">Ascending</option>
                 <option value="descending">Descending</option>
@@ -56,7 +57,7 @@
             <br />
             <input id="BtnCreateReport" type="submit" value="Create Report" />
         }
-        @using (Html.BeginForm("StaffHomePage", "Staff"))
+        @using (Html.BeginForm("Index", "Report"))
         {
             <input id="BtnCancel" type="submit" value="Cancel" />
         }

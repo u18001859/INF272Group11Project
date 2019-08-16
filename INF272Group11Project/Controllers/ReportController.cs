@@ -38,5 +38,18 @@ namespace INF272Group11Project.Controllers
         {
             return View();
         }
+
+        public FileResult GetProvinceReport()
+        {
+            string URL = "C:\\Users\\sebas\\Source\\Repos\\INF272Group11Project9\\INF272Group11Project\\Provincial Results.pdf";
+            byte[] ReadFile = System.IO.File.ReadAllBytes(URL);
+            return File(ReadFile, "application/pdf");
+        }
+        public FileResult GetNationalReport()
+        {
+            string URL = "C:\\Users\\sebas\\Source\\Repos\\INF272Group11Project9\\INF272Group11Project\\National Results.pdf";
+            byte[] ReadFile = System.IO.File.ReadAllBytes(URL);
+            return File(ReadFile, "application/pdf");
+        }
     }
 }

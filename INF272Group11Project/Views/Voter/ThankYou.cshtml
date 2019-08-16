@@ -15,7 +15,15 @@
     <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
     <h1 class="PageHeading">Voter Home Page!</h1>
     <label class="Slogan">The simple and better way to vote</label>
+    <br />
+    <ul class="NavigationBar">
+        <li class="BarList"><a class="OnPage" href="@Url.Action("Index","Voter")">Home</a></li>
+        <li class="BarList"><a href="@Url.Action("UpdateVoterInfo", "Voter")">Update Personal Info</a></li>
+        <li class="BarList"><a href="@Url.Action("ChangePasswordVoter", "Voter")">Change Password</a></li>
+        <li class="BarList"><a href="@Url.Action("Logout","Voter")">Logout</a></li>
+    </ul>
 
     <h1 class="SecondaryHead">Thank You For Voting!</h1>
+    <h3 class="SecondaryHead">You can return to the home page clicking Home.</h3>
 </body>
 </html>
