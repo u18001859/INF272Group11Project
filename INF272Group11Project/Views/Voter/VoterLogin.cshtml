@@ -17,7 +17,7 @@
     <label class="Slogan">The simple and better way to vote</label>
     <h1 class="SecondaryHead">Please Enter Your Login Information!</h1>
     <div class="Container">
-        @using (Html.BeginForm("LogVoterIn", "Voter"))
+        @using (Html.BeginForm("LogVoterIn", "Voter", FormMethod.Post))
         {
             <br />
             <br />

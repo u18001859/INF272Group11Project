@@ -1,4 +1,4 @@
-﻿
+﻿@model INF272Group11Project.Models.Voter
 @{
     Layout = null;
 }
@@ -25,7 +25,7 @@
     </ul>
     <h1 class="SecondaryHead">Please Enter your details below and click "Register".</h1>
     <div class="Container">
-        @using (Html.BeginForm("AddNewVoter", "Voter"))
+        @using (Html.BeginForm("AddNewVoter", "Voter", FormMethod.Post))
         {
             <br />
             <label>ID Number: </label>
@@ -41,35 +41,23 @@
             <br />
             <br />
             <label>Email Address: </label>
-            <input id="txtEmail" type="text" name="Emailz" />
+            <input id="txtEmail" type="text" name="Email" />
             <br />
             <br />
             <label>Phone Number: </label>
             <input id="txtPhoneNumber" type="text" name="PhoneNumber" />
             <br />
             <br />
-            <label>Select Province: </label>
-            <select id="dropdowntipo">
-                <option value="Province1">Province1</option>
-                <option value="Province2">Province2</option>
-                <option value="Province3">Province3</option>
-            </select>
+            @Html.LabelFor(model => model.Suburb.CityOrTown.ProvinceID, "Select a Province: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DropDownList("ProvinceID", null, htmlAttributes: new { @class = "form-control" })
             <br />
             <br />
-            <label>Select City/Town: </label>
-            <select id="dropdowntipo">
-                <option value="City/Town1">City/Town1</option>
-                <option value="City/Town2">City/Town2</option>
-                <option value="City/Town3">City/Town3</option>
-            </select>
+            @Html.LabelFor(model => model.Suburb.CityOrTownID, "Select a City Or Town: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DropDownList("CityOrTownID", null, htmlAttributes: new { @class = "form-control" })
             <br />
             <br />
-            <label>Select Suburb: </label>
-            <select id="dropdowntipo">
-                <option value="Suburb1">Suburb1</option>
-                <option value="Suburb2">Suburb2</option>
-                <option value="Suburb3">Suburb3</option>
-            </select>
+            @Html.LabelFor(model => model.SuburbID, "Select a suburb: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DropDownList("SuburbID", null, htmlAttributes: new { @class = "form-control" })
             <br />
             <br />
             <label>Street Address: </label>
@@ -84,15 +72,11 @@
             <input id="txtConfrimPassword" type="password" name="ConfrimPassword" />
             <br />
             <br />
-            <label>Select Security Question: </label>
-            <select id="dropdowntipo">
-                <option value="Question1">Question1</option>
-                <option value="Question2">Question2</option>
-                <option value="Question3">Question3</option>
-            </select>
+            @Html.LabelFor(model => model.SecurityQuestionID, "Select a Security Question: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DropDownList("SecurityQuestionID", null, htmlAttributes: new { @class = "form-control" })
             <br />
             <br />
-            <label>Security Question: </label>
+            <label>Security Question Answer: </label>
             <input id="txtSecurityQuestionAnswer" type="text" name="SecurityAnswer" />
             <br />
             <br />
