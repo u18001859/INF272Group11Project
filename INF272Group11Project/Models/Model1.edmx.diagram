@@ -18,7 +18,7 @@
         <EntityTypeShape EntityType="VotingSystemProjectModel.Staff" Width="1.5" PointX="12.5" PointY="17.625" IsExpanded="true" />
         <EntityTypeShape EntityType="VotingSystemProjectModel.StaffPosition" Width="1.5" PointX="10.25" PointY="20.5" IsExpanded="true" />
         <EntityTypeShape EntityType="VotingSystemProjectModel.Suburb" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="VotingSystemProjectModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VotingSystemProjectModel.sysdiagram" Width="1.5" PointX="5" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="VotingSystemProjectModel.Voter" Width="1.5" PointX="12.5" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="VotingSystemProjectModel.VotingStation" Width="1.5" PointX="7.5" PointY="16.5" IsExpanded="true" />
         <AssociationConnector Association="VotingSystemProjectModel.FK__Candidate__Candi__2A4B4B5E" ManuallyRouted="false" />
