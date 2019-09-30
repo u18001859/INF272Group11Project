@@ -1,4 +1,8 @@
-﻿
+﻿@model INF272Group11Project.ViewModels.CandidateVM
+@using INF272Group11Project.ViewModels
+@using System.Globalization
+@using System.Data
+
 @{
     Layout = null;
 }
@@ -29,54 +33,48 @@
     <div class="Container">
         @using (Html.BeginForm("Update", "Candidate"))
         {
-            <br />
-            <p class="error">
-                <label>@ViewBag.Error1</label>
-            </p>
-            <label>First Names:</label>
-            @:&nbsp;
-            <input type="text" id="txtFirstNames" name="FirstNames" />
-            <br />
-            <p class="error">
-                <label>@ViewBag.Error2</label>
-            </p>
-            <label>Last Name:</label>
-            @:&nbsp;
-            <input type="text" id="txtLastName" name="LastName" />
-            <br />
-            <p class="error">
-                <label>@ViewBag.Error3</label>
-            </p>
-            <label>Party:</label>
-            @:&nbsp;
-        <select>
-            <option value="Party1">Party1</option>
-            <option value="Party2">Party2</option>
-            <option value="Party3">Party3</option>
-         </select>
-            <br />
-            <p class="error">
-                <label>@ViewBag.Error4</label>
-            </p>
-            <label>Position:</label>
-            @:&nbsp;
-    <select>
-        <option value="Position1">Position1</option>
-        <option value="Position2">Position2</option>
-        <option value="Position3">Position3</option>
-    </select>
-            <br />
-            <br />
-            <input type="submit" name="submitButton" id="btnUpdate" value="Update" />
-            @:&nbsp;
-            @:&nbsp;
-            @:&nbsp;
-            @:&nbsp;
-            @:&nbsp;
-            @:&nbsp;
-            @:&nbsp;
-            @:&nbsp;
-            <input type="submit" name="submitButton" id="btnCancel" value="Cancel" />
+        <br />
+        <p class="error">
+            <label>@ViewBag.Error1</label>
+        </p>
+        <label>First Names:</label>
+        @:&nbsp;
+        <input type="text" id="txtFirstNames" name="FirstNames" />
+        <br />
+        <p class="error">
+            <label>@ViewBag.Error2</label>
+        </p>
+        <label>Last Name:</label>
+        @:&nbsp;
+        <input type="text" id="txtLastName" name="LastName" />
+        <br />
+        <p class="error">
+            <label>@ViewBag.Error3</label>
+        </p>
+        <label>Party:</label>
+        @:&nbsp;
+        @Html.DropDownListFor(i => i.PartyID, Model.Parties, "-Please select a party", new { @class = "form-control" })
+        <br />
+        <p class="error">
+            <label>@ViewBag.Error4</label>
+        </p>
+        <label>Position:</label>
+        @:&nbsp;
+
+        @Html.DropDownListFor(i => i.CandidatePosition_ID, Model.Positions, "-Please select a position", new { @class = "form-control" })
+
+        <br />
+        <br />
+        <input type="submit" name="submitButton" id="btnUpdate" value="Update" />
+        @:&nbsp;
+        @:&nbsp;
+        @:&nbsp;
+        @:&nbsp;
+        @:&nbsp;
+        @:&nbsp;
+        @:&nbsp;
+        @:&nbsp;
+        <input type="submit" name="submitButton" id="btnCancel" value="Cancel" />
         }
     </div>
 </body>

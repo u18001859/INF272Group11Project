@@ -31,31 +31,37 @@
 
         @using (Html.BeginForm("RegisterParty", "Staff"))
         {
-            <input id="BtnRegisterNewParty" type="submit" value="Register New Party" />
+        <input id="BtnRegisterNewParty" type="submit" value="Register New Party" />
         }
         @using (Html.BeginForm("UpdateOrDeleteParty","Staff"))
         {
-            <input id="BtnUpdateParty" type="submit" value="Update Or Delete Party" />
+        <input id="BtnUpdateParty" type="submit" value="Update Or Delete Party" />
         }
         @using (Html.BeginForm("RegisterCandidate", "Candidate"))
         {
-            <input id="BtnRegisterCandidate" type="submit" value="Register Candidate" name="RegisterCandidate"/>
+        <input id="BtnRegisterCandidate" type="submit" value="Register Candidate" name="RegisterCandidate" />
         }
         @using (Html.BeginForm("UpdateOrDeleteCandidate", "Candidate"))
         {
-            <input id="BtnSearchCandidate" type="submit" value="Update Or Delete Candidate" name="UpdateOrDeleteCandidate"/>
+        <input id="BtnSearchCandidate" type="submit" value="Update Or Delete Candidate" name="UpdateOrDeleteCandidate" />
         }
         @using (Html.BeginForm("AddVotingStation", "VotingStation"))
         {
-            <input id="BtnAddVotingStationStaffHome" type="submit" value="Add Voting Station" />
+        <input id="BtnAddVotingStationStaffHome" type="submit" value="Add Voting Station" />
         }
         @using (Html.BeginForm("UpdateDeleteVotingStation", "VotingStation"))
         {
-            <input id="BtnUpdateDeleteVotingStation" type="submit" value="Update Or Delete A Voting Station" />
+        <input id="BtnUpdateDeleteVotingStation" type="submit" value="Update Or Delete A Voting Station" />
         }
         @using (Html.BeginForm("RegisterStaff", "Staff"))
         {
-            <input id="BtnRegisterStaff" type="submit" value="Register Staff" />
+        <input id="BtnRegisterStaff" type="submit" value="Register Staff" />
+        }
+
+        @if ((string)TempData["Message"] != null)
+        {
+        <label>@TempData["Message"].ToString()</label>
+
         }
 
     </div>
