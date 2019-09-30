@@ -18,9 +18,27 @@ namespace INF272Group11Project.Controllers
         {
             return View();
         }
-        public ActionResult LogStaffIn()
+        public ActionResult LogStaffIn(string UserName, string Password)
         {
-            return RedirectToAction("StaffHomePage");
+            var _UserName = UserName;
+            var _Password = Password;
+
+            if (UserName == null || Password == null)
+            {
+                ViewBag.Message = "Please enter your Login details.";
+            }
+            else
+            {
+                if (UserName == "")
+                {
+
+                }
+                else
+                {
+                    return RedirectToAction("StaffHomePage");
+                }
+            }
+            return RedirectToAction("StaffLogin");
         }
 
         public ActionResult ForgotPassword()
