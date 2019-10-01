@@ -16,13 +16,13 @@
     <h1 class="PageHeading">Voting Made Easy!</h1>
     <label class="Slogan">The simpler and better way to vote</label>
     <ul class="NavigationBar">
-        <li class="BarList"><a href="@Url.Action("StaffHomePage","Staff")">Home</a></li>
+        <li class="BarList"><a href="@Url.Action("StaffHomePage", "Staff")">Home</a></li>
         <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff")">Update Personal Info</a></li>
         <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff")">Change Password</a></li>
         <li class="BarList"><a href="@Url.Action("Index", "Report")">Create a Report</a></li>
-        <li class="BarList"><a href="@Url.Action("TotalVotes","Results")">Total Votes</a></li>
-        <li class="BarList"><a href="@Url.Action("NationalResults","Results")">National Results</a></li>
-        <li class="BarList"><a href="@Url.Action("ProvincialResults","Results")">Provincial Results</a></li>
+        <li class="BarList"><a href="@Url.Action("TotalVotes", "Results")">Total Votes</a></li>
+        <li class="BarList"><a href="@Url.Action("NationalResults", "Results")">National Results</a></li>
+        <li class="BarList"><a href="@Url.Action("ProvincialResults", "Results")">Provincial Results</a></li>
         <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
     </ul>
     <h1 class="SecondaryHead">National Results:</h1>
@@ -35,12 +35,9 @@
                 <th><b>Total Votes:</b></th>
                 <th><b>Vote Percentage:</b></th>
             </tr>
-            <tr>
-                <td>Party</td>
-                <td>Candidate Name</td>
-                <td>Total Votes</td>
-                <td>Vote Percentage</td>
-            <tr>
+            @{ 
+               //I am supposed to generate the table here from the database but again my brain is potato and I cant figure it out
+            }
         </table>
         <br />
         @using (Html.BeginForm("StaffHomePage", "Staff"))

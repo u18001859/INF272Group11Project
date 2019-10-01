@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7b8a97615ad34f37b3696c9ebafbf071" Name="Diagram1">
+      <Diagram DiagramId="c763f20975ee4c6f94e2c292959577c9" Name="Diagram1">
         <EntityTypeShape EntityType="VotingSystemProjectModel.Candidate" Width="1.5" PointX="9.75" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="VotingSystemProjectModel.CandidatePosition" Width="1.5" PointX="7.5" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="VotingSystemProjectModel.CityOrTown" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
@@ -21,22 +21,22 @@
         <EntityTypeShape EntityType="VotingSystemProjectModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="VotingSystemProjectModel.Voter" Width="1.5" PointX="12.5" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="VotingSystemProjectModel.VotingStation" Width="1.5" PointX="7.5" PointY="16.5" IsExpanded="true" />
-        <AssociationConnector Association="VotingSystemProjectModel.FK__Candidate__Candi__2A4B4B5E" ManuallyRouted="false" />
-        <AssociationConnector Association="VotingSystemProjectModel.FK__Candidate__Party__2B3F6F97" ManuallyRouted="false" />
-        <AssociationConnector Association="VotingSystemProjectModel.FK__CityOrTow__Provi__1CF15040" ManuallyRouted="false" />
-        <AssociationConnector Association="VotingSystemProjectModel.FK__Suburb__CityOrTo__1FCDBCEB" ManuallyRouted="false" />
-        <AssociationConnector Association="VotingSystemProjectModel.FK__NationalR__Elect__403A8C7D" ManuallyRouted="false" />
-        <AssociationConnector Association="VotingSystemProjectModel.FK__Provincia__Elect__3B75D760" ManuallyRouted="false" />
-        <AssociationConnector Association="VotingSystemProjectModel.FK__NationalR__Party__412EB0B6" ManuallyRouted="false" />
-        <AssociationConnector Association="VotingSystemProjectModel.FK__Party__SuburbID__22AA2996" ManuallyRouted="false" />
-        <AssociationConnector Association="VotingSystemProjectModel.FK__PartyImag__party__25869641" ManuallyRouted="false" />
-        <AssociationConnector Association="VotingSystemProjectModel.FK__Provincia__Party__3D5E1FD2" ManuallyRouted="false" />
-        <AssociationConnector Association="VotingSystemProjectModel.FK__Provincia__Provi__3C69FB99" ManuallyRouted="false" />
-        <AssociationConnector Association="VotingSystemProjectModel.FK__Staff__SecurityQ__32E0915F" ManuallyRouted="false" />
-        <AssociationConnector Association="VotingSystemProjectModel.FK__Voter__SecurityQ__35BCFE0A" ManuallyRouted="false" />
-        <AssociationConnector Association="VotingSystemProjectModel.FK__Staff__StaffPosi__31EC6D26" ManuallyRouted="false" />
-        <AssociationConnector Association="VotingSystemProjectModel.FK__Voter__SuburbID__36B12243" ManuallyRouted="false" />
-        <AssociationConnector Association="VotingSystemProjectModel.FK__VotingSta__Subur__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="VotingSystemProjectModel.FK__Candidate__Candi__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="VotingSystemProjectModel.FK__Candidate__Party__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="VotingSystemProjectModel.FK__CityOrTow__Provi__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="VotingSystemProjectModel.FK__Suburb__CityOrTo__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="VotingSystemProjectModel.FK__NationalR__Elect__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="VotingSystemProjectModel.FK__Provincia__Elect__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="VotingSystemProjectModel.FK__NationalR__Party__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="VotingSystemProjectModel.FK__Party__SuburbID__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="VotingSystemProjectModel.FK__PartyImag__party__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="VotingSystemProjectModel.FK__Provincia__Party__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="VotingSystemProjectModel.FK__Provincia__Provi__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="VotingSystemProjectModel.FK__Staff__SecurityQ__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="VotingSystemProjectModel.FK__Voter__SecurityQ__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="VotingSystemProjectModel.FK__Staff__StaffPosi__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="VotingSystemProjectModel.FK__Voter__SuburbID__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="VotingSystemProjectModel.FK__VotingSta__Subur__60A75C0F" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

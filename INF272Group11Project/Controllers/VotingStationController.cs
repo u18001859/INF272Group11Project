@@ -11,16 +11,19 @@ namespace INF272Group11Project.Controllers
         // GET: VotingStation
         public ActionResult AddVotingStation()
         {
+            //Im gonn start with this one on the 3rd
             return View();
         }
 
         public ActionResult UpdateDeleteVotingStation()
         {
+            //same with this one
             return View();
         }
 
         public ActionResult UpdateVotingStation()
         {
+            //same with this one
             return View();
         }
 
