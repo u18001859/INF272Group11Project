@@ -31,24 +31,24 @@
     </ul>
     <h1 class="SecondaryHead">Update or Delete Candidate</h1>
     <div class="Container">
-        @using (Html.BeginForm("Choice", "Candidate"))
+        @using (Html.BeginForm("Choice", "Candidate", FormMethod.Post))
         {
-            <p class="error">
+            @*<p class="error">
                 <label>@ViewBag.Error1</label>
             </p>
             <label>Party Name:</label>
             @:&nbsp;
-    <select>
-        @Html.DropDownListFor(i => i.PartyID, Model.Parties, "-Please select a party", new { @class = "form-control" })
-    </select>
-            <br />
+
+            @Html.DropDownListFor(i => i.SelectedPartyID, Model.Parties, "-Please select a party-", new { @class = "form-control", Name = "Party" })
+
+            <br />*@
             <p class="error">
                 <label>@ViewBag.Error2</label>
             </p>
             <label>Candidate:</label>
             @:&nbsp;
 
-        @Html.DropDownListFor(i => i.CandidatePosition_ID, Model.Positions, "-Please select a position", new { @class = "form-control" })
+            @Html.DropDownListFor(i => i.SelectedCandidatePosition_ID, Model.Candidates, "-Please select a candidate-", new { @class = "form-control", Name = "Candidate" })
 
             <br />
             <br />
@@ -66,6 +66,8 @@
             @:&nbsp;
             @:&nbsp;
             <input type="submit" name="submitButton" id="btnCancel" value="Cancel" />
+
+            <label>@ViewBag.Num</label>
         }
     </div>
 </body>

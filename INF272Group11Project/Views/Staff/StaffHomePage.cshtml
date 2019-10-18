@@ -45,6 +45,10 @@
         {
             <input id="BtnSearchCandidate" type="submit" value="Update Or Delete Candidate" name="UpdateOrDeleteCandidate" />
         }
+        @using (Html.BeginForm("AddCandidatePosition", "Candidate"))
+        {
+            <input id="AddCandidatePosition" type="submit" value="Add Candidate Position" name="AddCandidatePosition" />
+        }
         @using (Html.BeginForm("AddVotingStation", "VotingStation"))
         {
             <input id="BtnAddVotingStationStaffHome" type="submit" value="Add Voting Station" />

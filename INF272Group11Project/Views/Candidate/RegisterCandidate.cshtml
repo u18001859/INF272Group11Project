@@ -51,7 +51,7 @@
             <label>Party:</label>
             @:&nbsp;
 
-                @*@Html.DropDownListFor(i => i.PartyID, Model.Parties, "-Please select a party", new { @class = "form-control" })*@
+            @Html.DropDownListFor(i => i.SelectedPartyID, Model.Parties, "-Please select a party-", new { @class = "form-control", Name = "Party" })
 
             <br />
             <p class="error">
@@ -60,7 +60,16 @@
             <label>Position:</label>
             @:&nbsp;
 
-               @*@Html.DropDownListFor(i => i.CandidatePosition_ID, Model.Positions, "-Please select a position", new { @class = "form-control" })*@
+            @Html.DropDownListFor(e => e.SelectedCandidatePosition_ID, Model.Positions, "-Please select a position-", new { @class = "form-control", Name = "Position" })
+
+            <br />
+            <p class="error">
+                <label>@ViewBag.Error5</label>
+            </p>
+            <label>Province:</label>
+            @:&nbsp;
+
+            @Html.DropDownListFor(t => t.SelectedProvinceID, Model.Provinces, "-Please select a province-", new { @class = "form-control", Name = "Province" })
 
             <br />
             <br />
@@ -74,6 +83,7 @@
             @:&nbsp;
             @:&nbsp;
             <input type="submit" name="submitButton" id="btnCancel" value="Cancel" />
+
         }
     </div>
 </body>

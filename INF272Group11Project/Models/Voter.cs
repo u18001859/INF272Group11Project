@@ -22,11 +22,18 @@ namespace INF272Group11Project.Models
         public string VoterEmail { get; set; }
         public string VoterPhoneNumber { get; set; }
         public string VoterStreetAddress { get; set; }
-        public bool VotingStatus { get; set; }
+        public bool VotePartyStatus { get; set; }
+        public bool VoteProvinceStatus { get; set; }
         public string SecurityQuestionAnswer { get; set; }
         public Nullable<int> SecurityQuestionID { get; set; }
         public Nullable<int> SuburbID { get; set; }
+        public Nullable<int> ProvinceID { get; set; }
+        public Nullable<int> CityorTownID { get; set; }
+        public string GUID { get; set; }
+        public System.DateTime GUIDTimeStamp { get; set; }
     
+        public virtual CityOrTown CityOrTown { get; set; }
+        public virtual Province Province { get; set; }
         public virtual SecurityQuestion SecurityQuestion { get; set; }
         public virtual Suburb Suburb { get; set; }
     }
