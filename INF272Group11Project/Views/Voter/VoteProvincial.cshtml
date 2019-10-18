@@ -1,4 +1,4 @@
-﻿
+﻿@model INF272Group11Project.ViewModels.VotingViewModel
 @{
     Layout = null;
 }
@@ -25,18 +25,23 @@
             <th>Party Image:</th>
             <th>Vote:</th>
         </tr>
+        @foreach (var item in Model.listcandidate)
+        {
+
+
         <tr>
-            <td>Party Name</td>
-            <td>PN</td>
-            <td>Candidate Name</td>
-            <td>Party Image</td>
+            <td>@item.Party.PartyName</td>
+            <td>@item.Party.PartyAccronym</td>
+            <td>@item.CandidateFirstNames @item.CandidateLastName</td>
+            <td>Add Party Picture</td>
             <td>
-                @using (Html.BeginForm("doVoteProvincial", "Voter"))
+                @using (Html.BeginForm("doVoteProvincial", "Voter", FormMethod.Post, new { VoterGUID = Model.voterView.voter.GUID, id = Model.voterView.voter.VoterID, PartyID = item.Party.PartyID, provinceID = item.ProvinceID}))
                 {
                     <input id="BtnVote" type="submit" value="Vote"/>
                 }
             </td>
         </tr>
+        }
     </table>
 </body>
 </html>

@@ -1,4 +1,4 @@
-USE master
+USE Master
 GO
 
 CREATE DATABASE VotingSystemProject
@@ -13,6 +13,16 @@ ProvinceID int identity NOT NULL PRIMARY KEY,
 ProvinceName VARCHAR(50) NOT NULL
 )
 
+INSERT INTO Province (ProvinceName) VALUES('Western Cape')
+INSERT INTO Province (ProvinceName) VALUES('Eastern Cape')
+INSERT INTO Province (ProvinceName) VALUES('Northern Cape')
+INSERT INTO Province (ProvinceName) VALUES('North West')
+INSERT INTO Province (ProvinceName) VALUES('Limpopo')
+INSERT INTO Province (ProvinceName) VALUES('Kwazulu Natal')
+INSERT INTO Province (ProvinceName) VALUES('Gauteng')
+INSERT INTO Province (ProvinceName) VALUES('Free State')
+INSERT INTO Province (ProvinceName) VALUES('Mpumalanga')
+
 CREATE TABLE CityOrTown
 (
 CityOrTownID int identity NOT NULL Primary KEY,
@@ -20,12 +30,24 @@ CityOrTownName VARCHAR(50) NOT NULL,
 ProvinceID int FOREIGN KEY REFERENCES Province(ProvinceID)
 )
 
+INSERT INTO CityOrTown (CityOrTownName, ProvinceID) VALUES ('Cape Town','1')
+INSERT INTO CityOrTown (CityOrTownName, ProvinceID) VALUES ('Port Elizibeth','2')
+INSERT INTO CityOrTown (CityOrTownName, ProvinceID) VALUES ('Springbok','3')
+INSERT INTO CityOrTown (CityOrTownName, ProvinceID) VALUES ('Rustenburg','4')
+INSERT INTO CityOrTown (CityOrTownName, ProvinceID) VALUES ('Polokwane','5')
+INSERT INTO CityOrTown (CityOrTownName, ProvinceID) VALUES ('Durban','6')
+INSERT INTO CityOrTown (CityOrTownName, ProvinceID) VALUES ('Pretoria','7')
+INSERT INTO CityOrTown (CityOrTownName, ProvinceID) VALUES ('Bloemfontein','8')
+INSERT INTO CityOrTown (CityOrTownName, ProvinceID) VALUES ('Nelspruit','9')
+
 CREATE TABLE Suburb
 (
 SuburbID int identity NOT NULL PRIMARY KEY,
 SuburbName VARCHAR(50) NOT NULL,
 CityOrTownID int FOREIGN KEY REFERENCES CityOrTown(CityOrTownID)
 )
+
+INSERT INTO Suburb (SuburbName, CityOrTownID) VALUES ('Hatfield', '7')
 
 CREATE TABLE Party
 (
@@ -73,6 +95,10 @@ SecurityQuestionID int identity NOT NULL PRIMARY KEY,
 SecurityQuestion VARCHAR(50) NOT NULL
 )
 
+INSERT INTO SecurityQuestion (SecurityQuestion) VALUES ('What is your mothers maiden name?')
+INSERT INTO SecurityQuestion (SecurityQuestion) VALUES ('What is your favourite Dogs name?')
+INSERT INTO SecurityQuestion (SecurityQuestion) VALUES ('What is your favourite colour?')
+
 CREATE TABLE Staff
 (
 StaffID int identity NOT NULL PRIMARY KEY,
@@ -82,15 +108,17 @@ Staff_FirstNames VARCHAR(50) NOT NULL,
 Staff_LastName VARCHAR(50) NOT NULL,
 StaffPhoneNumber VARCHAR(50) NOT NULL,
 StaffEmail VARCHAR(50) NOT NULL,
-StaffSecurityQuestionAnswer VARCHAR(50) NOT NULL,
+StaffSecurityQuestionAnswer VARCHAR(MAX) NOT NULL,
 StaffPositionID int FOREIGN KEY REFERENCES StaffPosition(StaffPositionID),
-SecurityQuestionID int FOREIGN KEY REFERENCES SecurityQuestion(SecurityQuestionID)
+SecurityQuestionID int FOREIGN KEY REFERENCES SecurityQuestion(SecurityQuestionID),
+GUID VARCHAR(100) Not Null,
+GUIDTimeStamp DateTime Not NUll
 )
 
 CREATE TABLE Voter
 (
 VoterID int identity NOT NULL PRIMARY KEY,
-VoterIDNumber VARCHAR(100) NOT NULL,
+VoterIDNumber VARCHAR(MAX) NOT NULL,
 VoterPassword VARCHAR(MAX) NOT NULL,
 VoterFirstNames VARCHAR(50) NOT NULL,
 VoterLastName VARCHAR(50) NOT NULL,
@@ -98,9 +126,11 @@ VoterEmail VARCHAR(50) NOT NULL,
 VoterPhoneNumber VARCHAR(50) NOT NULL,
 VoterStreetAddress VARCHAR(50) NOT NULL,
 VotingStatus bit NOT NULL,
-SecurityQuestionAnswer VARCHAR(50) NOT NULL,
+SecurityQuestionAnswer VARCHAR(MAX) NOT NULL,
 SecurityQuestionID int FOREIGN KEY REFERENCES SecurityQuestion(SecurityQuestionID),
-SuburbID int FOREIGN KEY REFERENCES Suburb(SuburbID)
+SuburbID int FOREIGN KEY REFERENCES Suburb(SuburbID),
+GUID VARCHAR(100) Not Null,
+GUIDTimeStamp DateTime Not NUll
 )
 
 CREATE TABLE Election

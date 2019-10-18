@@ -19,8 +19,10 @@ namespace INF272Group11Project.Models
         public string CandidateLastName { get; set; }
         public Nullable<int> CandidatePosition_ID { get; set; }
         public Nullable<int> PartyID { get; set; }
+        public Nullable<int> ProvinceID { get; set; }
     
         public virtual CandidatePosition CandidatePosition { get; set; }
         public virtual Party Party { get; set; }
+        public virtual Province Province { get; set; }
     }
 }

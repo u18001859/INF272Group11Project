@@ -13,10 +13,10 @@ namespace INF272Group11Project.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class VotingSystemProjectEntities : DbContext
+    public partial class VotingSystemProjectEntities2 : DbContext
     {
-        public VotingSystemProjectEntities()
-            : base("name=VotingSystemProjectEntities")
+        public VotingSystemProjectEntities2()
+            : base("name=VotingSystemProjectEntities2")
         {
         }
     

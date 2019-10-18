@@ -17,7 +17,8 @@
     <h1 class="PageHeading">Voting Made Easy!</h1>
     <label class="Slogan">The simple and better way to vote</label>
     <h1 class="SecondaryHead">Please Enter Your Login Information!</h1>
-    <p style="color: red">@ViewBag.message</p>
+    <h1 class="SecondaryHead" style="color: red;">@ViewBag.message</h1>
+    <h1 class="SecondaryHead" style="color: green;">@ViewBag.success</h1>
     <div class="Container">
         @using (Html.BeginForm("LogVoterIn", "Voter", FormMethod.Post))
         {

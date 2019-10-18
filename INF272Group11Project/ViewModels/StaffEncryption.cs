@@ -2,22 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using INF272Group11Project.Models;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace INF272Group11Project.ViewModels
 {
-    public class RegisterVoterVM
+    public class StaffEncryption
     {
-        public List<Province> Provinces;
-        public List<CityOrTown> CityOrTowns;
-        public List<Suburb> suburbs;
-        public List<SecurityQuestion> SecurityQuestions;
-        public int? id;
-        public List<Voter> VoterList;
-        public VoterVM voterView;
-
+        
         public string HashedData(string placeholder)
         {
             using (SHA256 h = SHA256.Create())
