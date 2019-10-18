@@ -1,4 +1,4 @@
-﻿
+﻿@model INF272Group11Project.Models.NationalResult
 @{
     Layout = null;
 }
@@ -35,8 +35,28 @@
                 <th><b>Total Votes:</b></th>
                 <th><b>Vote Percentage:</b></th>
             </tr>
-            @{ 
-               //I am supposed to generate the table here from the database but again my brain is potato and I cant figure it out
+            @{
+                int temp = 0;
+                for (int i = 0; i < ((SelectList)ViewData["NationalResultsID"]).Count(); i++)
+                {
+                    temp += Convert.ToInt32(((SelectList)ViewData["NationalResultsTotalVotes"]).ElementAt(i).Value);
+                }
+                for (int j = 0; j < ((SelectList)ViewData["NationalResultsID"]).Count(); j++)
+                {
+                    <tr>
+                        <th>
+                            @(((SelectList)ViewData["NationalResultsID"]).ElementAt(j).Value)
+                        </th>
+                        <th>
+                        </th>
+                        <th>
+                            @(((SelectList)ViewData["NationalResultsTotalVotes"]).ElementAt(j).Value)
+                        </th>
+                        <th>
+                            @(Convert.ToDecimal(((SelectList)ViewData["NationalResultsTotalVotes"]).ElementAt(j).Value)/temp*100 + "%")
+                        </th>
+                    </tr>
+                }
             }
         </table>
         <br />

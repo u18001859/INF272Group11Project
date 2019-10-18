@@ -1,4 +1,5 @@
 ﻿using INF272Group11Project.Models;
+using INF272Group11Project.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,18 +10,22 @@ namespace INF272Group11Project.Controllers
 {
     public class ResultsController : Controller
     {
+        VotingSystemProjectEntities2 Resultsdb = new VotingSystemProjectEntities2();
+        ResultsVM results = new ResultsVM();
         // GET: Results
         public ActionResult TotalVotes()
         {
-            VotingSystemProjectEntities2 Resultsdb = new VotingSystemProjectEntities2();
-            List<Election> electionList = Resultsdb.Elections.ToList();
+            
             //Theres supposed to be stuff here but my brain is literal garbage rn and I cant figure it out
             return View();
         }
 
         public ActionResult NationalResults()
         {
-            //Im gonna start working on this tomorrow
+            ViewBag.PartyID = new SelectList(Resultsdb.Parties, "PartyID", "PartyName");
+            ViewBag.CandidateID = new SelectList(Resultsdb.Candidates, "CandidateID", "CandidateFirstNames", "CandidateLastName");
+            ViewBag.NationalResultsID = new SelectList(Resultsdb.NationalResults, "NationalResultsID", "NationalResultsID");
+            ViewBag.NationalResultsTotalVotes = new SelectList(Resultsdb.NationalResults, "NationalResultsTotalVotes", "NationalResultsTotalVotes");
             return View();
         }
 
