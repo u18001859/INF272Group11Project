@@ -7,13 +7,12 @@ using INF272Group11Project.Models;
 
 namespace INF272Group11Project.ViewModels
 {
-    public class ResultsVM
+    public class TotalResultsVM
     {
         public List<Party> Parties;
         public List<Candidate> Candidates;
         public List<NationalResult> Results;
-        public ResultsVM resultsView;
+        public NationalResultsVM resultsView;
 
-        
     }
 }
