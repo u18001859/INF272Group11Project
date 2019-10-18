@@ -195,6 +195,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\NationalResultsVM.cs" />
+    <Compile Include="ViewModels\ProvincialResultsVM.cs" />
     <Compile Include="ViewModels\TotalResultsVM.cs" />
   </ItemGroup>
   <ItemGroup>

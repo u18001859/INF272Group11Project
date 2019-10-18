@@ -37,13 +37,33 @@
                 <th><b>Total Votes:</b></th>
                 <th><b>Vote Percentage</b></th>
             </tr>
-            <tr>
-                <td>Province</td>
-               <td>Party</td>
-                <td>Candidate Name</td>
-               <td>Total Votes</td>
-                <td>Vote Percentage</td>
-            <tr>
+            @{
+                int temp = 0;
+                for (int i = 0; i < ((SelectList)ViewData["ProvincialResultsID"]).Count(); i++)
+                {
+                    temp += Convert.ToInt32(((SelectList)ViewData["ProvincialResultsTotalVotes"]).ElementAt(i).Value);
+                }
+                for (int j = 0; j < ((SelectList)ViewData["ProvincialResultsID"]).Count(); j++)
+                {
+                    <tr>
+                        <th>
+                            @(((SelectList)ViewData["ProvinceID"]).ElementAt(j).Value)
+                        </th>
+                        <th>
+                            @(((SelectList)ViewData["PartyID"]).ElementAt(j).Value)
+                        </th>
+                        <th>
+                            @(((SelectList)ViewData["CandidateID"]).ElementAt(j).Value)
+                        </th>
+                        <th>
+                            @(((SelectList)ViewData["ProvincialResultsTotalVotes"]).ElementAt(j).Value)
+                        </th>
+                        <th>
+                            @(Convert.ToDecimal(((SelectList)ViewData["ProvincialResultsTotalVotes"]).ElementAt(j).Value) / temp * 100 + "%")
+                        </th>
+                    </tr>
+                }
+            }
         </table>
         <br />
         <br />

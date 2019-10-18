@@ -24,7 +24,7 @@ namespace INF272Group11Project.Controllers
         public ActionResult NationalResults()
         {
             ViewBag.PartyID = new SelectList(Resultsdb.Parties, "PartyID", "PartyName");
-            ViewBag.CandidateID = new SelectList(Resultsdb.Candidates, "CandidateID", "CandidateFirstNames", "CandidateLastName");
+            ViewBag.CandidateID = new SelectList(Resultsdb.Candidates, "CandidateID", "CandidateLastName");
             ViewBag.NationalResultsID = new SelectList(Resultsdb.NationalResults, "NationalResultsID", "NationalResultsID");
             ViewBag.NationalResultsTotalVotes = new SelectList(Resultsdb.NationalResults, "NationalResultsTotalVotes", "NationalResultsTotalVotes");
             return View();
@@ -32,9 +32,13 @@ namespace INF272Group11Project.Controllers
 
         public ActionResult ProvincialResults(string DropdownList)
         {
-            //dropdownlist selection reloads form with results by province
+            ViewBag.ElectionID = new SelectList(Resultsdb.Elections, "ElectionID", "ElectionID");
+            ViewBag.PartyID = new SelectList(Resultsdb.Parties, "PartyID", "PartyName");
+            ViewBag.ProvinceID = new SelectList(Resultsdb.Provinces, "ProvinceID", "ProvinceName");
+            ViewBag.ProvincialResultsID = new SelectList(Resultsdb.ProvincialResults, "ProvincialResultsID", "ProvincialResultsID");
+            ViewBag.ProvincialResultsTotalVotes = new SelectList(Resultsdb.ProvincialResults, "ProvincialResultsTotalVotes", "ProvincialResultsTotalVotes");
+
             return View();
-            //same with this one
         }
     }
 }
