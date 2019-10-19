@@ -20,15 +20,24 @@
             </ul>
 
             <h1 class="SecondaryHead">Total Votes!</h1>
-        <table>
-            <tr>
-                <th>Election Date:</th>
-                <th>Total Votes:</th>
-            </tr>
-            <tr>
-                <td>Election Date</td>
-                <td>Total Number Of Votes for Election</td>
-            </tr>
-        </table>
+            <table>
+                <tr>
+                    <th>Election Date:</th>
+                    <th>Total Votes:</th>
+                </tr>
+                @{
+                    for (int i = 0; i < ((SelectList)ViewData["ElectionDate"]).Count(); i++)
+                    {
+                        <tr>
+                            <th>
+                                @(((SelectList)ViewData["ElectionDate"]).ElementAt(i).Value)
+                            </th>
+                            <th>
+                                @(((SelectList)ViewData["TotalVotes"]).ElementAt(i).Value)
+                            </th>
+                        </tr>
+                    }
+                }
+            </table>
     </body>
 </html>
