@@ -1,0 +1,91 @@
+﻿@model INF272Group11Project.Models.Candidate
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register Candidate</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/INF272Project.css" />
+</head>
+<body>
+    <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
+    <h1 class="PageHeading">Voting Made Easy!</h1>
+    <label class="Slogan">The simpler and better way to vote</label>
+    <ul class="NavigationBar">
+        <li class="BarList"><a href="@Url.Action("Index","Voter")">Home</a></li>
+        <li class="BarList"><a href="@Url.Action("RegisterVoter", "Voter")">Register To Vote</a></li>
+        <li class="BarList"><a href="@Url.Action("VoterLogin", "Voter")">Voter Login</a></li>
+        <li class="BarList"><a class="OnPage" href="@Url.Action("FindVotingStation", "Voter")">Find Voting Station</a></li>
+        <li class="BarList"><a href="@Url.Action("StaffLogin","Staff")">Staff Login</a></li>
+    </ul>
+    <h1 class="SecondaryHead"
+        Are you sure you want to delete this candidate?/h1>
+        <div class="Container">
+
+            @using (Html.BeginForm("Delete", "Candidate", FormMethod.Post))
+            {
+                <div>
+                    <h4>Candidate</h4>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CandidateFirstNames)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CandidateFirstNames)
+                        </dd>
+
+                        <br/>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CandidateLastName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CandidateLastName)
+                        </dd>
+
+                        <input type="hidden" value=@TempData["CandidateEditID"] name="Candidate_ID" ID="Candidate_ID" />
+
+
+                        @*<dt>
+                                    @Html.DisplayNameFor(model => model.CandidatePosition_ID.CandidatePosition_Description)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.CandidatePosition_ID.CandidatePosition_Description)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.PartyID.PartyName)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.PartyID.PartyName)
+                                </dd>
+
+                            </dl>*@
+
+                        <br/>
+
+
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Delete" class="btn btn-default" /> |
+                                <a href="javascript:void(0);" onclick="history.go(-1);">Back</a>
+                            </div>
+                        }
+                </div>
+            }
+
+</body>
+</html>

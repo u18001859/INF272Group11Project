@@ -15,6 +15,8 @@ namespace INF272Group11Project.Controllers
 {
     public class CandidateController : Controller
     {
+        //CANDIDATE CRUD
+
         VotingSystemProjectEntities2 db = new VotingSystemProjectEntities2();
 
         // GET: Candidate
@@ -46,8 +48,8 @@ namespace INF272Group11Project.Controllers
             CandidateVM vm = new CandidateVM();
 
             vm.Parties = GetParties(0);
-            vm.Positions = GetPositions(0);
             vm.Provinces = GetProvinces(0);
+            vm.Positions = GetPositions(0);
 
             return View(vm);
         }
@@ -198,11 +200,6 @@ namespace INF272Group11Project.Controllers
                             throw;
                         }
 
-                        //catch (Exception e)
-                        //{
-                        //    TempData["Message"] = "Add candidate error:" + e;
-                        //}
-
                         return RedirectToAction("StaffHomePage", "Staff");
                     }
                 case "Cancel":
@@ -233,32 +230,33 @@ namespace INF272Group11Project.Controllers
             return View(vm);
         }
 
-        public ActionResult Choice(/*string PartyName,*/ string Candidate, string submitButton)
+        public ActionResult Choice(/*string PartyName,*/ string CandidateID, string submitButton)
         {
             switch (submitButton)
             {
                 case "Update":
                     //Validation: Prevents candidate from being registered if fields are left blank
+
                     //if (String.IsNullOrEmpty(PartyName))
                     //{
                     //    return RedirectToAction("UpdateOrDeleteCandidate", "Candidate", new { @errorID = 1 });
                     //}
-                    if (String.IsNullOrEmpty(Candidate))
+                    if (String.IsNullOrEmpty(CandidateID))
                     {
                         return RedirectToAction("UpdateOrDeleteCandidate", "Candidate", new { @errorID = 2 });
                     }
                     else
                     {
-                        return RedirectToAction("UpdateCandidate", "Candidate", new {@CandidateID = Candidate});
+                        return RedirectToAction("UpdateCandidate", "Candidate", new { @CandidateID = CandidateID });
                     }
                 case "Delete":
-                    if (String.IsNullOrEmpty(Candidate))
+                    if (String.IsNullOrEmpty(CandidateID))
                     {
                         return RedirectToAction("UpdateOrDeleteCandidate", "Candidate", new { @errorID = 2 });
                     }
                     else
                     {
-                        return RedirectToAction("UpdateCandidate", "Candidate", new {@CandidateID = Candidate});
+                        return RedirectToAction("DeleteCandidate", "Candidate", new { @CandidateID = CandidateID });
                     }
                 case "Cancel":
                     return RedirectToAction("StaffHomePage", "Staff");
@@ -268,7 +266,7 @@ namespace INF272Group11Project.Controllers
         }
 
         [HttpGet]
-        public ActionResult UpdateCandidate(string CandidateID, string firstNames, string lastName, string party, string position, int? errorID)
+        public ActionResult UpdateCandidate(string CandidateID, int? errorID)
         {
             //viewbags to fill fields with already existing data
             if (errorID == 1)
@@ -292,8 +290,6 @@ namespace INF272Group11Project.Controllers
                 ViewBag.Error5 = "Please select a province";
             }
 
-            ViewBag.ID = CandidateID;
-
             TempData["CandidateEditID"] = CandidateID;
 
             CandidateVM vm = new CandidateVM();
@@ -306,7 +302,7 @@ namespace INF272Group11Project.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Candidate candidate, string CandidateID, string FirstNames, string LastName, string Party, string Position, string Province, string submitButton)
+        public ActionResult Update(string CandidateID, string FirstNames, string LastName, string Position, string Party, string Province, string submitButton)
         {
             switch (submitButton)
             {
@@ -334,32 +330,26 @@ namespace INF272Group11Project.Controllers
                     }
                     else
                     {
-                        int CanID = 0;
+                        int CanID = Convert.ToInt32(CandidateID);
 
-                        if (int.TryParse(CandidateID, out CanID))
-                        {
-                             ViewBag.Num = CandidateID;
-                        }
+                        Candidate c = db.Candidates.Where(i => i.Candidate_ID == CanID).FirstOrDefault();
 
-                        Candidate c = db.Candidates.Where(i => i.CandidatePosition_ID == CanID).FirstOrDefault();
-
-
+                        c.CandidateFirstNames = FirstNames;
+                        c.CandidateLastName = LastName;
+                        c.CandidatePosition_ID = Convert.ToInt32(Position);
+                        c.PartyID = Convert.ToInt32(Party);
+                        c.ProvinceID = Convert.ToInt32(Province);
 
                         try
                         {
 
                             if (ModelState.IsValid)
                             {
-                                c.CandidateFirstNames = FirstNames;
-                                c.CandidateLastName = LastName;
-                                c.CandidatePosition_ID = Convert.ToInt32(Position);
-                                c.PartyID = Convert.ToInt32(Party);
-                                c.ProvinceID = Convert.ToInt32(Province);
-
+                                db.Entry(c).State = EntityState.Modified;
                                 db.SaveChanges();
+                                TempData["Message"] = "Candidate successfully edited!";
                             }
 
-                            TempData["Message"] = "Candidate successfully edited!";
                         }
                         catch (DbEntityValidationException e)
                         {
@@ -386,26 +376,277 @@ namespace INF272Group11Project.Controllers
             }
         }
 
-        public ActionResult Delete()
+        [HttpGet]
+        public ActionResult DeleteCandidate(string CandidateID)
         {
-            return RedirectToAction("UpdateOrDeleteCandidate", "Candidate");
+            if (CandidateID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Candidate candidate = db.Candidates.Find(Convert.ToInt32(CandidateID));
+            if (candidate == null)
+            {
+                return HttpNotFound();
+            }
+
+            TempData["CandidateEditID"] = CandidateID;
+
+            return View(candidate);
         }
 
-        public ActionResult AddCandidatePosition()
+        [HttpPost]
+        public ActionResult Delete(string Candidate_ID)
         {
+            Candidate candidate = db.Candidates.Find(Convert.ToInt32(Candidate_ID));
+            if (candidate == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                db.Candidates.Remove(candidate);
+                db.SaveChanges();
+                TempData["Message"] = "Candidate successfully deleted!";
+                return RedirectToAction("UpdateOrDeleteCandidate", "Candidate");
+            }
+        }
+
+        //CANDIDATE POSITION CRUD
+
+        public ActionResult AddCandidatePosition(int? errorID)
+        {
+            if (errorID == 1)
+            {
+                ViewBag.Error1 = "Please enter a candidate position";
+            }
             return View();
         }
 
-        public ActionResult Create([Bind(Include = "CandidatePosition_ID,CandidatePosition_Description")] CandidatePosition candidatePosition)
+        [HttpPost]
+        public ActionResult Create(string PositionName, string submitButton)
         {
-            if (ModelState.IsValid)
+            switch (submitButton)
             {
-                db.CandidatePositions.Add(candidatePosition);
-                db.SaveChanges();
-                return RedirectToAction("StaffHomePage", "Staff");
+                case "Add":
+                    //Validation: Prevents candidate from being registered if fields are left blank
+                    if (String.IsNullOrEmpty(PositionName))
+                    {
+                        return RedirectToAction("AddCandidatePosition", "Candidate", new { @errorID = 1 });
+                    }
+                    else
+                    {
+                        CandidatePosition cp = new Models.CandidatePosition();
+
+                        cp.CandidatePosition_Description = PositionName;
+
+
+                        try
+                        {
+                            if (ModelState.IsValid)
+                            {
+                                db.CandidatePositions.Add(cp);
+                                db.SaveChanges();
+                                TempData["Message"] = "New candidate position successfully added!";
+                            }
+
+                        }
+                        catch (DbEntityValidationException e)
+                        {
+                            foreach (var eve in e.EntityValidationErrors)
+                            {
+                                Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                                    eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                                foreach (var ve in eve.ValidationErrors)
+                                {
+                                    Console.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
+                                        ve.PropertyName,
+                                        eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
+                                        ve.ErrorMessage);
+                                }
+                            }
+                            throw;
+                        }
+
+                        return RedirectToAction("StaffHomePage", "Staff");
+                    }
+                case "Cancel":
+                    return RedirectToAction("StaffHomePage", "Staff");
+                default:
+                    return RedirectToAction("StaffHomePage", "Staff");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult UpdateOrDeleteCandidatePosition(int? errorID)
+        {
+            if (errorID == 1)
+            {
+                ViewBag.Error1 = "Please select a candidate position";
             }
 
-            return View(candidatePosition);
+            CandidatePositionVM vm2 = new CandidatePositionVM();
+
+            vm2.Positions = GetPositions(0);
+
+            return View(vm2);
+        }
+
+        public ActionResult Choice2(string CandidatePositionID, string submitButton)
+        {
+            switch (submitButton)
+            {
+                case "Update":
+                    //Validation: Prevents candidate from being registered if fields are left blank
+
+                    if (String.IsNullOrEmpty(CandidatePositionID))
+                    {
+                        return RedirectToAction("UpdateOrDeleteCandidatePosition", "Candidate", new { @errorID = 1 });
+                    }
+                    else
+                    {
+                        return RedirectToAction("UpdateCandidatePosition", "Candidate", new { @CandidatePositionID = CandidatePositionID });
+                    }
+                case "Delete":
+                    if (String.IsNullOrEmpty(CandidatePositionID))
+                    {
+                        return RedirectToAction("UpdateOrDeleteCandidatePosition", "Candidate", new { @errorID = 1 });
+                    }
+                    else
+                    {
+                        return RedirectToAction("DeleteCandidatePosition", "Candidate", new { @CandidatePositionID = CandidatePositionID });
+                    }
+                case "Cancel":
+                    return RedirectToAction("StaffHomePage", "Staff");
+                default:
+                    return RedirectToAction("StaffHomePage", "Staff");
+
+            }
+        }
+
+        [HttpGet]
+        public ActionResult UpdateCandidatePosition(string CandidatePositionID, int? errorID)
+        {
+            //viewbags to fill fields with already existing data
+            if (errorID == 1)
+            {
+                ViewBag.Error1 = "Please select a candidate position";
+            }
+
+            TempData["CandidatePositionEditID"] = CandidatePositionID;
+
+            CandidatePositionVM vm2 = new CandidatePositionVM();
+
+            vm2.Positions = GetPositions(0);
+
+            return View(vm2);
+        }
+
+        [HttpPost]
+        public ActionResult Update2(string CandidatePositionID, string PositionName, string submitButton)
+        {
+            switch (submitButton)
+            {
+                case "Update":
+                    //Validation: Prevents candidate from being registered if fields are left blank
+                    if (String.IsNullOrEmpty(PositionName))
+                    {
+                        return RedirectToAction("UpdateCandidatePosition", "Candidate", new { @errorID = 1 });
+                    }
+                    else
+                    {
+                        int CanPosID = Convert.ToInt32(CandidatePositionID);
+
+                        CandidatePosition cp = db.CandidatePositions.Where(i => i.CandidatePosition_ID == CanPosID).FirstOrDefault();
+
+                        cp.CandidatePosition_Description = PositionName;
+
+                        try
+                        {
+
+                            if (ModelState.IsValid)
+                            {
+                                db.Entry(cp).State = EntityState.Modified;
+                                db.SaveChanges();
+                                TempData["Message"] = "Candidate position successfully edited!";
+                            }
+
+                        }
+                        catch (DbEntityValidationException e)
+                        {
+                            foreach (var eve in e.EntityValidationErrors)
+                            {
+                                Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                                    eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                                foreach (var ve in eve.ValidationErrors)
+                                {
+                                    Console.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
+                                        ve.PropertyName,
+                                        eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
+                                        ve.ErrorMessage);
+                                }
+                            }
+                            throw;
+                        }
+                        return RedirectToAction("UpdateOrDeleteCandidatePosition", "Candidate");
+                    }
+                case "Back":
+                    return RedirectToAction("UpdateOrDeleteCandidatePosition", "Candidate");
+                default:
+                    return RedirectToAction("UpdateOrDeleteCandidatePosition", "Candidate");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult DeleteCandidatePosition(string CandidatePositionID)
+        {
+            if (CandidatePositionID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CandidatePosition position = db.CandidatePositions.Find(Convert.ToInt32(CandidatePositionID));
+            if (position == null)
+            {
+                return HttpNotFound();
+            }
+
+            TempData["CandidatePositionEditID"] = CandidatePositionID;
+
+            return View(position);
+        }
+
+        [HttpPost]
+        public ActionResult Delete2(string CandidatePositionID)
+        {
+            CandidatePosition position = db.CandidatePositions.Find(Convert.ToInt32(CandidatePositionID));
+            if (position == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                //var candidates = db.Candidates.Where(y => y.Candidate_ID == position.CandidatePosition_ID).AsEnumerable();
+                //foreach (var can in candidates)
+                //{
+                //    var c = can;
+                //    candidates.
+                //    candidates.Remove(c);
+                //}
+                //db.CandidatePositions.DeleteObject(author);
+
+                //db.Candidates
+                try
+                {
+                    db.CandidatePositions.Remove(position);
+                    db.SaveChanges();
+                    TempData["Message"] = "Candidate position successfully deleted!";
+                }
+                catch(Exception e)
+                {
+                    TempData["Message"] = "Error: " + e;
+                }
+               
+                return RedirectToAction("UpdateOrDeleteCandidatePosition", "Candidate");
+            }
         }
     }
 }

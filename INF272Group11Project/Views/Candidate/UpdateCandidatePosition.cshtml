@@ -1,4 +1,4 @@
-﻿@model INF272Group11Project.ViewModels.CandidateVM
+﻿@model INF272Group11Project.ViewModels.CandidatePositionVM
 @using INF272Group11Project.ViewModels
 @using System.Globalization
 @using System.Data
@@ -29,48 +29,20 @@
         <li class="BarList"><a href="@Url.Action("ProvincialResults","Results")">Provincial Results</a></li>
         <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
     </ul>
-    <h1 class="SecondaryHead">Update Candidate</h1>
+    <h1 class="SecondaryHead">Update Candidate Position</h1>
     <div class="Container">
-        @using (Html.BeginForm("Update", "Candidate"))
+        @using (Html.BeginForm("Update2", "Candidate"))
         {
             <br />
             <p class="error">
                 <label>@ViewBag.Error1</label>
             </p>
-            <label>First Names:</label>
+            <label>Position name:</label>
             @:&nbsp;
-            <input type="text" id="txtFirstNames" name="FirstNames" />
+            <input type="text" id="txtPositionName" name="PositionName" />
             <br />
-            <p class="error">
-                <label>@ViewBag.Error2</label>
-            </p>
-            <label>Last Name:</label>
-            @:&nbsp;
-            <input type="text" id="txtLastName" name="LastName" />
-            <br />
-            <p class="error">
-                <label>@ViewBag.Error3</label>
-            </p>
-            <label>Party:</label>
-            @:&nbsp;
-            @Html.DropDownListFor(i => i.SelectedPartyID, Model.Parties, "-Please select a party-", new { @class = "form-control", Name = "Party" })
-            <br />
-            <p class="error">
-                <label>@ViewBag.Error4</label>
-            </p>
-            <label>Position:</label>
-            @:&nbsp;
 
-            @Html.DropDownListFor(i => i.SelectedCandidatePosition_ID, Model.Positions, "-Please select a position-", new { @class = "form-control", Name = "Position" })
-            <p class="error">
-                <label>@ViewBag.Error5</label>
-            </p>
-            <label>Province:</label>
-            @:&nbsp;
-
-            @Html.DropDownListFor(i => i.SelectedProvinceID, Model.Provinces, "-Please select a province-", new { @class = "form-control", Name = "Province" })
-
-            <input type="hidden" value=@TempData["CandidateEditID"] name="CandidateID" ID="CandidateID" />
+            <input type="hidden" value=@TempData["CandidatePositionEditID"] name="CandidatePositionID" ID="CandidatePositionID" />
 
             <br />
             <br />

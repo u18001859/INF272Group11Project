@@ -48,7 +48,7 @@
             <label>Candidate:</label>
             @:&nbsp;
 
-            @Html.DropDownListFor(i => i.SelectedCandidatePosition_ID, Model.Candidates, "-Please select a candidate-", new { @class = "form-control", Name = "Candidate" })
+            @Html.DropDownListFor(i => i.SelectedCandidateID, Model.Candidates, "-Please select a candidate-", new { @class = "form-control", Name = "CandidateID" })
 
             <br />
             <br />
@@ -67,7 +67,10 @@
             @:&nbsp;
             <input type="submit" name="submitButton" id="btnCancel" value="Cancel" />
 
-            <label>@ViewBag.Num</label>
+            <br/>
+            <br/>
+
+            <label>@TempData["Message"] </label>
         }
     </div>
 </body>

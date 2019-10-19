@@ -1,4 +1,5 @@
-﻿@model INF272Group11Project.Models.CandidatePosition
+﻿@model INF272Group11Project.ViewModels.CandidatePositionVM
+@using INF272Group11Project.ViewModels
 @using System.Globalization
 @using System.Data
 
@@ -29,21 +30,29 @@
     <div class="Container">
         @using (Html.BeginForm("Create", "Candidate"))
         {
-            @Html.AntiForgeryToken()
 
-
-
-            <lable>Position Name:</lable>
-
+            <br />
+            <p class="error">
+                <label>@ViewBag.Error1</label>
+            </p>
+            <label>Position Name:</label>
             @:&nbsp;
-
-            @Html.EditorFor(model => model.CandidatePosition_Description, new { htmlAttributes = new { @class = "form-control" } })
+            <input type="text" id="txtFirstNames" name="PositionName" />
 
 
             <br />
             <br />
 
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" name="submitButton" id="btnRegister" value="Add" />
+            @:&nbsp;
+            @:&nbsp;
+            @:&nbsp;
+            @:&nbsp;
+            @:&nbsp;
+            @:&nbsp;
+            @:&nbsp;
+            @:&nbsp;
+            <input type="submit" name="submitButton" id="btnCancel" value="Cancel" />
 
         }
     </div>
