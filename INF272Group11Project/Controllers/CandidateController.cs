@@ -22,7 +22,7 @@ namespace INF272Group11Project.Controllers
         // GET: Candidate
 
         [HttpGet]
-        public ActionResult RegisterCandidate(string Party, int? errorID)
+        public ActionResult RegisterCandidate(string Party, int? errorID, string VoterGUID)
         {
             if (errorID == 1)
             {
@@ -51,7 +51,36 @@ namespace INF272Group11Project.Controllers
             vm.Provinces = GetProvinces(0);
             vm.Positions = GetPositions(0);
 
-            return View(vm);
+            VoterVM voterVM = new VoterVM();
+            if (voterVM.IsLogedIn(db, VoterGUID))
+            {
+                voterVM.RefreshGUID(db);
+                RegisterVoterVM registerVoterVM = new RegisterVoterVM();
+                registerVoterVM.voterView = voterVM;
+                registerVoterVM.VoterList = db.Voters.ToList();
+                ViewBag.message = TempData["message"];
+                ViewBag.message = TempData["success"];
+                return View(vm);
+            }
+            else
+            {
+                VoterVM = TempData["voterVM"] as voterVM;
+                if (voterVM.IsLogedIn(db))
+                {
+                    voterVM.RefreshGUID(db);
+                    RegisterVoterVM registerVoterVM = new RegisterVoterVM();
+                    registerVoterVM.voterView = voterVM;
+                    registerVoterVM.VoterList = db.Voters.ToList();
+                    ViewBag.message = TempData["message"];
+                    ViewBag.success = TempData["success"];
+                    return View(vm);
+                }
+
+            }
+
+            //return View(vm);
+
+
         }
 
         //Method for drop down list for Parties
@@ -104,7 +133,16 @@ namespace INF272Group11Project.Controllers
                 var can = db.Candidates.Select(c => new SelectListItem
                 {
                     Value = c.Candidate_ID.ToString(),
-                    Text = c.CandidateFirstNames + " " + c.CandidateLastName /*+ " " + db.Candidates.Where(a => a.CandidatePosition_ID = db.Candidates.Select(p => p.CandidatePosition_ID))*/
+                    Text = c.CandidateFirstNames + " " + c.CandidateLastName 
+                    //+ " (" + (from pos in db.CandidatePositions
+                    //                                                                   join cand in db.Candidates
+                    //                                                                   on pos.CandidatePosition_ID equals cand.CandidatePosition_ID
+                    //                                                                   where (pos.CandidatePosition_ID == c.CandidatePosition_ID)
+                    //                                                                   select pos.CandidatePosition_ID).ToString() + ") (" + (from part in db.Parties
+                    //                                                                                                               join cand in db.Candidates
+                    //                                                                                                               on part.PartyID equals cand.PartyID
+                    //                                                                                                               where (part.PartyID == c.PartyID)
+                    //                                                                                                               select part.PartyName).ToString() + ")"
                 }).ToList();
 
                 if (selected == 0)
@@ -211,7 +249,7 @@ namespace INF272Group11Project.Controllers
         }
 
         [HttpGet]
-        public ActionResult UpdateOrDeleteCandidate(int? errorID)
+        public ActionResult UpdateOrDeleteCandidate(int? errorID, string VoterGUID)
         {
             //if (errorID == 1)
             //{
@@ -227,7 +265,35 @@ namespace INF272Group11Project.Controllers
             //vm.Parties = GetParties(0);
             vm.Candidates = GetCandidates(0);
 
-            return View(vm);
+
+            VoterVM voterVM = new VoterVM();
+            if (voterVM.IsLogedIn(db, VoterGUID))
+            {
+                voterVM.RefreshGUID(db);
+                RegisterVoterVM registerVoterVM = new RegisterVoterVM();
+                registerVoterVM.voterView = voterVM;
+                registerVoterVM.VoterList = db.Voters.ToList();
+                ViewBag.message = TempData["message"];
+                ViewBag.message = TempData["success"];
+                return View(vm);
+            }
+            else
+            {
+                VoterVM = TempData["voterVM"] as voterVM;
+                if (voterVM.IsLogedIn(db))
+                {
+                    voterVM.RefreshGUID(db);
+                    RegisterVoterVM registerVoterVM = new RegisterVoterVM();
+                    registerVoterVM.voterView = voterVM;
+                    registerVoterVM.VoterList = db.Voters.ToList();
+                    ViewBag.message = TempData["message"];
+                    ViewBag.success = TempData["success"];
+                    return View(vm);
+                }
+
+            }
+
+            //return View(vm);
         }
 
         public ActionResult Choice(/*string PartyName,*/ string CandidateID, string submitButton)
@@ -266,7 +332,7 @@ namespace INF272Group11Project.Controllers
         }
 
         [HttpGet]
-        public ActionResult UpdateCandidate(string CandidateID, int? errorID)
+        public ActionResult UpdateCandidate(string CandidateID, int? errorID, string VoterGUID)
         {
             //viewbags to fill fields with already existing data
             if (errorID == 1)
@@ -298,7 +364,34 @@ namespace INF272Group11Project.Controllers
             vm.Positions = GetPositions(0);
             vm.Provinces = GetProvinces(0);
 
-            return View(vm);
+            VoterVM voterVM = new VoterVM();
+            if (voterVM.IsLogedIn(db, VoterGUID))
+            {
+                voterVM.RefreshGUID(db);
+                RegisterVoterVM registerVoterVM = new RegisterVoterVM();
+                registerVoterVM.voterView = voterVM;
+                registerVoterVM.VoterList = db.Voters.ToList();
+                ViewBag.message = TempData["message"];
+                ViewBag.message = TempData["success"];
+                return View(vm);
+            }
+            else
+            {
+                VoterVM = TempData["voterVM"] as voterVM;
+                if (voterVM.IsLogedIn(db))
+                {
+                    voterVM.RefreshGUID(db);
+                    RegisterVoterVM registerVoterVM = new RegisterVoterVM();
+                    registerVoterVM.voterView = voterVM;
+                    registerVoterVM.VoterList = db.Voters.ToList();
+                    ViewBag.message = TempData["message"];
+                    ViewBag.success = TempData["success"];
+                    return View(vm);
+                }
+
+            }
+
+            //return View(vm);
         }
 
         [HttpPost]
@@ -377,7 +470,7 @@ namespace INF272Group11Project.Controllers
         }
 
         [HttpGet]
-        public ActionResult DeleteCandidate(string CandidateID)
+        public ActionResult DeleteCandidate(string CandidateID, string VoterGUID)
         {
             if (CandidateID == null)
             {
@@ -391,7 +484,34 @@ namespace INF272Group11Project.Controllers
 
             TempData["CandidateEditID"] = CandidateID;
 
-            return View(candidate);
+            VoterVM voterVM = new VoterVM();
+            if (voterVM.IsLogedIn(db, VoterGUID))
+            {
+                voterVM.RefreshGUID(db);
+                RegisterVoterVM registerVoterVM = new RegisterVoterVM();
+                registerVoterVM.voterView = voterVM;
+                registerVoterVM.VoterList = db.Voters.ToList();
+                ViewBag.message = TempData["message"];
+                ViewBag.message = TempData["success"];
+                return View(candidate);
+            }
+            else
+            {
+                VoterVM = TempData["voterVM"] as voterVM;
+                if (voterVM.IsLogedIn(db))
+                {
+                    voterVM.RefreshGUID(db);
+                    RegisterVoterVM registerVoterVM = new RegisterVoterVM();
+                    registerVoterVM.voterView = voterVM;
+                    registerVoterVM.VoterList = db.Voters.ToList();
+                    ViewBag.message = TempData["message"];
+                    ViewBag.success = TempData["success"];
+                    return View(candidate);
+                }
+
+            }
+
+            //return View(candidate);
         }
 
         [HttpPost]
@@ -413,13 +533,40 @@ namespace INF272Group11Project.Controllers
 
         //CANDIDATE POSITION CRUD
 
-        public ActionResult AddCandidatePosition(int? errorID)
+        public ActionResult AddCandidatePosition(int? errorID, string VoterGUID)
         {
             if (errorID == 1)
             {
                 ViewBag.Error1 = "Please enter a candidate position";
             }
-            return View();
+
+            VoterVM voterVM = new VoterVM();
+            if (voterVM.IsLogedIn(db, VoterGUID))
+            {
+                voterVM.RefreshGUID(db);
+                RegisterVoterVM registerVoterVM = new RegisterVoterVM();
+                registerVoterVM.voterView = voterVM;
+                registerVoterVM.VoterList = db.Voters.ToList();
+                ViewBag.message = TempData["message"];
+                ViewBag.message = TempData["success"];
+                return View();
+            }
+            else
+            {
+                VoterVM = TempData["voterVM"] as voterVM;
+                if (voterVM.IsLogedIn(db))
+                {
+                    voterVM.RefreshGUID(db);
+                    RegisterVoterVM registerVoterVM = new RegisterVoterVM();
+                    registerVoterVM.voterView = voterVM;
+                    registerVoterVM.VoterList = db.Voters.ToList();
+                    ViewBag.message = TempData["message"];
+                    ViewBag.success = TempData["success"];
+                    return View();
+                }
+
+            }
+            //return View();
         }
 
         [HttpPost]
@@ -477,7 +624,7 @@ namespace INF272Group11Project.Controllers
         }
 
         [HttpGet]
-        public ActionResult UpdateOrDeleteCandidatePosition(int? errorID)
+        public ActionResult UpdateOrDeleteCandidatePosition(int? errorID, string VoterGUID)
         {
             if (errorID == 1)
             {
@@ -488,7 +635,34 @@ namespace INF272Group11Project.Controllers
 
             vm2.Positions = GetPositions(0);
 
-            return View(vm2);
+            VoterVM voterVM = new VoterVM();
+            if (voterVM.IsLogedIn(db, VoterGUID))
+            {
+                voterVM.RefreshGUID(db);
+                RegisterVoterVM registerVoterVM = new RegisterVoterVM();
+                registerVoterVM.voterView = voterVM;
+                registerVoterVM.VoterList = db.Voters.ToList();
+                ViewBag.message = TempData["message"];
+                ViewBag.message = TempData["success"];
+                return View(vm2);
+            }
+            else
+            {
+                VoterVM = TempData["voterVM"] as voterVM;
+                if (voterVM.IsLogedIn(db))
+                {
+                    voterVM.RefreshGUID(db);
+                    RegisterVoterVM registerVoterVM = new RegisterVoterVM();
+                    registerVoterVM.voterView = voterVM;
+                    registerVoterVM.VoterList = db.Voters.ToList();
+                    ViewBag.message = TempData["message"];
+                    ViewBag.success = TempData["success"];
+                    return View(vm2);
+                }
+
+            }
+
+            //return View(vm2);
         }
 
         public ActionResult Choice2(string CandidatePositionID, string submitButton)
@@ -524,7 +698,7 @@ namespace INF272Group11Project.Controllers
         }
 
         [HttpGet]
-        public ActionResult UpdateCandidatePosition(string CandidatePositionID, int? errorID)
+        public ActionResult UpdateCandidatePosition(string CandidatePositionID, int? errorID, string VoterGUID)
         {
             //viewbags to fill fields with already existing data
             if (errorID == 1)
@@ -538,8 +712,35 @@ namespace INF272Group11Project.Controllers
 
             vm2.Positions = GetPositions(0);
 
-            return View(vm2);
-        }
+            VoterVM voterVM = new VoterVM();
+            if (voterVM.IsLogedIn(db, VoterGUID))
+            {
+                voterVM.RefreshGUID(db);
+                RegisterVoterVM registerVoterVM = new RegisterVoterVM();
+                registerVoterVM.voterView = voterVM;
+                registerVoterVM.VoterList = db.Voters.ToList();
+                ViewBag.message = TempData["message"];
+                ViewBag.message = TempData["success"];
+                return View(vm2);
+            }
+            else
+            {
+                VoterVM = TempData["voterVM"] as voterVM;
+                if (voterVM.IsLogedIn(db))
+                {
+                    voterVM.RefreshGUID(db);
+                    RegisterVoterVM registerVoterVM = new RegisterVoterVM();
+                    registerVoterVM.voterView = voterVM;
+                    registerVoterVM.VoterList = db.Voters.ToList();
+                    ViewBag.message = TempData["message"];
+                    ViewBag.success = TempData["success"];
+                    return View(vm2);
+                }
+
+            }
+
+            //return View(vm2);
+    }
 
         [HttpPost]
         public ActionResult Update2(string CandidatePositionID, string PositionName, string submitButton)
@@ -597,7 +798,7 @@ namespace INF272Group11Project.Controllers
         }
 
         [HttpGet]
-        public ActionResult DeleteCandidatePosition(string CandidatePositionID)
+        public ActionResult DeleteCandidatePosition(string CandidatePositionID, string VoterGUID)
         {
             if (CandidatePositionID == null)
             {
@@ -611,8 +812,35 @@ namespace INF272Group11Project.Controllers
 
             TempData["CandidatePositionEditID"] = CandidatePositionID;
 
-            return View(position);
-        }
+            VoterVM voterVM = new VoterVM();
+            if (voterVM.IsLogedIn(db, VoterGUID))
+            {
+                voterVM.RefreshGUID(db);
+                RegisterVoterVM registerVoterVM = new RegisterVoterVM();
+                registerVoterVM.voterView = voterVM;
+                registerVoterVM.VoterList = db.Voters.ToList();
+                ViewBag.message = TempData["message"];
+                ViewBag.message = TempData["success"];
+                return View(position);
+            }
+            else
+            {
+                VoterVM = TempData["voterVM"] as voterVM;
+                if (voterVM.IsLogedIn(db))
+                {
+                    voterVM.RefreshGUID(db);
+                    RegisterVoterVM registerVoterVM = new RegisterVoterVM();
+                    registerVoterVM.voterView = voterVM;
+                    registerVoterVM.VoterList = db.Voters.ToList();
+                    ViewBag.message = TempData["message"];
+                    ViewBag.success = TempData["success"];
+                    return View(position);
+                }
+
+            }
+
+            //return View(position);
+    }
 
         [HttpPost]
         public ActionResult Delete2(string CandidatePositionID)
@@ -644,6 +872,8 @@ namespace INF272Group11Project.Controllers
                 {
                     TempData["Message"] = "Error: " + e;
                 }
+
+
                
                 return RedirectToAction("UpdateOrDeleteCandidatePosition", "Candidate");
             }

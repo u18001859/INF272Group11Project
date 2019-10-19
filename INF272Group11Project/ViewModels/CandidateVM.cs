@@ -33,6 +33,24 @@ namespace INF272Group11Project.ViewModels
         public int PartyID { set; get; }
         public int ProvinceID { set; get; }
 
+        //public bool IsLoggedIn(VotingSystemProjectEntities2 db)
+        //{
+        //    db.Configuration.ProxyCreationEnabled = false;
+        //    var guid = db.Voters.Where(x => x.GUID == Candidate.GUID && x.GUIDTimeStamp > DateTime.Now).Count();
+        //    if (guid > 0)
+        //        return true;
+        //    return false;
+        //}
+
+        //public bool IsLoggedIn(VotingSystemProjectEntities2 db, string userGUID)
+        //{
+        //    db.Configuration.ProxyCreationEnabled = false;
+        //    candidate = db.Candidates.Where(x => x.GUID == userGUID && x.GUIDTimeStamp > DateTime.Now).FirstOrDefault();
+        //    if (candidate != null)
+        //        return true;
+        //    return false;
+        //}
+
 
 
 

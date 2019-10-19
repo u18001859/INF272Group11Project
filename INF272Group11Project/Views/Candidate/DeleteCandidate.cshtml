@@ -41,7 +41,7 @@
                             @Html.DisplayFor(model => model.CandidateFirstNames)
                         </dd>
 
-                        <br/>
+                        <br />
 
                         <dt>
                             @Html.DisplayNameFor(model => model.CandidateLastName)
@@ -55,24 +55,24 @@
 
 
                         @*<dt>
-                                    @Html.DisplayNameFor(model => model.CandidatePosition_ID.CandidatePosition_Description)
-                                </dt>
+                @Html.DisplayNameFor(model => model.CandidatePosition_ID.CandidatePosition_Description)
+            </dt>
 
-                                <dd>
-                                    @Html.DisplayFor(model => model.CandidatePosition_ID.CandidatePosition_Description)
-                                </dd>
+            <dd>
+                @Html.DisplayFor(model => model.CandidatePosition_ID.CandidatePosition_Description)
+            </dd>
 
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.PartyID.PartyName)
-                                </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.PartyID.PartyName)
+            </dt>
 
-                                <dd>
-                                    @Html.DisplayFor(model => model.PartyID.PartyName)
-                                </dd>
+            <dd>
+                @Html.DisplayFor(model => model.PartyID.PartyName)
+            </dd>
 
-                            </dl>*@
+        </dl>*@
 
-                        <br/>
+                        <br />
 
 
                         @using (Html.BeginForm())
@@ -84,7 +84,11 @@
                                 <a href="javascript:void(0);" onclick="history.go(-1);">Back</a>
                             </div>
                         }
-                </div>
+
+                        <br />
+                        <label>@TempData["message"]</label>
+                        <label>@TempData["success"]</label>
+</div>
             }
 
 </body>
