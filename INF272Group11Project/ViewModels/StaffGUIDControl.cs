@@ -10,7 +10,9 @@ namespace INF272Group11Project.ViewModels
     {
         public Staff staff;
 
-            public void RefreshGUID(VotingSystemProjectEntities2 db)
+
+        public void RefreshGUID(VotingSystemProjectEntities1 db)
+
         {
             db.Configuration.ProxyCreationEnabled = false;
 
@@ -23,29 +25,39 @@ namespace INF272Group11Project.ViewModels
             }
             else
             {
+
                 var u = db.Staffs.Where(z => z.StaffID == staff.StaffID).FirstOrDefault();
+
                 db.Entry(u).CurrentValues.SetValues(staff);
                 db.SaveChanges();
             }
         }
 
+
         public bool IsLogedIn(VotingSystemProjectEntities2 db)
         {
             db.Configuration.ProxyCreationEnabled = false;
             var guid = db.Staffs.Where(x => x.GUID == staff.GUID && x.GUIDTimeStamp > DateTime.Now).Count();
+
+       
             if (guid > 0)
                 return true;
             return false;
 
         }
+
         public bool IsLogedIn(VotingSystemProjectEntities2 db, string userGUID)
         {
             db.Configuration.ProxyCreationEnabled = false;
             staff = db.Staffs.Where(x => x.GUID == userGUID && x.GUIDTimeStamp > DateTime.Now).FirstOrDefault();
+
             if (staff != null)
                 return true;
             return false;
 
         }
     }
+
 }
+
+

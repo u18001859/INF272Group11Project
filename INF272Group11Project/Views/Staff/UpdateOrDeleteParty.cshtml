@@ -29,16 +29,13 @@
     <h1 class="SecondaryHead">Please Select a Party and Click "Update" Or "Delete"</h1>
     <div class="Container">
 
-        @using (Html.BeginForm("UpateParty", "Staff"))
+        @using (Html.BeginForm("UpdateParty", "Staff"))
         {
+
             <br />
             <br />
             <label>Select a Party: </label>
-            <select id="dropdowntipo">
-                <option value="Exemplo1">Party1</option>
-                <option value="Exemplo2">Party2</option>
-                <option value="Exemplo3">Party3</option>
-            </select>
+            @Html.DropDownList("Parties", null, htmlAttributes: new { @Class = "form-control" })
             <br />
             <br />
             <input id="BtnUpdateParty" type="submit" value="Update Party" />

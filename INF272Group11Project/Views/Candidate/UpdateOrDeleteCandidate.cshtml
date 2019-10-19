@@ -1,4 +1,8 @@
-﻿
+﻿@model INF272Group11Project.ViewModels.CandidateVM
+@using INF272Group11Project.ViewModels
+@using System.Globalization
+@using System.Data
+
 @{
     Layout = null;
 }
@@ -27,29 +31,25 @@
     </ul>
     <h1 class="SecondaryHead">Update or Delete Candidate</h1>
     <div class="Container">
-        @using (Html.BeginForm("Choice", "Candidate"))
+        @using (Html.BeginForm("Choice", "Candidate", FormMethod.Post))
         {
-            <p class="error">
+            @*<p class="error">
                 <label>@ViewBag.Error1</label>
             </p>
             <label>Party Name:</label>
             @:&nbsp;
-            <select>
-                <option value="Party1">Party1</option>
-                <option value="Party2">Party2</option>
-                <option value="Party3">Party3</option>
-            </select>
-            <br />
+
+            @Html.DropDownListFor(i => i.SelectedPartyID, Model.Parties, "-Please select a party-", new { @class = "form-control", Name = "Party" })
+
+            <br />*@
             <p class="error">
                 <label>@ViewBag.Error2</label>
             </p>
             <label>Candidate:</label>
             @:&nbsp;
-            <select>
-                <option value="Candidate1">Candidate1</option>
-                <option value="Candidate2">Candidate2</option>
-                <option value="Candidate3">Candidate3</option>
-            </select>
+
+            @Html.DropDownListFor(i => i.SelectedCandidateID, Model.Candidates, "-Please select a candidate-", new { @class = "form-control", Name = "CandidateID" })
+
             <br />
             <br />
             <br />
@@ -66,7 +66,16 @@
             @:&nbsp;
             @:&nbsp;
             <input type="submit" name="submitButton" id="btnCancel" value="Cancel" />
+
+            <br />
+            <br />
+
+            <label>@TempData["Message"] </label>
         }
+
+        <br />
+        <label>@TempData["message"]</label>
+        <label>@TempData["success"]</label>
     </div>
 </body>
 </html>

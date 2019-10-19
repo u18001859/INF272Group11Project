@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+@model INF272Group11Project.Models.VotingStation
 
 <html>
 <head>
@@ -22,12 +23,12 @@
         </ul>
         <h1 class="SecondaryHead">Please Add A Voting Station!</h1>
         <div class="Container">
-            @using (Html.BeginForm("StaffHomePage", "Staff"))
+            @using (Html.BeginForm("AddVotingStation", "VotingStation"))
             {
                 <br />
                 <br />
                 <lable>Voting Station Name: </lable>
-                <input type="text" name="VotingStationName" />
+                @Html.EditorFor(model => model.VotingStationName, new { @class = "control-label" })
                 <br />
                 <br />
                 <label>Select Province: </label>
@@ -77,7 +78,7 @@
                 <br />
                 <input id="BtnAddVotingStation" type="submit" value="Add" name="Add" />
             }
-            @using (Html.BeginForm("StaffHomePage", "Staff"))
+            @using (Html.BeginForm("AddVotingStation", "VotingStation"))
             {
                 <input id="BtnCancel" type="submit" value="Cancel" name="Cancel" />
             }

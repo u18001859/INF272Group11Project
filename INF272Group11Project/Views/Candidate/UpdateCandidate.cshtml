@@ -1,4 +1,8 @@
-﻿
+﻿@model INF272Group11Project.ViewModels.CandidateVM
+@using INF272Group11Project.ViewModels
+@using System.Globalization
+@using System.Data
+
 @{
     Layout = null;
 }
@@ -49,22 +53,25 @@
             </p>
             <label>Party:</label>
             @:&nbsp;
-        <select>
-            <option value="Party1">Party1</option>
-            <option value="Party2">Party2</option>
-            <option value="Party3">Party3</option>
-         </select>
+            @Html.DropDownListFor(i => i.SelectedPartyID, Model.Parties, "-Please select a party-", new { @class = "form-control", Name = "Party" })
             <br />
             <p class="error">
                 <label>@ViewBag.Error4</label>
             </p>
             <label>Position:</label>
             @:&nbsp;
-    <select>
-        <option value="Position1">Position1</option>
-        <option value="Position2">Position2</option>
-        <option value="Position3">Position3</option>
-    </select>
+
+            @Html.DropDownListFor(i => i.SelectedCandidatePosition_ID, Model.Positions, "-Please select a position-", new { @class = "form-control", Name = "Position" })
+            <p class="error">
+                <label>@ViewBag.Error5</label>
+            </p>
+            <label>Province:</label>
+            @:&nbsp;
+
+            @Html.DropDownListFor(i => i.SelectedProvinceID, Model.Provinces, "-Please select a province-", new { @class = "form-control", Name = "Province" })
+
+            <input type="hidden" value=@TempData["CandidateEditID"] name="CandidateID" ID="CandidateID" />
+
             <br />
             <br />
             <input type="submit" name="submitButton" id="btnUpdate" value="Update" />
@@ -76,8 +83,12 @@
             @:&nbsp;
             @:&nbsp;
             @:&nbsp;
-            <input type="submit" name="submitButton" id="btnCancel" value="Cancel" />
+            <input type="submit" name="submitButton" id="btnBack" value="Back" />
         }
+
+        <br />
+        <label>@TempData["message"]</label>
+        <label>@TempData["success"]</label>
     </div>
 </body>
 </html>

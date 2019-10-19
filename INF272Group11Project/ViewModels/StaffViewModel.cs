@@ -10,6 +10,8 @@ namespace INF272Group11Project.ViewModels
     {
         public StaffGUIDControl StaffView;
 
-        public List<Staff> ListStaff;
+        public List<Staff> Liststaff;
+        
+
     }
 }

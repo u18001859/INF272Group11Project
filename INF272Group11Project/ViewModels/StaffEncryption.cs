@@ -9,7 +9,7 @@ namespace INF272Group11Project.ViewModels
 {
     public class StaffEncryption
     {
-        
+
         public string HashedData(string placeholder)
         {
             using (SHA256 h = SHA256.Create())
