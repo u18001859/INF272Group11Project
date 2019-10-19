@@ -18,6 +18,7 @@ namespace INF272Group11Project.Models
         public CityOrTown()
         {
             this.Suburbs = new HashSet<Suburb>();
+            this.Voters = new HashSet<Voter>();
         }
     
         public int CityOrTownID { get; set; }
@@ -27,5 +28,7 @@ namespace INF272Group11Project.Models
         public virtual Province Province { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Suburb> Suburbs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Voter> Voters { get; set; }
     }
 }

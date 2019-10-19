@@ -24,6 +24,8 @@ namespace INF272Group11Project.Models
         public string StaffSecurityQuestionAnswer { get; set; }
         public Nullable<int> StaffPositionID { get; set; }
         public Nullable<int> SecurityQuestionID { get; set; }
+        public string GUID { get; set; }
+        public System.DateTime GUIDTimeStamp { get; set; }
     
         public virtual SecurityQuestion SecurityQuestion { get; set; }
         public virtual StaffPosition StaffPosition { get; set; }

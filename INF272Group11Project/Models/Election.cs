@@ -23,7 +23,7 @@ namespace INF272Group11Project.Models
     
         public int ElectionID { get; set; }
         public System.DateTime ElectionDate { get; set; }
-        public int TotalVotes { get; set; }
+        public Nullable<int> TotalVotes { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NationalResult> NationalResults { get; set; }

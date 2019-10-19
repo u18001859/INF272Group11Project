@@ -13,10 +13,10 @@ namespace INF272Group11Project.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class VotingSystemProjectEntities : DbContext
+    public partial class VotingSystemProjectEntities1 : DbContext
     {
-        public VotingSystemProjectEntities()
-            : base("name=VotingSystemProjectEntities")
+        public VotingSystemProjectEntities1()
+            : base("name=VotingSystemProjectEntities1")
         {
         }
     
@@ -38,7 +38,6 @@ namespace INF272Group11Project.Models
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<StaffPosition> StaffPositions { get; set; }
         public virtual DbSet<Suburb> Suburbs { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Voter> Voters { get; set; }
         public virtual DbSet<VotingStation> VotingStations { get; set; }
     }
