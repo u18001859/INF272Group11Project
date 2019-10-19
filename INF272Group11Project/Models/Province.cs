@@ -17,16 +17,22 @@ namespace INF272Group11Project.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Province()
         {
+            this.Candidates = new HashSet<Candidate>();
             this.CityOrTowns = new HashSet<CityOrTown>();
             this.ProvincialResults = new HashSet<ProvincialResult>();
+            this.Voters = new HashSet<Voter>();
         }
     
         public int ProvinceID { get; set; }
         public string ProvinceName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Candidate> Candidates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CityOrTown> CityOrTowns { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProvincialResult> ProvincialResults { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Voter> Voters { get; set; }
     }
 }
