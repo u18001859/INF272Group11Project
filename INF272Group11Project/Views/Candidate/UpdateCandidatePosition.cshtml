@@ -1,4 +1,4 @@
-﻿@model INF272Group11Project.ViewModels.CandidateVM
+﻿@model INF272Group11Project.ViewModels.CandidatePositionVM
 @using INF272Group11Project.ViewModels
 @using System.Globalization
 @using System.Data
@@ -12,7 +12,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Update or Delete Candidate</title>
+    <title>Update Candidate</title>
     <link rel="stylesheet" type="text/css" href="~/Content/INF272Project.css" />
 </head>
 <body>
@@ -29,28 +29,21 @@
         <li class="BarList"><a href="@Url.Action("ProvincialResults","Results")">Provincial Results</a></li>
         <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
     </ul>
-    <h1 class="SecondaryHead">Update or Delete Candidate</h1>
+    <h1 class="SecondaryHead">Update Candidate Position</h1>
     <div class="Container">
-        @using (Html.BeginForm("Choice", "Candidate", FormMethod.Post))
+        @using (Html.BeginForm("Update2", "Candidate"))
         {
-            @*<p class="error">
+            <br />
+            <p class="error">
                 <label>@ViewBag.Error1</label>
             </p>
-            <label>Party Name:</label>
+            <label>Position name:</label>
             @:&nbsp;
-
-            @Html.DropDownListFor(i => i.SelectedPartyID, Model.Parties, "-Please select a party-", new { @class = "form-control", Name = "Party" })
-
-            <br />*@
-            <p class="error">
-                <label>@ViewBag.Error2</label>
-            </p>
-            <label>Candidate:</label>
-            @:&nbsp;
-
-            @Html.DropDownListFor(i => i.SelectedCandidateID, Model.Candidates, "-Please select a candidate-", new { @class = "form-control", Name = "CandidateID" })
-
+            <input type="text" id="txtPositionName" name="PositionName" />
             <br />
+
+            <input type="hidden" value=@TempData["CandidatePositionEditID"] name="CandidatePositionID" ID="CandidatePositionID" />
+
             <br />
             <br />
             <input type="submit" name="submitButton" id="btnUpdate" value="Update" />
@@ -59,18 +52,10 @@
             @:&nbsp;
             @:&nbsp;
             @:&nbsp;
-            <input type="submit" name="submitButton" id="btnDelete" value="Delete" />
             @:&nbsp;
             @:&nbsp;
             @:&nbsp;
-            @:&nbsp;
-            @:&nbsp;
-            <input type="submit" name="submitButton" id="btnCancel" value="Cancel" />
-
-            <br />
-            <br />
-
-            <label>@TempData["Message"] </label>
+            <input type="submit" name="submitButton" id="btnBack" value="Back" />
         }
 
         <br />

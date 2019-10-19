@@ -1,4 +1,4 @@
-﻿@model INF272Group11Project.ViewModels.CandidateVM
+﻿@model INF272Group11Project.ViewModels.CandidatePositionVM
 @using INF272Group11Project.ViewModels
 @using System.Globalization
 @using System.Data
@@ -29,26 +29,17 @@
         <li class="BarList"><a href="@Url.Action("ProvincialResults","Results")">Provincial Results</a></li>
         <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
     </ul>
-    <h1 class="SecondaryHead">Update or Delete Candidate</h1>
+    <h1 class="SecondaryHead">Update or Delete Candidate Position</h1>
     <div class="Container">
-        @using (Html.BeginForm("Choice", "Candidate", FormMethod.Post))
+        @using (Html.BeginForm("Choice2", "Candidate", FormMethod.Post))
         {
-            @*<p class="error">
-                <label>@ViewBag.Error1</label>
-            </p>
-            <label>Party Name:</label>
-            @:&nbsp;
-
-            @Html.DropDownListFor(i => i.SelectedPartyID, Model.Parties, "-Please select a party-", new { @class = "form-control", Name = "Party" })
-
-            <br />*@
             <p class="error">
-                <label>@ViewBag.Error2</label>
+                <label>@ViewBag.Error1</label>
             </p>
             <label>Candidate:</label>
             @:&nbsp;
 
-            @Html.DropDownListFor(i => i.SelectedCandidateID, Model.Candidates, "-Please select a candidate-", new { @class = "form-control", Name = "CandidateID" })
+            @Html.DropDownListFor(i => i.SelectedCandidatePosition_ID, Model.Positions, "-Please select a candidate position-", new { @class = "form-control", Name = "CandidatePositionID" })
 
             <br />
             <br />
@@ -72,10 +63,10 @@
 
             <label>@TempData["Message"] </label>
         }
-
         <br />
         <label>@TempData["message"]</label>
         <label>@TempData["success"]</label>
+
     </div>
 </body>
 </html>

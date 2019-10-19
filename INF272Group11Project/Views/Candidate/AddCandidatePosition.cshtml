@@ -1,4 +1,4 @@
-﻿@model INF272Group11Project.ViewModels.CandidateVM
+﻿@model INF272Group11Project.ViewModels.CandidatePositionVM
 @using INF272Group11Project.ViewModels
 @using System.Globalization
 @using System.Data
@@ -26,54 +26,24 @@
         <li class="BarList"><a class="OnPage" href="@Url.Action("FindVotingStation", "Voter")">Find Voting Station</a></li>
         <li class="BarList"><a href="@Url.Action("StaffLogin","Staff")">Staff Login</a></li>
     </ul>
-    <h1 class="SecondaryHead">Register Candidate</h1>
+    <h1 class="SecondaryHead">Add Candidate Position</h1>
     <div class="Container">
-        @using (Html.BeginForm("AddNewCandidate", "Candidate", FormMethod.Post))
+        @using (Html.BeginForm("Create", "Candidate"))
         {
+
             <br />
             <p class="error">
                 <label>@ViewBag.Error1</label>
             </p>
-            <label>First Names:</label>
+            <label>Position Name:</label>
             @:&nbsp;
-            <input type="text" id="txtFirstNames" name="FirstNames" />
-            <br />
-            <p class="error">
-                <label>@ViewBag.Error2</label>
-            </p>
-            <label>Last Name:</label>
-            @:&nbsp;
-            <input type="text" id="txtLastName" name="LastName" />
-            <br />
-            <p class="error">
-                <label>@ViewBag.Error3</label>
-            </p>
-            <label>Party:</label>
-            @:&nbsp;
+            <input type="text" id="txtFirstNames" name="PositionName" />
 
-            @Html.DropDownListFor(i => i.SelectedPartyID, Model.Parties, "-Please select a party-", new { @class = "form-control", Name = "Party" })
-
-            <br />
-            <p class="error">
-                <label>@ViewBag.Error4</label>
-            </p>
-            <label>Position:</label>
-            @:&nbsp;
-
-            @Html.DropDownListFor(e => e.SelectedCandidatePosition_ID, Model.Positions, "-Please select a position-", new { @class = "form-control", Name = "Position" })
-
-            <br />
-            <p class="error">
-                <label>@ViewBag.Error5</label>
-            </p>
-            <label>Province:</label>
-            @:&nbsp;
-
-            @Html.DropDownListFor(t => t.SelectedProvinceID, Model.Provinces, "-Please select a province-", new { @class = "form-control", Name = "Province" })
 
             <br />
             <br />
-            <input type="submit" name="submitButton" id="btnRegister" value="Register" />
+
+            <input type="submit" name="submitButton" id="btnRegister" value="Add" />
             @:&nbsp;
             @:&nbsp;
             @:&nbsp;
@@ -84,7 +54,7 @@
             @:&nbsp;
             <input type="submit" name="submitButton" id="btnCancel" value="Cancel" />
 
-            <br />
+            <br/>
             <label>@TempData["message"]</label>
             <label>@TempData["success"]</label>
 

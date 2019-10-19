@@ -16,6 +16,7 @@ namespace INF272Group11Project.Models
     using System.Linq;
     
 
+
     public partial class VotingSystemProjectEntities1 : DbContext
     {
         public VotingSystemProjectEntities1()

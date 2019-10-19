@@ -5,6 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
 
+
       <Diagram DiagramId="7810b5082d40479993bb7918872af52b" Name="Diagram1">
         <EntityTypeShape EntityType="VotingSystemProjectModel.Candidate" Width="1.5" PointX="9.75" PointY="12.125" IsExpanded="true" />
         <EntityTypeShape EntityType="VotingSystemProjectModel.CandidatePosition" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />

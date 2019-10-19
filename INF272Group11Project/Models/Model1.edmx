@@ -161,7 +161,9 @@
           <Property Name="SuburbID" Type="int" />
         </EntityType>
 
+
         <Association Name="FK__Candidate__Candi__1FCDBCEB">
+
 
           <End Role="CandidatePosition" Type="Self.CandidatePosition" Multiplicity="0..1" />
           <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
@@ -201,6 +203,7 @@
         </Association>
         <Association Name="FK__CityOrTow__Provi__1273C1CD">
 
+
           <End Role="Province" Type="Self.Province" Multiplicity="0..1" />
           <End Role="CityOrTown" Type="Self.CityOrTown" Multiplicity="*" />
           <ReferentialConstraint>
@@ -213,7 +216,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <Association Name="FK__NationalR__Elect__38996AB5">
+
 
           <End Role="Election" Type="Self.Election" Multiplicity="0..1" />
           <End Role="NationalResult" Type="Self.NationalResult" Multiplicity="*" />
@@ -226,6 +231,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+
 
         <Association Name="FK__NationalR__Party__5DCAEF64">
 
@@ -243,7 +249,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <Association Name="FK__Party__SuburbID__182C9B23">
+
 
           <End Role="Suburb" Type="Self.Suburb" Multiplicity="0..1" />
           <End Role="Party" Type="Self.Party" Multiplicity="*" />
@@ -257,7 +265,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <Association Name="FK__PartyImag__party__1B0907CE">
+
 
           <End Role="Party" Type="Self.Party" Multiplicity="1" />
           <End Role="PartyImage" Type="Self.PartyImage" Multiplicity="0..1" />
@@ -270,6 +280,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+
 
         <Association Name="FK__Provincia__Elect__33D4B598">
 
@@ -285,7 +296,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <Association Name="FK__Provincia__Party__35BCFE0A">
+
 
           <End Role="Party" Type="Self.Party" Multiplicity="0..1" />
           <End Role="ProvincialResult" Type="Self.ProvincialResult" Multiplicity="*" />
@@ -298,6 +311,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+
 
         <Association Name="FK__Provincia__Provi__34C8D9D1">
 
@@ -313,7 +327,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <Association Name="FK__Staff__SecurityQ__29572725">
+
 
           <End Role="SecurityQuestion" Type="Self.SecurityQuestion" Multiplicity="0..1" />
           <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
@@ -326,6 +342,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+
 
         <Association Name="FK__Staff__StaffPosi__286302EC">
 
@@ -341,7 +358,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <Association Name="FK__Suburb__CityOrTo__15502E78">
+
 
           <End Role="CityOrTown" Type="Self.CityOrTown" Multiplicity="0..1" />
           <End Role="Suburb" Type="Self.Suburb" Multiplicity="*" />
@@ -354,6 +373,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+
+
 
         <Association Name="FK__Voter__CityorTow__2F10007B">
           <End Role="CityOrTown" Type="Self.CityOrTown" Multiplicity="0..1" />
@@ -381,6 +402,8 @@
         </Association>
         <Association Name="FK__Voter__SecurityQ__2C3393D0">
 
+
+
           <End Role="SecurityQuestion" Type="Self.SecurityQuestion" Multiplicity="0..1" />
           <End Role="Voter" Type="Self.Voter" Multiplicity="*" />
           <ReferentialConstraint>
@@ -393,7 +416,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <Association Name="FK__Voter__SuburbID__2D27B809">
+
 
           <End Role="Suburb" Type="Self.Suburb" Multiplicity="0..1" />
           <End Role="Voter" Type="Self.Voter" Multiplicity="*" />
@@ -407,7 +432,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <Association Name="FK__VotingSta__Subur__3C69FB99">
+
 
           <End Role="Suburb" Type="Self.Suburb" Multiplicity="0..1" />
           <End Role="VotingStation" Type="Self.VotingStation" Multiplicity="*" />
@@ -467,6 +494,8 @@
           <EntitySet Name="Suburb" EntityType="Self.Suburb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Voter" EntityType="Self.Voter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VotingStation" EntityType="Self.VotingStation" Schema="dbo" store:Type="Tables" />
+
+
 
 
           <AssociationSet Name="FK__Candidate__Candi__1FCDBCEB" Association="Self.FK__Candidate__Candi__1FCDBCEB">
@@ -575,7 +604,9 @@
           <Property Name="CandidatePosition_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CandidatePosition_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
 
+
           <NavigationProperty Name="Candidates" Relationship="Self.FK__Candidate__Candi__1FCDBCEB" FromRole="CandidatePosition" ToRole="Candidate" />
+
 
         </EntityType>
         <EntityType Name="CityOrTown">
@@ -586,9 +617,11 @@
           <Property Name="CityOrTownName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ProvinceID" Type="Int32" />
 
+
           <NavigationProperty Name="Province" Relationship="Self.FK__CityOrTow__Provi__1273C1CD" FromRole="CityOrTown" ToRole="Province" />
           <NavigationProperty Name="Suburbs" Relationship="Self.FK__Suburb__CityOrTo__15502E78" FromRole="CityOrTown" ToRole="Suburb" />
           <NavigationProperty Name="Voters" Relationship="Self.FK__Voter__CityorTow__2F10007B" FromRole="CityOrTown" ToRole="Voter" />
+
 
         </EntityType>
         <EntityType Name="Election">
@@ -598,9 +631,11 @@
           <Property Name="ElectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ElectionDate" Type="DateTime" Nullable="false" Precision="3" />
 
+
           <Property Name="TotalVotes" Type="Int32" />
           <NavigationProperty Name="NationalResults" Relationship="Self.FK__NationalR__Elect__38996AB5" FromRole="Election" ToRole="NationalResult" />
           <NavigationProperty Name="ProvincialResults" Relationship="Self.FK__Provincia__Elect__33D4B598" FromRole="Election" ToRole="ProvincialResult" />
+
 
         </EntityType>
         <EntityType Name="NationalResult">
@@ -612,8 +647,10 @@
           <Property Name="PartyID" Type="Int32" />
           <Property Name="NationalResultsTotalVotes" Type="Int32" Nullable="false" />
 
+
           <NavigationProperty Name="Election" Relationship="Self.FK__NationalR__Elect__38996AB5" FromRole="NationalResult" ToRole="Election" />
           <NavigationProperty Name="Party" Relationship="Self.FK__NationalR__Party__398D8EEE" FromRole="NationalResult" ToRole="Party" />
+
 
         </EntityType>
         <EntityType Name="Party">
@@ -635,6 +672,7 @@
           <NavigationProperty Name="PartyImage" Relationship="Self.FK__PartyImag__party__1B0907CE" FromRole="Party" ToRole="PartyImage" />
           <NavigationProperty Name="ProvincialResults" Relationship="Self.FK__Provincia__Party__35BCFE0A" FromRole="Party" ToRole="ProvincialResult" />
 
+
         </EntityType>
         <EntityType Name="PartyImage">
           <Key>
@@ -646,6 +684,7 @@
 
           <NavigationProperty Name="Party" Relationship="Self.FK__PartyImag__party__1B0907CE" FromRole="PartyImage" ToRole="Party" />
 
+
         </EntityType>
         <EntityType Name="Province">
           <Key>
@@ -653,6 +692,8 @@
           </Key>
           <Property Name="ProvinceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProvinceName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+
+
 
           <NavigationProperty Name="Candidates" Relationship="Self.FK__Candidate__Provi__21B6055D" FromRole="Province" ToRole="Candidate" />
           <NavigationProperty Name="CityOrTowns" Relationship="Self.FK__CityOrTow__Provi__1273C1CD" FromRole="Province" ToRole="CityOrTown" />
@@ -670,6 +711,7 @@
           <Property Name="PartyID" Type="Int32" />
           <Property Name="ProvincialResultsTotalVotes" Type="Int32" Nullable="false" />
 
+
           <NavigationProperty Name="Election" Relationship="Self.FK__Provincia__Elect__33D4B598" FromRole="ProvincialResult" ToRole="Election" />
           <NavigationProperty Name="Party" Relationship="Self.FK__Provincia__Party__35BCFE0A" FromRole="ProvincialResult" ToRole="Party" />
           <NavigationProperty Name="Province" Relationship="Self.FK__Provincia__Provi__34C8D9D1" FromRole="ProvincialResult" ToRole="Province" />
@@ -682,8 +724,10 @@
           <Property Name="SecurityQuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SecurityQuestion1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
 
+
           <NavigationProperty Name="Staffs" Relationship="Self.FK__Staff__SecurityQ__29572725" FromRole="SecurityQuestion" ToRole="Staff" />
           <NavigationProperty Name="Voters" Relationship="Self.FK__Voter__SecurityQ__2C3393D0" FromRole="SecurityQuestion" ToRole="Voter" />
+
 
         </EntityType>
         <EntityType Name="Staff">
@@ -706,6 +750,7 @@
           <NavigationProperty Name="SecurityQuestion" Relationship="Self.FK__Staff__SecurityQ__29572725" FromRole="Staff" ToRole="SecurityQuestion" />
           <NavigationProperty Name="StaffPosition" Relationship="Self.FK__Staff__StaffPosi__286302EC" FromRole="Staff" ToRole="StaffPosition" />
 
+
         </EntityType>
         <EntityType Name="StaffPosition">
           <Key>
@@ -714,7 +759,9 @@
           <Property Name="StaffPositionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StaffPosition_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
 
+
           <NavigationProperty Name="Staffs" Relationship="Self.FK__Staff__StaffPosi__286302EC" FromRole="StaffPosition" ToRole="Staff" />
+
 
         </EntityType>
         <EntityType Name="Suburb">
@@ -725,10 +772,12 @@
           <Property Name="SuburbName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CityOrTownID" Type="Int32" />
 
+
           <NavigationProperty Name="CityOrTown" Relationship="Self.FK__Suburb__CityOrTo__15502E78" FromRole="Suburb" ToRole="CityOrTown" />
           <NavigationProperty Name="Parties" Relationship="Self.FK__Party__SuburbID__182C9B23" FromRole="Suburb" ToRole="Party" />
           <NavigationProperty Name="Voters" Relationship="Self.FK__Voter__SuburbID__2D27B809" FromRole="Suburb" ToRole="Voter" />
           <NavigationProperty Name="VotingStations" Relationship="Self.FK__VotingSta__Subur__3C69FB99" FromRole="Suburb" ToRole="VotingStation" />
+
 
         </EntityType>
         <EntityType Name="Voter">
@@ -772,9 +821,11 @@
           <Property Name="VotingStationStreetAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SuburbID" Type="Int32" />
 
+
           <NavigationProperty Name="Suburb" Relationship="Self.FK__VotingSta__Subur__3C69FB99" FromRole="VotingStation" ToRole="Suburb" />
         </EntityType>
         <Association Name="FK__Candidate__Candi__1FCDBCEB">
+
 
           <End Role="CandidatePosition" Type="Self.CandidatePosition" Multiplicity="0..1" />
           <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
@@ -788,7 +839,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <Association Name="FK__Candidate__Party__20C1E124">
+
 
           <End Role="Party" Type="Self.Party" Multiplicity="0..1" />
           <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
@@ -801,7 +854,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-=
+
+
         <Association Name="FK__Candidate__Provi__21B6055D">
           <End Role="Province" Type="Self.Province" Multiplicity="0..1" />
           <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
@@ -815,7 +869,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__CityOrTow__Provi__1273C1CD">
-\
+
           <End Role="Province" Type="Self.Province" Multiplicity="0..1" />
           <End Role="CityOrTown" Type="Self.CityOrTown" Multiplicity="*" />
           <ReferentialConstraint>
@@ -828,7 +882,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <Association Name="FK__Suburb__CityOrTo__15502E78">
+
 
           <End Role="CityOrTown" Type="Self.CityOrTown" Multiplicity="0..1" />
           <End Role="Suburb" Type="Self.Suburb" Multiplicity="*" />
@@ -868,7 +924,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <Association Name="FK__Provincia__Elect__33D4B598">
+
 
           <End Role="Election" Type="Self.Election" Multiplicity="0..1" />
           <End Role="ProvincialResult" Type="Self.ProvincialResult" Multiplicity="*" />
@@ -882,7 +940,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <Association Name="FK__NationalR__Party__398D8EEE">
+
 
           <End Role="Party" Type="Self.Party" Multiplicity="0..1" />
           <End Role="NationalResult" Type="Self.NationalResult" Multiplicity="*" />
@@ -896,7 +956,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <Association Name="FK__Party__SuburbID__182C9B23">
+
 
           <End Role="Suburb" Type="Self.Suburb" Multiplicity="0..1" />
           <End Role="Party" Type="Self.Party" Multiplicity="*" />
@@ -910,7 +972,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <Association Name="FK__PartyImag__party__1B0907CE">
+
 
           <End Role="Party" Type="Self.Party" Multiplicity="1" />
           <End Role="PartyImage" Type="Self.PartyImage" Multiplicity="0..1" />
@@ -924,7 +988,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <Association Name="FK__Provincia__Party__35BCFE0A">
+
 
           <End Role="Party" Type="Self.Party" Multiplicity="0..1" />
           <End Role="ProvincialResult" Type="Self.ProvincialResult" Multiplicity="*" />
@@ -938,7 +1004,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <Association Name="FK__Provincia__Provi__34C8D9D1">
+
 
           <End Role="Province" Type="Self.Province" Multiplicity="0..1" />
           <End Role="ProvincialResult" Type="Self.ProvincialResult" Multiplicity="*" />
@@ -951,6 +1019,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+
 
         <Association Name="FK__Voter__ProvinceI__2E1BDC42">
           <End Role="Province" Type="Self.Province" Multiplicity="0..1" />
@@ -978,7 +1047,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <Association Name="FK__Voter__SecurityQ__2C3393D0">
+
 
           <End Role="SecurityQuestion" Type="Self.SecurityQuestion" Multiplicity="0..1" />
           <End Role="Voter" Type="Self.Voter" Multiplicity="*" />
@@ -992,7 +1063,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <Association Name="FK__Staff__StaffPosi__286302EC">
+
 
           <End Role="StaffPosition" Type="Self.StaffPosition" Multiplicity="0..1" />
           <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
@@ -1005,6 +1078,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+
 
         <Association Name="FK__Voter__SuburbID__2D27B809">
 
@@ -1033,7 +1107,9 @@
           </ReferentialConstraint>
         </Association>
 
+
         <EntityContainer Name="VotingSystemProjectEntities1" annotation:LazyLoadingEnabled="true">
+
 
           <EntitySet Name="Candidates" EntityType="Self.Candidate" />
           <EntitySet Name="CandidatePositions" EntityType="Self.CandidatePosition" />
@@ -1174,6 +1250,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+
 
         <EntityContainerMapping StorageEntityContainer="VotingSystemProjectModelStoreContainer" CdmEntityContainer="VotingSystemProjectEntities1">
 
