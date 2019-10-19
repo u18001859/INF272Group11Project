@@ -1,4 +1,4 @@
-﻿@model INF272Group11Project.Models.Staff
+﻿@model INF272Group11Project.ViewModels.StaffViewModel
 @{
     Layout = null;
 }
@@ -17,13 +17,14 @@
     <label class="Slogan">The simple and better way to vote</label>
     <br />
     <ul class="NavigationBar">
-        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff", new { StaffGUID = Model.GUID})">Home</a></li>
-        <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff", new { StaffGUID = Model.GUID, id = Model.StaffID})">Update Personal Info</a></li>
-        <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff", new { StaffGUID = Model.GUID, id = Model.StaffID})">Change Password</a></li>
-        <li class="BarList"><a href="@Url.Action("Index", "Report", new { StaffGUID = Model.GUID, id = Model.StaffID})">Create a Report</a></li>
-        <li class="BarList"><a href="@Url.Action("TotalVotes","Results",  new { StaffGUID = Model.GUID, id = Model.StaffID})">Total Votes</a></li>
-        <li class="BarList"><a href="@Url.Action("NationalResults","Results", new { StaffGUID = Model.GUID, id = Model.StaffID})">National Results</a></li>
-        <li class="BarList"><a href="@Url.Action("ProvincialResults","Results", new { StaffGUID = Model.GUID, id = Model.StaffID})">Provincial Results</a></li>
+        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff", new { StaffGUID = Model.StaffView.staff.GUID})">Home</a></li>
+        <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Update Personal Info</a></li>
+        <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Change Password</a></li>
+        <li class="BarList"><a href="@Url.Action("Index", "Report", new {StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Create a Report</a></li>
+        <li class="BarList"><a href="@Url.Action("TotalVotes","Results",  new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Total Votes</a></li>
+        <li class="BarList"><a href="@Url.Action("NationalResults","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">National Results</a></li>
+        <li class="BarList"><a href="@Url.Action("ProvincialResults","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Provincial Results</a></li>
+        <li class="BarList"><a href="@Url.Action("SetElectionDate", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID })">Set Election Date</a></li>
         <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
     </ul>
     <h1 class="SecondaryHead">You can use the below tools to insert, update, or delete information from the system!</h1>
@@ -31,32 +32,34 @@
     <h1 class="SecondaryHead" style="color: green">@ViewBag.success</h1>
     <div class="Container">
 
-        @using (Html.BeginForm("RegisterParty", "Staff",FormMethod.Post, new { StaffGUID = Model.GUID, id = Model.StaffID}))
+        @using (Html.BeginForm("RegisterParty", "Staff",FormMethod.Post, new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID}))
         {
             <input id="BtnRegisterNewParty" type="submit" value="Register New Party" />
         }
-        @using (Html.BeginForm("UpdateOrDeleteParty","Staff",FormMethod.Post, new { StaffGUID = Model.GUID, id = Model.StaffID}))
+        @using (Html.BeginForm("UpdateOrDeleteParty","Staff",FormMethod.Post, new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID}))
         {
             <input id="BtnUpdateParty" type="submit" value="Update Or Delete Party" />
         }
-        @using (Html.BeginForm("RegisterCandidate", "Candidate",FormMethod.Post, new { StaffGUID = Model.GUID, id = Model.StaffID}))
+        @using (Html.BeginForm("RegisterCandidate", "Candidate",FormMethod.Post, new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID}))
         {
             <input id="BtnRegisterCandidate" type="submit" value="Register Candidate" name="RegisterCandidate"/>
         }
-        @using (Html.BeginForm("UpdateOrDeleteCandidate", "Candidate",FormMethod.Post, new { StaffGUID = Model.GUID, id = Model.StaffID}))
+        @using (Html.BeginForm("UpdateOrDeleteCandidate", "Candidate",FormMethod.Post, new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID}))
         {
             <input id="BtnSearchCandidate" type="submit" value="Update Or Delete Candidate" name="UpdateOrDeleteCandidate"/>
         }
-        @using (Html.BeginForm("AddVotingStation", "VotingStation",FormMethod.Post, new { StaffGUID = Model.GUID, id = Model.StaffID}))
+        @using (Html.BeginForm("AddVotingStation", "VotingStation",FormMethod.Post, new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID}))
         {
             <input id="BtnAddVotingStationStaffHome" type="submit" value="Add Voting Station" />
         }
-        @using (Html.BeginForm("UpdateDeleteVotingStation", "VotingStation",FormMethod.Post, new { StaffGUID = Model.GUID, id = Model.StaffID}))
+        @using (Html.BeginForm("UpdateDeleteVotingStation", "VotingStation",FormMethod.Post, new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID}))
         {
             <input id="BtnUpdateDeleteVotingStation" type="submit" value="Update Or Delete A Voting Station" />
         }
-        @using (Html.BeginForm("RegisterStaff", "Staff",FormMethod.Post, new { StaffGUID = Model.GUID, id = Model.StaffID}))
+        @using (Html.BeginForm("RegisterStaff", "Staff",FormMethod.Post))
         {
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID"/>
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnRegisterStaff" type="submit" value="Register Staff" />
         }
 

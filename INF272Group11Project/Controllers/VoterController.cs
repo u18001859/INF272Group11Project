@@ -57,39 +57,48 @@ namespace INF272Group11Project.Controllers
                         var SearchPhone = db.Voters.Where(g => g.VoterPhoneNumber == PhoneNumber).FirstOrDefault();
                         if (SearchPhone == null)
                         {
-                            var EncrypPassword1 = registerVoter.HashedData(Password);
-                            var EncrypPassword2 = registerVoter.HashedData(ConfrimPassword);
-                            var EncrypSecurityQuestionAnswer = registerVoter.HashedData(SecurityAnswer);
-                            if (EncrypPassword1 == EncrypPassword2)
+                            if (SearchPhone.VoterPhoneNumber.Length == 10)
                             {
 
-                                Voter v = new Voter();
-                                v.VoterIDNumber = EncrypVoterID.ToString();
-                                v.VoterPassword = EncrypPassword1.ToString();
-                                v.VoterFirstNames = FirstName.ToString();
-                                v.VoterLastName = LastName.ToString();
-                                v.VoterEmail = Email.ToString();
-                                v.VoterPhoneNumber = PhoneNumber.ToString();
-                                v.VoterStreetAddress = Address.ToString();
-                                v.VotePartyStatus = false;
-                                v.VotePartyStatus = false;
-                                v.SecurityQuestionAnswer = EncrypSecurityQuestionAnswer.ToString();
-                                v.SecurityQuestionID = voter.SecurityQuestionID;
-                                v.SuburbID = voter.SuburbID;
-                                v.ProvinceID = voter.ProvinceID;
-                                v.CityorTownID = voter.CityorTownID;
-                                v.GUID = Guid.NewGuid().ToString();
-                                v.GUIDTimeStamp = DateTime.Now;
+                                var EncrypPassword1 = registerVoter.HashedData(Password);
+                                var EncrypPassword2 = registerVoter.HashedData(ConfrimPassword);
+                                var EncrypSecurityQuestionAnswer = registerVoter.HashedData(SecurityAnswer);
+                                if (EncrypPassword1 == EncrypPassword2)
+                                {
 
-                                db.Voters.Add(v);
-                                db.SaveChanges();
+                                    Voter v = new Voter();
+                                    v.VoterIDNumber = EncrypVoterID.ToString();
+                                    v.VoterPassword = EncrypPassword1.ToString();
+                                    v.VoterFirstNames = FirstName.ToString();
+                                    v.VoterLastName = LastName.ToString();
+                                    v.VoterEmail = Email.ToString();
+                                    v.VoterPhoneNumber = PhoneNumber.ToString();
+                                    v.VoterStreetAddress = Address.ToString();
+                                    v.VotePartyStatus = false;
+                                    v.VotePartyStatus = false;
+                                    v.SecurityQuestionAnswer = EncrypSecurityQuestionAnswer.ToString();
+                                    v.SecurityQuestionID = voter.SecurityQuestionID;
+                                    v.SuburbID = voter.SuburbID;
+                                    v.ProvinceID = voter.ProvinceID;
+                                    v.CityorTownID = voter.CityorTownID;
+                                    v.GUID = Guid.NewGuid().ToString();
+                                    v.GUIDTimeStamp = DateTime.Now;
 
-                                TempData["success"] = "Registration was successfull!";
-                                return RedirectToAction("VoterLogin");
+                                    db.Voters.Add(v);
+                                    db.SaveChanges();
+
+                                    TempData["success"] = "Registration was successfull!";
+                                    return RedirectToAction("VoterLogin");
+                                }
+                                else
+                                {
+                                    TempData["message"] = "your passwords do not match Please try again";
+                                    RedirectToAction("RegisterVoter");
+                                }
                             }
                             else
                             {
-                                TempData["message"] = "your passwords do not match Please try again";
+                                TempData["message"] = "The Phone Number is not the right length!";
                                 RedirectToAction("RegisterVoter");
                             }
                         }
@@ -297,7 +306,7 @@ namespace INF272Group11Project.Controllers
         }
 
         [HttpPost]
-        public ActionResult doVoterUpdate([Bind(Include = "VoterIDNumber,VoterFirstNames,VoterLastName,VoterStreetAddress,SuburbID,VoterPhoneNumber,VoterEmail")] Voter voter)
+        public ActionResult doVoterUpdate([Bind(Include = "VoterIDNumber,VoterFirstNames,VoterLastName,VoterStreetAddress,SuburbID,ProvinceID,CityOrTownID,VoterPhoneNumber,VoterEmail")] Voter voter)
         {
             VoterVM voterVM = TempData["voterVM"] as VoterVM;
           
@@ -311,6 +320,8 @@ namespace INF272Group11Project.Controllers
                 u.VoterLastName = voter.VoterLastName;
                 u.VoterStreetAddress = voter.VoterStreetAddress;
                 u.SuburbID = voter.SuburbID;
+                u.ProvinceID = voter.ProvinceID;
+                u.CityorTownID = voter.CityorTownID;
                 u.VoterEmail = voter.VoterEmail;
                 u.VoterPhoneNumber = voter.VoterPhoneNumber;
                 db.SaveChanges();

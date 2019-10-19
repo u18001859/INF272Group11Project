@@ -26,6 +26,7 @@ namespace INF272Group11Project.Controllers
                     staffGUIDControl.RefreshGUID(db);
                     StaffViewModel staffVM = new StaffViewModel();
                     staffVM.StaffView = staffGUIDControl;
+                    staffVM.ListStaff = db.Staffs.ToList();
                     ViewBag.message = TempData["message"];
                     ViewBag.success = TempData["success"];
                     return View(staffVM);
@@ -44,7 +45,7 @@ namespace INF272Group11Project.Controllers
                     staffGUID.RefreshGUID(db);
                     StaffViewModel staffVM = new StaffViewModel();
                     staffVM.StaffView = staffGUID;
-
+                    staffVM.ListStaff = db.Staffs.ToList();
                     ViewBag.message = TempData["message"];
                     ViewBag.success = TempData["success"];
                     return View(staffVM);
@@ -89,6 +90,9 @@ namespace INF272Group11Project.Controllers
                     StaffGUIDControl staffGUIDControl = new StaffGUIDControl();
                     staffGUIDControl.staff = s;
                     staffGUIDControl.RefreshGUID(db);
+                    StaffViewModel staffView = new StaffViewModel();
+                    
+                    staffView.ListStaff = db.Staffs.ToList();
                     TempData["GUIDControl"] = staffGUIDControl;
 
                    return RedirectToAction("StaffHomePage");
@@ -177,16 +181,16 @@ namespace INF272Group11Project.Controllers
 
         }
 
-        public ActionResult ChangePasswordStaff()
+        public ActionResult ChangePasswordStaff(string StaffGUID, string id)
         {
-            return View();
+            return RedirectToAction("doUpdatePassword");
         }
-
-        public ActionResult doUpdatePassword()
+        [HttpPost]
+        public ActionResult doUpdatePassword(string StaffGUID, string id, string Answer, string NewPassword, string ConfirmNewPassword)
         {
             return RedirectToAction("StaffHomePage");
         }
-
+        [HttpPost]
         public ActionResult RegisterStaff(string StaffGUID, string id)
         {
             if (StaffGUID != null)
@@ -205,8 +209,8 @@ namespace INF272Group11Project.Controllers
                 }
                 else
                 {
-                    TempData["message"] = "An Error Occured Please Login Again";
-                    return RedirectToAction("StaffLogin");
+                    TempData["message"] = "You do not have permission to access this page";
+                    return RedirectToAction("StaffHomePage", new { StaffGUID = StaffGUID});
                 }
             }
             else
@@ -240,7 +244,7 @@ namespace INF272Group11Project.Controllers
                                 CreateStaff.Staff_FirstNames = FirstName;
                                 CreateStaff.Staff_LastName = LastName;
                                 CreateStaff.SecurityQuestionID = staff.SecurityQuestionID;
-                                CreateStaff.StaffPositionID = staff.StaffPosition.StaffPositionID;
+                                CreateStaff.StaffPositionID = staff.StaffPositionID;
                                 CreateStaff.StaffEmail = Email;
                                 CreateStaff.StaffPhoneNumber = PhoneNumber;
                                 CreateStaff.StaffSecurityQuestionAnswer = SecurityQuestionAnswer;
@@ -285,10 +289,10 @@ namespace INF272Group11Project.Controllers
 
         public ActionResult UpdateStaffInfo(string StaffGUID, string id)
         {
+            return RedirectToAction("StaffHomePage");
 
-            return View();
         }
-
+        [HttpPost]
         public ActionResult doStaffUpdate()
         {
             return RedirectToAction("StaffHomePage");
@@ -334,6 +338,125 @@ namespace INF272Group11Project.Controllers
         public ActionResult GetUserName()
         {
             return View();
+        }
+
+        public ActionResult SetElectionDate(string StaffGUID, string id)
+        {
+            ViewBag.message = TempData["message"];
+            if (StaffGUID != null)
+            {
+                StaffGUIDControl staffGUID = new StaffGUIDControl();
+                if(staffGUID.IsLogedIn(db, StaffGUID))
+                {
+                    staffGUID.RefreshGUID(db);
+                    StaffViewModel staffView = new StaffViewModel();
+                    staffView.StaffView = staffGUID;
+                    return View(staffView);
+                }
+                else
+                {
+                    TempData["message"] = "An Error Occured Please Login Again!";
+                    return RedirectToAction("StaffLogin");
+                }
+            }
+            else
+            {
+                TempData["message"] = "An Error Occured Please Login Again!";
+                return RedirectToAction("StaffLogin");
+            }
+            
+        }
+        [HttpPost]
+        public ActionResult doSetElectionDate(string StaffGUID, string id, DateTime ElectionDate)
+        {
+            if(ElectionDate != null && ElectionDate.Date > DateTime.Today)
+            {
+                var search = db.Elections.Where(j => j.ElectionDate == ElectionDate).FirstOrDefault();
+                if(search == null)
+                {
+                    Election election = new Election();
+                    election.ElectionDate = ElectionDate;
+                    db.Elections.Add(election);
+                    RegisterVoterVM register = new RegisterVoterVM();
+                    register.VoterList = db.Voters.Where(x => x.VotePartyStatus == true).ToList();
+                    RegisterVoterVM register2 = new RegisterVoterVM();
+                    register2.VoterList = db.Voters.Where(k => k.VoteProvinceStatus == true).ToList();
+                    if (register.VoterList != null && register2.VoterList != null)
+                    {
+
+
+                        foreach (var item in register.VoterList)
+                        {
+
+                            Voter v = new Voter();
+                            var searchVoter = db.Voters.Where(l => l.VoterID == item.VoterID).FirstOrDefault();
+                            if (searchVoter != null)
+                            {
+                                item.VotePartyStatus = false;
+                                v.VotePartyStatus = item.VotePartyStatus;
+
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                TempData["message"] = "Please Select A Valid Election Date!";
+                                return RedirectToAction("SetElectionDate", new { StaffGUID = StaffGUID, id = id });
+                            }
+
+                        }
+
+
+
+
+
+                        foreach (var item2 in register2.VoterList)
+                        {
+                            Voter v = new Voter();
+                            var searchVoter = db.Voters.Where(l => l.VoterID == item2.VoterID).FirstOrDefault();
+                            if (searchVoter != null)
+                            {
+
+                                item2.VoteProvinceStatus = false;
+                                v.VoteProvinceStatus = item2.VoteProvinceStatus;
+
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                TempData["message"] = "Please Select A Valid Election Date!";
+                                return RedirectToAction("SetElectionDate", new { StaffGUID = StaffGUID, id = id });
+                            }
+                        }
+                        db.SaveChanges();
+                        TempData["success"] = "The Eelection Date Has Been Set!";
+                        return RedirectToAction("StaffHomePage", new { StaffGUID = StaffGUID });
+                    }
+                    else
+                    {
+                        Election elections = new Election();
+                        elections.ElectionDate = ElectionDate;
+                        db.Elections.Add(election);
+                        db.SaveChanges();
+                        TempData["success"] = "The Eelection Date Has Been Set!";
+                        return RedirectToAction("StaffHomePage", new { StaffGUID = StaffGUID });
+
+
+                    }
+
+                }
+                else
+                {
+                    TempData["message"] = "This ElectionDate Already Exists Please Select A different One!";
+                    return RedirectToAction("SetElectionDate", new { StaffGUID = StaffGUID, id = id });
+                }
+                
+
+            }
+            else
+            {
+                TempData["message"] = "Please Select A Valid Election Date!";
+                return RedirectToAction("SetElectionDate", new { StaffGUID = StaffGUID, id = id });
+            }
         }
     }
 }

@@ -241,6 +241,7 @@
     <Content Include="Provincial Results.pdf" />
     <Content Include="Views\Voter\ForgotPasswordGetID.cshtml" />
     <Content Include="Views\Staff\GetUserName.cshtml" />
+    <Content Include="Views\Staff\SetElectionDate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

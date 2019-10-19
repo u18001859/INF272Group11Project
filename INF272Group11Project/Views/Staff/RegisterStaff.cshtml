@@ -1,4 +1,4 @@
-﻿@model INF272Group11Project.Models.Staff
+﻿@model INF272Group11Project.ViewModels.StaffViewModel
 @{
     Layout = null;
 }
@@ -16,20 +16,22 @@
     <h1 class="PageHeading">Voting Made Easy!</h1>
     <label class="Slogan">The simple and better way to vote</label>
     <ul class="NavigationBar">
-        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff", new { StaffGUID = Model.GUID})">Home</a></li>
-        <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff", new { StaffGUID = Model.GUID, id = Model.StaffID})">Update Personal Info</a></li>
-        <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff", new { StaffGUID = Model.GUID, id = Model.StaffID})">Change Password</a></li>
-        <li class="BarList"><a href="@Url.Action("Index", "Report", new { StaffGUID = Model.GUID, id = Model.StaffID})">Create a Report</a></li>
-        <li class="BarList"><a href="@Url.Action("TotalVotes","Results", new { StaffGUID = Model.GUID, id = Model.StaffID})">Total Votes</a></li>
-        <li class="BarList"><a href="@Url.Action("NationalResults","Results", new { StaffGUID = Model.GUID, id = Model.StaffID})">National Results</a></li>
-        <li class="BarList"><a href="@Url.Action("ProvincialResults","Results", new { StaffGUID = Model.GUID, id = Model.StaffID})">Provincial Results</a></li>
+        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff", new { StaffGUID = Model.StaffView.staff.GUID})">Home</a></li>
+        <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Update Personal Info</a></li>
+        <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Change Password</a></li>
+        <li class="BarList"><a href="@Url.Action("Index", "Report", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Create a Report</a></li>
+        <li class="BarList"><a href="@Url.Action("TotalVotes","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Total Votes</a></li>
+        <li class="BarList"><a href="@Url.Action("NationalResults","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">National Results</a></li>
+        <li class="BarList"><a href="@Url.Action("ProvincialResults","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Provincial Results</a></li>
         <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
     </ul>
     <h1 class="SecondaryHead">Please Enter The New Staff Information!</h1>
     <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
     <div class="Container">
-        @using (Html.BeginForm("AddNewStaff", "Staff", FormMethod.Post, new { StaffGUID = Model.GUID, id = Model.StaffID}))
+        @using (Html.BeginForm("AddNewStaff", "Staff", FormMethod.Post))
         {
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <br />
             <label>User Name: </label>
             <input id="txtStaffIDNumber" type="text" name="StaffUserName" />
@@ -47,7 +49,7 @@
             <input id="txtEmail" type="text" name="Email" />
             <br />
             <br />
-            @Html.LabelFor(model => model.StaffPosition.StaffPosition_Description, "Select a Staff Position: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.StaffView.staff.StaffPositionID, "Select a Staff Position: ", htmlAttributes: new { @class = "control-label col-md-2" })
             @Html.DropDownList("StaffPositions", null, htmlAttributes: new { @class = "form-control" })
             <br />
             <br />
@@ -63,7 +65,7 @@
             <input id="txtConfrimPassword" type="password" name="ConfirmPassword" />
             <br />
             <br />
-            @Html.LabelFor(model => model.SecurityQuestionID, "Select a Security Question: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.StaffView.staff.SecurityQuestionID, "Select a Security Question: ", htmlAttributes: new { @class = "control-label col-md-2" })
             @Html.DropDownList("SecurityQuestionID", null, htmlAttributes: new { @class = "form-control" })
             <br />
             <br />
