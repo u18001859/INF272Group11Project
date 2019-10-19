@@ -17,10 +17,12 @@ namespace INF272Group11Project.Models
     
 
 
+
     public partial class VotingSystemProjectEntities1 : DbContext
     {
         public VotingSystemProjectEntities1()
             : base("name=VotingSystemProjectEntities1")
+
 
         {
         }

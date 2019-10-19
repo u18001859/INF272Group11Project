@@ -1,4 +1,5 @@
-﻿
+﻿@model INF272Group11Project.ViewModels.RegisterVoterVM
+
 @{
     Layout = null;
 }
@@ -16,19 +17,21 @@
     <h1 class="PageHeading">Voting Made Easy!</h1>
     <label class="Slogan">The simple and better way to vote</label>
     <ul class="NavigationBar">
-        <li class="BarList"><a href="@Url.Action("VoterHomePage","Voter")"></a></li>
-        <li class="BarList"><a class="OnPage" href="@Url.Action("VoteParty","Voter")">Vote</a></li>
-        <li class="BarList"><a href="@Url.Action("UpdateVoterInfo", "Voter")">Update Personal Info</a></li>
-        <li class="BarList"><a href="@Url.Action("ChangePasswordVoter", "Voter")">Change Password</a></li>
+        <li class="BarList"><a href="@Url.Action("VoterHomePage","Voter", new { VoterGUID = Model.voterView.voter.GUID})"></a></li>
+        <li class="BarList"><a class="OnPage" href="@Url.Action("VoteParty","Voter", new {VoterGUID = Model.voterView.voter.GUID, id =  Model.voterView.voter.VoterID})">National Vote</a></li>
+        <li class="BarList"><a class="OnPage" href="@Url.Action("VoteProvincial","Voter", new {VoterGUID = Model.voterView.voter.GUID, id =  Model.voterView.voter.VoterID})">Provincial Vote</a></li>
+        <li class="BarList"><a href="@Url.Action("UpdateVoterInfo", "Voter", new {VoterGUID = Model.voterView.voter.GUID, id =  Model.voterView.voter.VoterID})">Update Personal Info</a></li>
+        <li class="BarList"><a href="@Url.Action("ChangePasswordVoter", "Voter", new {VoterGUID = Model.voterView.voter.GUID, id = Model.voterView.voter.VoterID})">Change Password</a></li>
         <li class="BarList"><a href="@Url.Action("Logout","Voter")">Logout</a></li>
     </ul>
 
     <br />
     <br />
-    <br />
-    <br />
+    <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
+    <h1 class="SecondaryHead" style="color: green">@ViewBag.success</h1>
     <h1 class="SecondaryHead">Welcome To The Voter Home Page Here You Can Vote For A Party And Update Your Information</h1>
-    <h2>Your Personal Details</h2>
+    <h2>Your Personal Details:</h2>
+
     <table>
         <tr>
             <th>First Names:</th>
@@ -40,16 +43,18 @@
             <th>Suburb:</th>
             <th>Street Address:</th>
         </tr>
+
         <tr>
-            <td>Voters First Name</td>
-            <td>Voters Last Name</td>
-            <td>Voters Email Address</td>
-            <td>Voters Phone Number</td>
-            <td>Voters Province</td>
-            <td>Voters City/Town</td>
-            <td>Voters Suburb</td>
-            <td>Voters Street Address</td>
+            <td>@Html.DisplayFor(model => model.voterView.voter.VoterFirstNames)</td>
+            <td>@Html.DisplayFor(modelItem => modelItem.voterView.voter.VoterLastName)</td>
+            <td>@Html.DisplayFor(modelItem => modelItem.voterView.voter.VoterEmail)</td>
+            <td>@Html.DisplayFor(modelItem => modelItem.voterView.voter.VoterPhoneNumber)</td>
+            <td>@Html.DisplayFor(modelItem => modelItem.voterView.voter.Province.ProvinceName)</td>
+            <td>@Html.DisplayFor(modelItem => modelItem.voterView.voter.CityOrTown.CityOrTownName)</td>
+            <td>@Html.DisplayFor(modelItem => modelItem.voterView.voter.Suburb.SuburbName)</td>
+            <td>@Html.DisplayFor(modelItem => modelItem.voterView.voter.VoterStreetAddress)</td>
         </tr>
+
     </table>
 </body>
 </html>

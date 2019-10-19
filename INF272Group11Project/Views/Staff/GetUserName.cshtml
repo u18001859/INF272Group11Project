@@ -22,29 +22,21 @@
         <li class="BarList"><a href="@Url.Action("FindVotingStation", "Voter")">Find Voting Station</a></li>
         <li class="BarList"><a href="@Url.Action("StaffLogin","Staff")">Staff Login</a></li>
     </ul>
-    <h1 class="SecondaryHead">Please Enter Your Login Details!</h1>
+    <h1 class="SecondaryHead">Please Enter Your Username!</h1>
     <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
-    <h1 class="SecondaryHead" style="color: green">@ViewBag.success</h1>
     <div class="Container">
-        @using (Html.BeginForm("doStaffLogin", "Staff", FormMethod.Post))
+        @using (Html.BeginForm("ForgotPassword", "Staff", FormMethod.Post))
         {
             <br />
             <br />
-            <label>Enter User Name: </label>
+            <label>Enter Username: </label>
             <input id="txtUserName" type="text" name="UserName" />
             <br />
             <br />
-            <label>Enter Password: </label>
-            <input id="txtPassword" type="password" name="Password" />
-            <br />
-            <a href="@Url.Action("GetUserName", "Staff")">Forgot Password?</a>
-            <br />
-            <input id="BtnLogin" type="submit" value="Login" name="Login" />
+            <input id="BtnLogin" type="submit" value="search" name="Search" />
         }
         @using (Html.BeginForm("Index", "Voter"))
         {
             <input id="BtnCancel" type="submit" value="Cancel" name="Cancel" />
         }
     </div>
-</body>
-</html>

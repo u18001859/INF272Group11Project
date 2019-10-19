@@ -215,6 +215,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
 
+
     <Compile Include="ViewModels\CandidatePositionVM.cs" />
     <Compile Include="ViewModels\CandidateVM.cs" />
     <Compile Include="Controllers\CandidatePositionsController.cs" />
@@ -226,10 +227,16 @@
     <Compile Include="ViewModels\UpdateDeleteVotingStationVM.cs" />
     <Compile Include="ViewModels\UpdateVotingStationVM.cs" />
     <Compile Include="ViewModels\PartyViewModel.cs" />
+
     <Compile Include="ViewModels\RegisterVoterVM.cs" />
     <Compile Include="ViewModels\StaffEncryption.cs" />
     <Compile Include="ViewModels\StaffGUIDControl.cs" />
     <Compile Include="ViewModels\StaffViewModel.cs" />
+
+    <Compile Include="ViewModels\VoterVM.cs" />
+    <Compile Include="ViewModels\VotingViewModel.cs" />
+
+
 
   </ItemGroup>
   <ItemGroup>
@@ -282,7 +289,6 @@
     <Content Include="Views\Report\MakeNationalReport.cshtml" />
     <Content Include="Views\Voter\VoteParty.cshtml" />
     <Content Include="Views\Voter\VoteProvincial.cshtml" />
-    <Content Include="Views\Voter\ThankYou.cshtml" />
     <Content Include="Views\Candidate\RegisterCandidate.cshtml" />
     <Content Include="Views\Candidate\UpdateOrDeleteCandidate.cshtml" />
     <Content Include="Views\Candidate\UpdateCandidate.cshtml" />
@@ -290,6 +296,11 @@
     <Content Include="Views\Results\ProvincialResults.cshtml" />
     <Content Include="Views\Report\MakeProvincialReport.cshtml" />
     <Content Include="Provincial Results.pdf" />
+
+    <Content Include="Views\Voter\ForgotPasswordGetID.cshtml" />
+    <Content Include="Views\Staff\GetUserName.cshtml" />
+    <Content Include="Views\Staff\SetElectionDate.cshtml" />
+
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
 
@@ -304,6 +315,7 @@
     <Content Include="Views\Staff\SetElectionDate.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+
 
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

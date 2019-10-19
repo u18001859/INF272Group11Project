@@ -1,4 +1,5 @@
-﻿
+﻿@model INF272Group11Project.ViewModels.VotingViewModel
+    
 @{
     Layout = null;
 }
@@ -15,6 +16,15 @@
     <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
     <h1 class="PageHeading">Voter Home Page!</h1>
     <label class="Slogan">The simple and better way to vote</label>
+    <br />
+    <ul class="NavigationBar">
+        <li class="BarList"><a href="@Url.Action("VoterHomePage","Voter", new {VoterGUID = Model.voterView.voter.GUID})">Home</a></li>
+        <li class="BarList"><a class="OnPage" href="@Url.Action("VoteParty","Voter", new {VoterGUID = Model.voterView.voter.GUID, id = Model.voterView.voter.VoterID})">Vote</a></li>
+        <li class="BarList"><a href="@Url.Action("UpdateVoterInfo", "Voter", new {VoterGUID = Model.voterView.voter.GUID, id = Model.voterView.voter.VoterID})">Update Personal Info</a></li>
+        <li class="BarList"><a href="@Url.Action("ChangePasswordVoter", "Voter", new {VoterGUID = Model.voterView.voter.GUID, id = Model.voterView.voter.VoterID})">Change Password</a></li>
+        <li class="BarList"><a href="@Url.Action("Logout","Voter")">Logout</a></li>
+    </ul>
+    <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
     <h1 class="SecondaryHead">Vote for Party By Clicking The Vote Button!</h1>
 
     <table>
@@ -26,19 +36,23 @@
             <th>Party Logo:</th>
             <th>Vote:</th>
         </tr>
-        <tr>
-            <td>Party Name</td>
-            <td>PN</td>
-            <td>Candidate Name</td>
-            <td>Candidate Image</td>
-            <td>Party Logo</td>
-            <td>
-                @using (Html.BeginForm("doVoteParty", "Voter"))
-                {
-                    <input id="BtnVoteParty" type="submit" value="Vote" />
-                }
-            </td>
-        </tr>
+        @foreach (var item in Model.listcandidate)
+        {
+            <tr>
+                <td>@item.Party.PartyName</td>
+                <td>@item.Party.PartyAccronym</td>
+                <td>@item.CandidateFirstNames @item.CandidateLastName</td>
+                <td>InsertPartyLeaderImage</td>
+                <td>InsetPartyLogo</td>
+                <td>
+                    @using (Html.BeginForm("doVoteParty", "Voter", FormMethod.Post, new { PartyID = item.Party.PartyID, voterID = Model.voterView.voter.VoterID, VoterGUID = Model.voterView.voter.GUID }))
+                    {
+                        <input id="BtnVoteParty" type="submit" value="Vote" />
+                    }
+                </td>
+
+            </tr>
+        }
     </table>
 </body>
 </html>

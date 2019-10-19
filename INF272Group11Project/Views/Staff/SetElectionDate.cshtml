@@ -12,41 +12,24 @@
     <link rel="stylesheet" type="text/css" href="~/Content/INF272Project.css" />
 </head>
 <body>
-    <img id="Logo"
-         src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png"
-         alt="Logo" />
+
+    <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
+
     <h1 class="PageHeading">Voting Made Easy!</h1>
     <label class="Slogan">The simple and better way to vote</label>
     <br />
     <ul class="NavigationBar">
-        <li class="BarList">
-            <a class="OnPage"
-               href="@Url.Action("StaffHomePage","Staff", new { StaffGUID = Model.StaffView.staff.GUID})">Home</a>
-        </li>
-        <li class="BarList">
-            <a href="@Url.Action("UpdateStaffInfo", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Update Personal Info</a>
-        </li>
-        <li class="BarList">
-            <a href="@Url.Action("ChangePasswordStaff", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Change Password</a>
-        </li>
-        <li class="BarList">
-            <a href="@Url.Action("Index", "Report", new {StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Create a Report</a>
-        </li>
-        <li class="BarList">
-            <a href="@Url.Action("TotalVotes","Results",  new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Total Votes</a>
-        </li>
-        <li class="BarList">
-            <a href="@Url.Action("NationalResults","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">National Results</a>
-        </li>
-        <li class="BarList">
-            <a href="@Url.Action("ProvincialResults","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Provincial Results</a>
-        </li>
-        <li class="BarList">
-            <a href="@Url.Action("SetElectionDate", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Set Election Date</a>
-        </li>
-        <li class="BarList">
-            <a href="@Url.Action("Logout", "Voter")">Logout</a>
-        </li>
+
+        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff", new { StaffGUID = Model.StaffView.staff.GUID})">Home</a></li>
+        <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Update Personal Info</a></li>
+        <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Change Password</a></li>
+        <li class="BarList"><a href="@Url.Action("Index", "Report", new {StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Create a Report</a></li>
+        <li class="BarList"><a href="@Url.Action("TotalVotes","Results",  new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Total Votes</a></li>
+        <li class="BarList"><a href="@Url.Action("NationalResults","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">National Results</a></li>
+        <li class="BarList"><a href="@Url.Action("ProvincialResults","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Provincial Results</a></li>
+        <li class="BarList"><a href="@Url.Action("SetElectionDate", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Set Election Date</a></li>
+        <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
+
     </ul>
     <h1 class="SecondaryHead">Please Select A Date For The Election!</h1>
     <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
@@ -54,24 +37,26 @@
     <div class="Container">
 
         @using (Html.BeginForm("doSetElectionDate", "Staff", FormMethod.Post))
-        {
-            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
-            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
-            <br />
-            <br />
-            <label>Please Select A Date For The Election: </label>
-            <input type="date" name="ElectionDate" />
-            <br />
-            <br />
-            <input type="submit" value="Set Election Date" name="CreateElection" />
-        }
+
+    {
+    <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+    <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
+    <br />
+    <br />
+    <label>Please Select A Date For The Election: </label>
+    <input type="date" name="ElectionDate" />
+    <br />
+    <br />
+    <input type="submit" value="Set Election Date" name="CreateElection" />
+            }
         @using (Html.BeginForm("StaffHomePage", "Staff"))
-        {
-            <input type="hidden" value="@Model.StaffView.staff.GUID"
-                   name="StaffGUID" />
-            <input type="submit" value="Cancel" name="Cancel" />
-        }
+                {
+        <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+        <input type="submit" value="Cancel" name="Cancel" />
+                }
 
     </div>
 </body>
 </html>
+
+

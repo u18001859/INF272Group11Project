@@ -13,6 +13,7 @@ namespace INF272Group11Project.Controllers
     public class StaffController : Controller
     {
         // GET: Staff
+
         VotingSystemProjectEntities1 db = new VotingSystemProjectEntities1();
         StaffEncryption staffEncryptionVM = new StaffEncryption();
 
@@ -21,12 +22,16 @@ namespace INF272Group11Project.Controllers
             if (StaffGUID != null)
             {
                 StaffGUIDControl staffGUIDControl = new StaffGUIDControl();
+
                 if (staffGUIDControl.IsLogedIn(db, StaffGUID))
+
                 {
                     staffGUIDControl.RefreshGUID(db);
                     StaffViewModel staffVM = new StaffViewModel();
                     staffVM.StaffView = staffGUIDControl;
+
                     staffVM.Liststaff = db.Staffs.ToList();
+
                     ViewBag.message = TempData["message"];
                     ViewBag.success = TempData["success"];
                     return View(staffVM);
@@ -45,7 +50,9 @@ namespace INF272Group11Project.Controllers
                     staffGUID.RefreshGUID(db);
                     StaffViewModel staffVM = new StaffViewModel();
                     staffVM.StaffView = staffGUID;
+
                     staffVM.Liststaff = db.Staffs.ToList();
+
                     ViewBag.message = TempData["message"];
                     ViewBag.success = TempData["success"];
                     return View(staffVM);
@@ -58,7 +65,6 @@ namespace INF272Group11Project.Controllers
                 }
             }
 
-
         }
 
         public ActionResult StaffLogin()
@@ -70,6 +76,7 @@ namespace INF272Group11Project.Controllers
         [HttpPost]
         public ActionResult doStaffLogin(string UserName, string Password)
         {
+
             if (UserName == null && Password == null)
             {
                 TempData["message"] = "Please fill in all your login details!";
@@ -91,6 +98,104 @@ namespace INF272Group11Project.Controllers
                     staffGUIDControl.staff = s;
                     staffGUIDControl.RefreshGUID(db);
                     StaffViewModel staffView = new StaffViewModel();
+
+                    
+                    staffView.ListStaff = db.Staffs.ToList();
+                    TempData["GUIDControl"] = staffGUIDControl;
+
+                   return RedirectToAction("StaffHomePage");
+                }
+                else
+                {
+                    TempData["message"] = "Your Username or Password was incorrect!";
+                    return RedirectToAction("StaffLogin");
+                }
+                
+            }
+            
+        }
+        [HttpPost]
+        public ActionResult ForgotPassword(string UserName)
+        {
+            var check = db.Staffs.Where(x => x.Staff_UserName == UserName).FirstOrDefault();
+            if (check != null)
+            {
+
+                var question = check.SecurityQuestionID;
+                if (question != null)
+                {
+                    var securityquestion = db.SecurityQuestions.Where(j => j.SecurityQuestionID == question).FirstOrDefault();
+                    if (securityquestion != null)
+                    {
+                        var answer = securityquestion.SecurityQuestion1;
+                        ViewBag.answer = answer;
+                        ViewBag.Username = UserName;
+                        ViewBag.message = TempData["message"];
+                        return View(check);
+                    }
+                    else
+                    {
+                        TempData["message"] = "An Unknown Error Took Place, Please try again";
+                        return RedirectToAction("StaffLogin");
+                    }
+                }
+                else
+                {
+                    TempData["message"] = "An Unknown Error Took Place, Please try again";
+                    return RedirectToAction("StaffLogin");
+                }
+            }
+            else
+            {
+                TempData["message"] = "Your Username was not found";
+                return RedirectToAction("StaffLogin");
+            }
+        }
+        [HttpPost]
+        public ActionResult doForgotPasswordUpdate(string Username, string Answer, string NewPassword, string ConfirmNewPassword)
+        {
+            
+            Staff s = db.Staffs.Where(x => x.Staff_UserName == Username && x.StaffSecurityQuestionAnswer == Answer).FirstOrDefault();
+            if (Username != null && Answer != null && NewPassword != null && ConfirmNewPassword != null)
+            {
+               
+                if (s != null)
+                {
+                    if(NewPassword == ConfirmNewPassword)
+                    {
+                        var hassedPassword = staffEncryptionVM.HashedData(NewPassword);
+                        s.Staff_Password = hassedPassword;
+                        db.SaveChanges();
+                        TempData["success"] = "Your Password Has Been Updated";
+                        return RedirectToAction("StaffLogin");
+                    }
+                    else
+                    {
+                        TempData["message"] = "Your Passwords do not Match!";
+                        return RedirectToAction("ForgotPassword", new { UserName = s.Staff_UserName});
+                    }
+                }
+                else
+                {
+                    TempData["message"] = "An Error Has Occured! Please Try Again!";
+                    return RedirectToAction("StaffLogin");
+                }
+            }
+            else
+            {
+                TempData["message"] = "Please Fill in your details";
+                return RedirectToAction("ForgotPassword", new { UserName = s.Staff_UserName});
+            }
+
+        }
+
+        public ActionResult ChangePasswordStaff(string StaffGUID, string id)
+        {
+            return RedirectToAction("doUpdatePassword");
+        }
+        [HttpPost]
+        public ActionResult doUpdatePassword(string StaffGUID, string id, string Answer, string NewPassword, string ConfirmNewPassword)
+
 
                     staffView.Liststaff = db.Staffs.ToList();
                     TempData["GUIDControl"] = staffGUIDControl;
@@ -186,6 +291,7 @@ namespace INF272Group11Project.Controllers
         }
 
         public ActionResult ChangePasswordStaff(string StaffGUID, string id)
+
         {
             if (StaffGUID != null)
             {
@@ -249,6 +355,7 @@ namespace INF272Group11Project.Controllers
             }
         }
         [HttpPost]
+
         public ActionResult doUpdatePassword(string StaffGUID, string id, string Answer, string NewPassword, string ConfirmNewPassword)
         {
             if (StaffGUID != null)
@@ -300,6 +407,7 @@ namespace INF272Group11Project.Controllers
             }
         }
         [HttpPost]
+
         public ActionResult RegisterStaff(string StaffGUID, string id)
         {
             if (StaffGUID != null)
@@ -319,10 +427,9 @@ namespace INF272Group11Project.Controllers
                 else
                 {
                     TempData["message"] = "You do not have permission to access this page";
-                    return RedirectToAction("StaffHomePage", new
-                    {
-                        StaffGUID = StaffGUID
-                    });
+
+                    return RedirectToAction("StaffHomePage", new { StaffGUID = StaffGUID});
+
                 }
             }
             else
@@ -336,6 +443,7 @@ namespace INF272Group11Project.Controllers
         [HttpPost]
         public ActionResult AddNewStaff(string StaffUserName, string FirstName, string LastName, string Email, string PhoneNumber, string Password, string ConfirmPassword, [Bind(Include = "StaffPostionID, SecurityQuestionID")] Staff staff, string SecurityQuestionAnswer, string StaffGUID, string id)
         {
+
             if (StaffUserName != null && FirstName != null && LastName != null && Email != null && PhoneNumber != null && Password != null && ConfirmPassword != null)
             {
                 var searchusername = db.Staffs.Where(x => x.Staff_UserName == StaffUserName).FirstOrDefault();
@@ -348,6 +456,7 @@ namespace INF272Group11Project.Controllers
                         if (searchPhoneNumber == null)
                         {
                             if (ConfirmPassword == Password)
+
                             {
                                 var HassedPassword = staffEncryptionVM.HashedData(Password);
                                 Staff CreateStaff = new Staff();
@@ -366,7 +475,9 @@ namespace INF272Group11Project.Controllers
                                 db.Staffs.Add(CreateStaff);
                                 db.SaveChanges();
                                 TempData["success"] = "You have successfully Registered a StaffMember";
+
                                 return RedirectToAction("StaffHomePage", new { StaffGUID = StaffGUID });
+
                             }
                             else
                             {
@@ -383,26 +494,31 @@ namespace INF272Group11Project.Controllers
                     else
                     {
                         TempData["message"] = "Your Email is already in use!";
+
                         return RedirectToAction("RegisterStaff", new
                         {
                             StaffGUID = StaffGUID,
                             id = id
                         });
+
                     }
                 }
                 else
                 {
                     TempData["message"] = "Your username is already in use!";
+
                     return RedirectToAction("RegisterStaff", new
                     {
                         StaffGUID = StaffGUID,
                         id = id
                     });
+
                 }
             }
             else
             {
                 TempData["message"] = "Please Fill In All of your Details";
+
                 return RedirectToAction("RegisterStaff", new
                 {
                     StaffGUID = StaffGUID,
@@ -410,10 +526,12 @@ namespace INF272Group11Project.Controllers
                 });
             }
 
+
         }
 
         public ActionResult UpdateStaffInfo(string StaffGUID, string id)
         {
+
             if (StaffGUID != null)
             {
                 StaffGUIDControl staffGUIDControl = new StaffGUIDControl();
@@ -459,6 +577,7 @@ namespace INF272Group11Project.Controllers
         }
         [HttpPost]
         public ActionResult doStaffUpdate(string StaffGUID, string id, [Bind(Include = "Staff_FirstNames, Staff_LastName, StaffPhoneNumber, StaffEmail")] Staff staff)
+
         {
             var ids = Convert.ToInt32(id);
             if (staff.Staff_FirstNames != null && staff.Staff_LastName != null && staff.StaffPhoneNumber != null && staff.StaffEmail != null)
@@ -671,13 +790,21 @@ namespace INF272Group11Project.Controllers
             return RedirectToAction("StaffHomePage");
         }
 
+        public ActionResult GetUserName()
+        {
+            return View();
+        }
+
+
         public ActionResult SetElectionDate(string StaffGUID, string id)
         {
             ViewBag.message = TempData["message"];
             if (StaffGUID != null)
             {
                 StaffGUIDControl staffGUID = new StaffGUIDControl();
+
                 if (staffGUID.IsLogedIn(db, StaffGUID))
+
                 {
                     staffGUID.RefreshGUID(db);
                     StaffViewModel staffView = new StaffViewModel();
@@ -700,10 +827,12 @@ namespace INF272Group11Project.Controllers
         [HttpPost]
         public ActionResult doSetElectionDate(string StaffGUID, string id, DateTime ElectionDate)
         {
+
             if (ElectionDate != null && ElectionDate.Date > DateTime.Today)
             {
                 var search = db.Elections.Where(j => j.ElectionDate == ElectionDate).FirstOrDefault();
                 if (search == null)
+
                 {
                     Election election = new Election();
                     election.ElectionDate = ElectionDate;
@@ -760,10 +889,9 @@ namespace INF272Group11Project.Controllers
                         }
                         db.SaveChanges();
                         TempData["success"] = "The Eelection Date Has Been Set!";
-                        return RedirectToAction("StaffHomePage", new
-                        {
-                            StaffGUID = StaffGUID
-                        });
+
+                        return RedirectToAction("StaffHomePage", new { StaffGUID = StaffGUID });
+
                     }
                     else
                     {
@@ -772,10 +900,9 @@ namespace INF272Group11Project.Controllers
                         db.Elections.Add(election);
                         db.SaveChanges();
                         TempData["success"] = "The Eelection Date Has Been Set!";
-                        return RedirectToAction("StaffHomePage", new
-                        {
-                            StaffGUID = StaffGUID
-                        });
+
+                        return RedirectToAction("StaffHomePage", new { StaffGUID = StaffGUID });
+
 
 
                     }
@@ -784,23 +911,19 @@ namespace INF272Group11Project.Controllers
                 else
                 {
                     TempData["message"] = "This ElectionDate Already Exists Please Select A different One!";
-                    return RedirectToAction("SetElectionDate", new
-                    {
-                        StaffGUID = StaffGUID,
-                        id = id
-                    });
+
+                    return RedirectToAction("SetElectionDate", new { StaffGUID = StaffGUID, id = id });
                 }
+                
 
 
             }
             else
             {
                 TempData["message"] = "Please Select A Valid Election Date!";
-                return RedirectToAction("SetElectionDate", new
-                {
-                    StaffGUID = StaffGUID,
-                    id = id
-                });
+
+                return RedirectToAction("SetElectionDate", new { StaffGUID = StaffGUID, id = id });
+
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿
+﻿@model INF272Group11Project.Models.Voter
+
 @{
     Layout = null;
 }
@@ -17,65 +18,64 @@
     <label class="Slogan">The simple and better way to vote</label>
     <br />
     <ul class="NavigationBar">
-        <li class="BarList"><a href="@Url.Action("VoterHomePage","Voter")">Home</a></li>
-        <li class="BarList"><a class="OnPage" href="@Url.Action("VoteParty","Voter")">Vote</a></li>
-        <li class="BarList"><a href="@Url.Action("UpdateVoterInfo", "Voter")">Update Personal Info</a></li>
-        <li class="BarList"><a href="@Url.Action("ChangePasswordVoter", "Voter")">Change Password</a></li>
+        <li class="BarList"><a href="@Url.Action("VoterHomePage","Voter", new {VoterGUID = Model.GUID})">Home</a></li>
+        <li class="BarList"><a class="OnPage" href="@Url.Action("VoteParty","Voter", new {VoterGUID = Model.GUID, id = Model.VoterID})">Vote</a></li>
+        <li class="BarList"><a href="@Url.Action("UpdateVoterInfo", "Voter", new {VoterGUID = Model.GUID, id = Model.VoterID})">Update Personal Info</a></li>
+        <li class="BarList"><a href="@Url.Action("ChangePasswordVoter", "Voter", new {VoterGUID = Model.GUID, id = Model.VoterID})">Change Password</a></li>
         <li class="BarList"><a href="@Url.Action("Logout","Voter")">Logout</a></li>
     </ul>
+    <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
+    <h1 class="SecondaryHead" style="color: green">@ViewBag.success</h1>
     <h1 class="SecondaryHead">Please Update Your Information Below!</h1>
     <div class="Container">
-        @using (Html.BeginForm("doVoterUpdate", "Voter"))
+        @using (Html.BeginForm("doVoterUpdate", "Voter", FormMethod.Post))
         {
+
+            @Html.HiddenFor(model => model.VoterIDNumber)
             <br />
             <br />
             <label>First Names: </label>
-            <input id="txtFirstName" type="text" name="FirstName" />
+            @Html.EditorFor(model => model.VoterFirstNames)
+
             <br />
             <br />
             <label>Last Name: </label>
-            <input id="txtLasttName" type="text" name="Last" />
+            @Html.EditorFor(model => model.VoterLastName)
+
             <br />
             <br />
             <label>Address: </label>
-            <input id="txtAddress" type="text" name="NewAddress" />
+            @Html.EditorFor(model => model.VoterStreetAddress)
+
             <br />
             <br />
-            <label>Province: </label>
-            <select id="dropdowntipo">
-                <option value="Province1">Province1</option>
-                <option value="Province2">Province2</option>
-                <option value="Province3">Province3</option>
-            </select>
+            @Html.LabelFor(model => model.Suburb.CityOrTown.ProvinceID, "Select a Province: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DropDownList("ProvinceID", null, htmlAttributes: new { @class = "form-control" })
+
             <br />
             <br />
-            <label>City/Town: </label>
-            <select id="dropdowntipo">
-                <option value="City/Town1">City/Town1</option>
-                <option value="City/Town2">City/Town2</option>
-                <option value="City/Town3">City/Town3</option>
-            </select>
+            @Html.LabelFor(model => model.Suburb.CityOrTownID, "Select a City Or Town: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DropDownList("CityOrTownID", null, htmlAttributes: new { @class = "form-control" })
             <br />
             <br />
-            <label>Suburb: </label>
-            <select id="dropdowntipo">
-                <option value="Suburb1">Suburb1</option>
-                <option value="Suburb2">Suburb2</option>
-                <option value="Suburb3">Suburb3</option>
-            </select>
+            @Html.LabelFor(model => model.SuburbID, "Select a suburb: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DropDownList("SuburbID", null, htmlAttributes: new { @class = "form-control" })
+
             <br />
             <br />
             <label>Phone Number: </label>
-            <input id="txtPhoneNumber" type="text" name="PhoneNumber" />
+            @Html.EditorFor(model => model.VoterPhoneNumber)
+
             <br />
             <br />
             <label>Email Address: </label>
-            <input id="txtEmail" type="text" name="Email" />
+            @Html.EditorFor(model => model.VoterEmail)
+
             <br />
             <br />
             <input id="BtnUpdate" type="submit" value="Update" />
         }
-        @using (Html.BeginForm("VoterHomePage", "Voter"))
+        @using (Html.BeginForm("VoterHomePage", "Voter", new { VoterGUID = Model.GUID }))
         {
             <input id="BtnCancel" type="submit" value="Cancel" />
         }
