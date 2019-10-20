@@ -673,9 +673,9 @@ namespace INF272Group11Project.Controllers
         [HttpPost]
         public ActionResult AddImages(string StaffGUID, string id, PartyImage model, HttpPostedFileBase Logo, HttpPostedFileBase LeadPic)
         {
-            var db = new VotingSystemProjectEntities3(); 
+            var db = new VotingSystemProjectEntities3();
             if (Logo != null && LeadPic != null)
-            { 
+            {
                 model.partyID = 1;
                 model.PartyPicture = new byte[Logo.ContentLength];
                 Logo.InputStream.Read(model.PartyPicture, 0, Logo.ContentLength);
@@ -690,13 +690,45 @@ namespace INF272Group11Project.Controllers
                 TempData["message"] = "Please select images";
                 return RedirectToAction("PartyImages", new { StaffGUID = StaffGUID, id = id });
             }
-            
+
         }
         public ActionResult UpdateOrDeleteParty(string StaffGUID, string id)
         {
             ViewBag.Parties = new SelectList(db.Parties, "PartyID", "PartyName");
 
             return View();
+        }
+
+        public ActionResult DeleteParty(string StaffGUID, string id, Party model, string PartyName)
+        {
+            if (StaffGUID != null)
+            {
+                StaffGUIDControl staffGUID = new StaffGUIDControl();
+                if (staffGUID.IsLogedIn(db, StaffGUID))
+                {
+                    staffGUID.RefreshGUID(db);
+                    StaffViewModel staffView = new StaffViewModel();
+                    staffView.StaffView = staffGUID;
+                    var db = new VotingSystemProjectEntities3();
+                    Party p = db.Parties.Where(x => x.PartyName == PartyName).FirstOrDefault();
+                    if (p != null)
+                    {
+                        db.Parties.Remove(model);
+                        db.SaveChanges();
+                        return RedirectToAction("StaffHomePage", new { StaffGUID = StaffGUID });
+                    }
+                    else
+                    {
+                        TempData["message"] = "An Error Occured Please Login In Again!";
+                        return RedirectToAction("StaffLogin");
+                    }
+                }
+                else
+                {
+                    TempData["message"] = "An Error Occured Please Login In Again!";
+                    return RedirectToAction("StaffLogin");
+                }
+            }
         }
         public ActionResult UpateParty(string StaffGUID, string id, [Bind(Include = "PartyID")] Party party)
         {

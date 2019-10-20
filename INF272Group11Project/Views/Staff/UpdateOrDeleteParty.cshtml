@@ -28,20 +28,20 @@
     </ul>
     <h1 class="SecondaryHead">Please Select a Party and Click "Update" Or "Delete"</h1>
     <div class="Container">
-
-        @using (Html.BeginForm("UpdateParty", "Staff"))
-        {
-
-            <br />
-            <br />
-            <label>Select a Party: </label>
-            @Html.DropDownList("Parties", null, htmlAttributes: new { @Class = "form-control" })
-            <br />
-            <br />
-            <input id="BtnUpdateParty" type="submit" value="Update Party" />
-        }
         @using (Html.BeginForm("StaffHomePage", "Staff"))
         {
+            @using (Html.BeginForm("UpdateParty", "Staff"))
+            {
+
+                <br />
+                <br />
+                <label>Select a Party: </label>
+                @Html.DropDownList("Parties", null, htmlAttributes: new { @Class = "form-control" })
+                <br />
+                <br />
+                <input id="BtnUpdateParty" type="submit" value="Update Party" name="PartyName" />
+            }
+
             <input id="BtnDeleteParty" type="submit" value="Delete Party" />
         }
 
