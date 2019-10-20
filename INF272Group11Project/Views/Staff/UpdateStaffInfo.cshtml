@@ -1,5 +1,4 @@
-﻿@model INF272Group11Project.Models.Staff
-@{
+﻿@model INF272Group11Project.ViewModels.StaffViewModel
     Layout = null;
 }
 
@@ -16,13 +15,13 @@
     <h1 class="PageHeading">Voting Made Easy!</h1>
     <label class="Slogan">The simple and better way to vote</label>
     <ul class="NavigationBar">
-        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff", new { StaffGUID = Model.GUID})">Home</a></li>
-        <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff", new { StaffGUID = Model.GUID, id = Model.StaffID})">Update Personal Info</a></li>
-        <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff", new { StaffGUID = Model.GUID, id = Model.StaffID})">Change Password</a></li>
-        <li class="BarList"><a href="@Url.Action("Index", "Report", new { StaffGUID = Model.GUID, id = Model.StaffID})">Create a Report</a></li>
-        <li class="BarList"><a href="@Url.Action("TotalVotes","Results", new { StaffGUID = Model.GUID, id = Model.StaffID})">Total Votes</a></li>
-        <li class="BarList"><a href="@Url.Action("NationalResults","Results", new { StaffGUID = Model.GUID, id = Model.StaffID})">National Results</a></li>
-        <li class="BarList"><a href="@Url.Action("ProvincialResults","Results", new {StaffGUID = Model.GUID, id = Model.StaffID})">Provincial Results</a></li>
+        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff", new { StaffGUID = Model.StaffView.staff.GUID })">Home</a></li>
+        <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Update Personal Info</a></li>
+        <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Change Password</a></li>
+        <li class="BarList"><a href="@Url.Action("Index", "Report", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Create a Report</a></li>
+        <li class="BarList"><a href="@Url.Action("TotalVotes","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Total Votes</a></li>
+        <li class="BarList"><a href="@Url.Action("NationalResults","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">National Results</a></li>
+        <li class="BarList"><a href="@Url.Action("ProvincialResults","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Provincial Results</a></li>
         <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
     </ul>
     <h1 class="SecondaryHead">Please Update Your Information Below!</h1>
@@ -31,29 +30,29 @@
     <div class="Container">
         @using (Html.BeginForm("doStaffUpdate", "Staff", FormMethod.Post))
         {
-            <input type="hidden" value="@Model.GUID" name="StaffGUID"/>
-            <input type="hidden" value="@Model.StaffID" name="id"/>
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID"/>
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id"/>
             <br />
             <br />
             <label>First Names:</label>
-            @Html.EditorFor(model => model.Staff_FirstNames)
+            @Html.EditorFor(model => model.StaffView.staff.Staff_FirstNames)
             <br />
             <br />
             <label>Last Name:</label>
-            @Html.EditorFor(model => model.Staff_LastName)
+            @Html.EditorFor(model => model.StaffView.staff.Staff_LastName)
             <br />
             <br />
             <label>Phone Number: </label>
-            @Html.EditorFor(model => model.StaffPhoneNumber)
+            @Html.EditorFor(model => model.StaffView.staff.StaffPhoneNumber)
             <br />
             <br />
             <label>Email Address: </label>
-            @Html.EditorFor(model => model.StaffEmail)
+            @Html.EditorFor(model => model.StaffView.staff.StaffEmail)
             <br />
             <br />
             <input id="BtnUpdate" type="submit" value="Update" />
         }
-        @using (Html.BeginForm("StaffHomePage", "Staff", new { StaffGUID = Model.GUID} ))
+        @using (Html.BeginForm("StaffHomePage", "Staff", new { StaffGUID = Model.StaffView.staff.GUID} ))
         {
             <input id="BtnCancel" type="submit" value="Cancel" />
         }

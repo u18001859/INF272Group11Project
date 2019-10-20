@@ -17,7 +17,7 @@ namespace INF272Group11Project.Controllers
     {
         //CANDIDATE CRUD
 
-        VotingSystemProjectEntities2 db = new VotingSystemProjectEntities2();
+        VotingSystemProjectEntities3 db = new VotingSystemProjectEntities3();
 
         // GET: Candidate
 
@@ -64,12 +64,12 @@ namespace INF272Group11Project.Controllers
             }
             else
             {
-                VoterVM = TempData["voterVM"] as voterVM;
-                if (voterVM.IsLogedIn(db))
+                VoterVM voterVMs = TempData["voterVM"] as VoterVM;
+                if (voterVMs.IsLogedIn(db))
                 {
-                    voterVM.RefreshGUID(db);
+                    voterVMs.RefreshGUID(db);
                     RegisterVoterVM registerVoterVM = new RegisterVoterVM();
-                    registerVoterVM.voterView = voterVM;
+                    registerVoterVM.voterView = voterVMs;
                     registerVoterVM.VoterList = db.Voters.ToList();
                     ViewBag.message = TempData["message"];
                     ViewBag.success = TempData["success"];
@@ -78,7 +78,7 @@ namespace INF272Group11Project.Controllers
 
             }
 
-            //return View(vm);
+            return View(vm);
 
 
         }
@@ -86,7 +86,7 @@ namespace INF272Group11Project.Controllers
         //Method for drop down list for Parties
         private SelectList GetParties(int selected)
         {
-            using (VotingSystemProjectEntities2 db = new VotingSystemProjectEntities2())
+            using (VotingSystemProjectEntities3 db = new VotingSystemProjectEntities3())
             {
                 db.Configuration.ProxyCreationEnabled = false;
 
@@ -106,7 +106,7 @@ namespace INF272Group11Project.Controllers
         //Method for drop down list for Positions
         private SelectList GetPositions(int selected)
         {
-            using (VotingSystemProjectEntities2 db = new VotingSystemProjectEntities2())
+            using (VotingSystemProjectEntities3 db = new VotingSystemProjectEntities3())
             {
                 db.Configuration.ProxyCreationEnabled = false;
 
@@ -126,14 +126,14 @@ namespace INF272Group11Project.Controllers
         //Method for drop down list for Candidates
         private SelectList GetCandidates(int selected)
         {
-            using (VotingSystemProjectEntities2 db = new VotingSystemProjectEntities2())
+            using (VotingSystemProjectEntities3 db = new VotingSystemProjectEntities3())
             {
                 db.Configuration.ProxyCreationEnabled = false;
 
                 var can = db.Candidates.Select(c => new SelectListItem
                 {
                     Value = c.Candidate_ID.ToString(),
-                    Text = c.CandidateFirstNames + " " + c.CandidateLastName 
+                    Text = c.CandidateFirstNames + " " + c.CandidateLastName
                     //+ " (" + (from pos in db.CandidatePositions
                     //                                                                   join cand in db.Candidates
                     //                                                                   on pos.CandidatePosition_ID equals cand.CandidatePosition_ID
@@ -155,7 +155,7 @@ namespace INF272Group11Project.Controllers
         //Method for drop down list for Provinces
         private SelectList GetProvinces(int selected)
         {
-            using (VotingSystemProjectEntities2 db = new VotingSystemProjectEntities2())
+            using (VotingSystemProjectEntities3 db = new VotingSystemProjectEntities3())
             {
                 db.Configuration.ProxyCreationEnabled = false;
 
@@ -279,12 +279,12 @@ namespace INF272Group11Project.Controllers
             }
             else
             {
-                VoterVM = TempData["voterVM"] as voterVM;
+                VoterVM VoterVM = TempData["voterVM"] as VoterVM;
                 if (voterVM.IsLogedIn(db))
                 {
                     voterVM.RefreshGUID(db);
                     RegisterVoterVM registerVoterVM = new RegisterVoterVM();
-                    registerVoterVM.voterView = voterVM;
+                    registerVoterVM.voterView = VoterVM;
                     registerVoterVM.VoterList = db.Voters.ToList();
                     ViewBag.message = TempData["message"];
                     ViewBag.success = TempData["success"];
@@ -293,7 +293,7 @@ namespace INF272Group11Project.Controllers
 
             }
 
-            //return View(vm);
+            return View(vm);
         }
 
         public ActionResult Choice(/*string PartyName,*/ string CandidateID, string submitButton)
@@ -304,9 +304,9 @@ namespace INF272Group11Project.Controllers
                     //Validation: Prevents candidate from being registered if fields are left blank
 
                     //if (String.IsNullOrEmpty(PartyName))
-                    //{
-                    //    return RedirectToAction("UpdateOrDeleteCandidate", "Candidate", new { @errorID = 1 });
-                    //}
+                    {
+                        return RedirectToAction("UpdateOrDeleteCandidate", "Candidate", new { @errorID = 1 });
+                    }
                     if (String.IsNullOrEmpty(CandidateID))
                     {
                         return RedirectToAction("UpdateOrDeleteCandidate", "Candidate", new { @errorID = 2 });
@@ -377,12 +377,12 @@ namespace INF272Group11Project.Controllers
             }
             else
             {
-                VoterVM = TempData["voterVM"] as voterVM;
-                if (voterVM.IsLogedIn(db))
+                VoterVM voterVMs = TempData["voterVM"] as VoterVM;
+                if (voterVMs.IsLogedIn(db))
                 {
-                    voterVM.RefreshGUID(db);
+                    voterVMs.RefreshGUID(db);
                     RegisterVoterVM registerVoterVM = new RegisterVoterVM();
-                    registerVoterVM.voterView = voterVM;
+                    registerVoterVM.voterView = voterVMs;
                     registerVoterVM.VoterList = db.Voters.ToList();
                     ViewBag.message = TempData["message"];
                     ViewBag.success = TempData["success"];
@@ -391,7 +391,7 @@ namespace INF272Group11Project.Controllers
 
             }
 
-            //return View(vm);
+            return View(vm);
         }
 
         [HttpPost]
@@ -497,12 +497,12 @@ namespace INF272Group11Project.Controllers
             }
             else
             {
-                VoterVM = TempData["voterVM"] as voterVM;
-                if (voterVM.IsLogedIn(db))
+                VoterVM VoterVM = TempData["voterVM"] as VoterVM;
+                if (VoterVM.IsLogedIn(db))
                 {
-                    voterVM.RefreshGUID(db);
+                    VoterVM.RefreshGUID(db);
                     RegisterVoterVM registerVoterVM = new RegisterVoterVM();
-                    registerVoterVM.voterView = voterVM;
+                    registerVoterVM.voterView = VoterVM;
                     registerVoterVM.VoterList = db.Voters.ToList();
                     ViewBag.message = TempData["message"];
                     ViewBag.success = TempData["success"];
@@ -511,7 +511,7 @@ namespace INF272Group11Project.Controllers
 
             }
 
-            //return View(candidate);
+            return View(candidate);
         }
 
         [HttpPost]
@@ -553,10 +553,10 @@ namespace INF272Group11Project.Controllers
             }
             else
             {
-                VoterVM = TempData["voterVM"] as voterVM;
-                if (voterVM.IsLogedIn(db))
+                VoterVM voterVMs = TempData["voterVM"] as VoterVM;
+                if (voterVMs.IsLogedIn(db))
                 {
-                    voterVM.RefreshGUID(db);
+                    voterVMs.RefreshGUID(db);
                     RegisterVoterVM registerVoterVM = new RegisterVoterVM();
                     registerVoterVM.voterView = voterVM;
                     registerVoterVM.VoterList = db.Voters.ToList();
@@ -566,7 +566,7 @@ namespace INF272Group11Project.Controllers
                 }
 
             }
-            //return View();
+            return View();
         }
 
         [HttpPost]
@@ -648,12 +648,12 @@ namespace INF272Group11Project.Controllers
             }
             else
             {
-                VoterVM = TempData["voterVM"] as voterVM;
-                if (voterVM.IsLogedIn(db))
+                VoterVM voterVMs = TempData["voterVM"] as VoterVM;
+                if (voterVMs.IsLogedIn(db))
                 {
-                    voterVM.RefreshGUID(db);
+                    voterVMs.RefreshGUID(db);
                     RegisterVoterVM registerVoterVM = new RegisterVoterVM();
-                    registerVoterVM.voterView = voterVM;
+                    registerVoterVM.voterView = voterVMs;
                     registerVoterVM.VoterList = db.Voters.ToList();
                     ViewBag.message = TempData["message"];
                     ViewBag.success = TempData["success"];
@@ -662,7 +662,7 @@ namespace INF272Group11Project.Controllers
 
             }
 
-            //return View(vm2);
+            return View(vm2);
         }
 
         public ActionResult Choice2(string CandidatePositionID, string submitButton)
@@ -725,12 +725,12 @@ namespace INF272Group11Project.Controllers
             }
             else
             {
-                VoterVM = TempData["voterVM"] as voterVM;
-                if (voterVM.IsLogedIn(db))
+                VoterVM voterVMs = TempData["voterVM"] as VoterVM;
+                if (voterVMs.IsLogedIn(db))
                 {
-                    voterVM.RefreshGUID(db);
+                    voterVMs.RefreshGUID(db);
                     RegisterVoterVM registerVoterVM = new RegisterVoterVM();
-                    registerVoterVM.voterView = voterVM;
+                    registerVoterVM.voterView = voterVMs;
                     registerVoterVM.VoterList = db.Voters.ToList();
                     ViewBag.message = TempData["message"];
                     ViewBag.success = TempData["success"];
@@ -739,8 +739,8 @@ namespace INF272Group11Project.Controllers
 
             }
 
-            //return View(vm2);
-    }
+            return View(vm2);
+        }
 
         [HttpPost]
         public ActionResult Update2(string CandidatePositionID, string PositionName, string submitButton)
@@ -825,12 +825,12 @@ namespace INF272Group11Project.Controllers
             }
             else
             {
-                VoterVM = TempData["voterVM"] as voterVM;
-                if (voterVM.IsLogedIn(db))
+                VoterVM voterVMs = TempData["voterVM"] as VoterVM;
+                if (voterVMs.IsLogedIn(db))
                 {
-                    voterVM.RefreshGUID(db);
+                    voterVMs.RefreshGUID(db);
                     RegisterVoterVM registerVoterVM = new RegisterVoterVM();
-                    registerVoterVM.voterView = voterVM;
+                    registerVoterVM.voterView = voterVMs;
                     registerVoterVM.VoterList = db.Voters.ToList();
                     ViewBag.message = TempData["message"];
                     ViewBag.success = TempData["success"];
@@ -839,8 +839,8 @@ namespace INF272Group11Project.Controllers
 
             }
 
-            //return View(position);
-    }
+            return View(position);
+        }
 
         [HttpPost]
         public ActionResult Delete2(string CandidatePositionID)
@@ -868,13 +868,13 @@ namespace INF272Group11Project.Controllers
                     db.SaveChanges();
                     TempData["Message"] = "Candidate position successfully deleted!";
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     TempData["Message"] = "Error: " + e;
                 }
 
 
-               
+
                 return RedirectToAction("UpdateOrDeleteCandidatePosition", "Candidate");
             }
         }

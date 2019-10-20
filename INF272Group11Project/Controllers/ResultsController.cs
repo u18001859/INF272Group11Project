@@ -10,7 +10,7 @@ namespace INF272Group11Project.Controllers
 {
     public class ResultsController : Controller
     {
-        VotingSystemProjectEntities2 Resultsdb = new VotingSystemProjectEntities2();
+        VotingSystemProjectEntities3 Resultsdb = new VotingSystemProjectEntities3();
         NationalResultsVM results = new NationalResultsVM();
         // GET: Results
         public ActionResult TotalVotes()
