@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -206,6 +209,23 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+
+    <Compile Include="Report\National.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>National.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\Provicial.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Provicial.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AddVotingStationVM.cs" />
+    <Compile Include="ViewModels\CandidateVM.cs" />
+    <Compile Include="ViewModels\NationalResultsVM.cs" />
+    <Compile Include="ViewModels\ProvincialResultsVM.cs" />
+
+
     <Compile Include="ViewModels\CandidatePositionVM.cs" />
     <Compile Include="ViewModels\CandidateVM.cs" />
     <Compile Include="Controllers\CandidatePositionsController.cs" />
@@ -217,9 +237,13 @@
     <Compile Include="ViewModels\UpdateVotingStationVM.cs" />
     <Compile Include="ViewModels\PartyViewModel.cs" />
     <Compile Include="ViewModels\RegisterVoterVM.cs" />
+    <Compile Include="ViewModels\ReportViewModel.cs" />
     <Compile Include="ViewModels\StaffEncryption.cs" />
     <Compile Include="ViewModels\StaffGUIDControl.cs" />
     <Compile Include="ViewModels\StaffViewModel.cs" />
+
+
+    <Compile Include="ViewModels\TotalResultsVM.cs" />
     <Compile Include="ViewModels\VoterVM.cs" />
     <Compile Include="ViewModels\VotingViewModel.cs" />
   </ItemGroup>
@@ -274,6 +298,31 @@
     <Content Include="Views\Voter\ForgotPasswordGetID.cshtml" />
     <Content Include="Views\Staff\GetUserName.cshtml" />
     <Content Include="Views\Staff\SetElectionDate.cshtml" />
+
+    <Content Include="Report\National.xsc">
+      <DependentUpon>National.xsd</DependentUpon>
+    </Content>
+    <None Include="Report\National.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>National.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Report\National.xss">
+      <DependentUpon>National.xsd</DependentUpon>
+    </Content>
+    <Content Include="Views\Report\Chart.cshtml" />
+    <Content Include="Report\Provicial.xsc">
+      <DependentUpon>Provicial.xsd</DependentUpon>
+    </Content>
+    <None Include="Report\Provicial.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Provicial.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Report\Provicial.xss">
+      <DependentUpon>Provicial.xsd</DependentUpon>
+    </Content>
+
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
@@ -298,6 +347,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

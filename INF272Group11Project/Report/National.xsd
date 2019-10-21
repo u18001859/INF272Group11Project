@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="National" targetNamespace="http://tempuri.org/National.xsd" xmlns:mstns="http://tempuri.org/National.xsd" xmlns="http://tempuri.org/National.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="National" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="National" msprop:Generator_UserDSName="National">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="NationalResults" msprop:Generator_TableClassName="NationalResultsDataTable" msprop:Generator_TableVarName="tableNationalResults" msprop:Generator_TablePropName="NationalResults" msprop:Generator_RowDeletingName="NationalResultsRowDeleting" msprop:Generator_RowChangingName="NationalResultsRowChanging" msprop:Generator_RowEvHandlerName="NationalResultsRowChangeEventHandler" msprop:Generator_RowDeletedName="NationalResultsRowDeleted" msprop:Generator_UserTableName="NationalResults" msprop:Generator_RowChangedName="NationalResultsRowChanged" msprop:Generator_RowEvArgName="NationalResultsRowChangeEvent" msprop:Generator_RowClassName="NationalResultsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ElectionDate" msprop:Generator_ColumnVarNameInTable="columnElectionDate" msprop:Generator_ColumnPropNameInRow="ElectionDate" msprop:Generator_ColumnPropNameInTable="ElectionDateColumn" msprop:Generator_UserColumnName="ElectionDate" type="xs:string" minOccurs="0" />
+              <xs:element name="PartyName" msprop:Generator_ColumnVarNameInTable="columnPartyName" msprop:Generator_ColumnPropNameInRow="PartyName" msprop:Generator_ColumnPropNameInTable="PartyNameColumn" msprop:Generator_UserColumnName="PartyName" type="xs:string" minOccurs="0" />
+              <xs:element name="TotalVotes" msprop:Generator_ColumnVarNameInTable="columnTotalVotes" msprop:Generator_ColumnPropNameInRow="TotalVotes" msprop:Generator_ColumnPropNameInTable="TotalVotesColumn" msprop:Generator_UserColumnName="TotalVotes" type="xs:string" minOccurs="0" />
+              <xs:element name="PercentageVotes" msprop:Generator_ColumnVarNameInTable="columnPercentageVotes" msprop:Generator_ColumnPropNameInRow="PercentageVotes" msprop:Generator_ColumnPropNameInTable="PercentageVotesColumn" msprop:Generator_UserColumnName="PercentageVotes" type="xs:string" minOccurs="0" />
+              <xs:element name="ResultID" msprop:Generator_ColumnVarNameInTable="columnResultID" msprop:Generator_ColumnPropNameInRow="ResultID" msprop:Generator_ColumnPropNameInTable="ResultIDColumn" msprop:Generator_UserColumnName="ResultID" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="NationalResultsKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:NationalResults" />
+      <xs:field xpath="mstns:ResultID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

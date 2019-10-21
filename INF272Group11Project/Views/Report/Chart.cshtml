@@ -1,0 +1,9 @@
+﻿@model Dictionary<string, int>
+@{
+    Layout = null;
+}
+
+@{ 
+    var chart = new Chart(width: 400, height: 250).AddTitle("National Votes").AddSeries(name: "Parties", xValue: Model.Keys, yValues: Model.Values).Write();
+
+}

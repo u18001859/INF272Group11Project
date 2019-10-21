@@ -57,7 +57,7 @@ namespace INF272Group11Project.Controllers
                         var SearchPhone = db.Voters.Where(g => g.VoterPhoneNumber == PhoneNumber).FirstOrDefault();
                         if (SearchPhone == null)
                         {
-                            if (SearchPhone.VoterPhoneNumber.Length == 10)
+                            if (PhoneNumber.Length == 10)
                             {
 
                                 var EncrypPassword1 = registerVoter.HashedData(Password);
