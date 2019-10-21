@@ -32,43 +32,51 @@
     <h1 class="SecondaryHead" style="color: green">@ViewBag.success</h1>
     <div class="Container">
 
-        @using (Html.BeginForm("RegisterParty", "Staff",FormMethod.Post, new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID}))
+        @using (Html.BeginForm("RegisterParty", "Staff", FormMethod.Post))
         {
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnRegisterNewParty" type="submit" value="Register New Party" />
         }
 
-        @using (Html.BeginForm("UpdateOrDeleteParty","Staff",FormMethod.Post, new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID}))
+        @using (Html.BeginForm("UpdateOrDeleteParty", "Staff", FormMethod.Post))
 
         {
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnUpdateParty" type="submit" value="Update Or Delete Party" />
         }
-        @using (Html.BeginForm("RegisterCandidate", "Candidate",FormMethod.Post, new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID}))
+        @using (Html.BeginForm("RegisterCandidate", "Candidate"))
         {
+
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
+
             <input id="BtnRegisterCandidate" type="submit" value="Register Candidate" name="RegisterCandidate" />
         }
-        @using (Html.BeginForm("UpdateOrDeleteCandidate", "Candidate",FormMethod.Post, new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID}))
+        @using (Html.BeginForm("UpdateOrDeleteCandidate", "Candidate", FormMethod.Post))
         {
+
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnSearchCandidate" type="submit" value="Update Or Delete Candidate" name="UpdateOrDeleteCandidate" />
+
         }
-        @using (Html.BeginForm("AddCandidatePosition", "Candidate"))
+        @using (Html.BeginForm("AddVotingStation", "VotingStation", FormMethod.Post))
         {
-            <input id="AddCandidatePosition" type="submit" value="Add Candidate Position" name="AddCandidatePosition" />
-        }
-        @using (Html.BeginForm("UpdateOrDeleteCandidatePosition", "Candidate"))
-        {
-            <input id="BtnSearchCandidate" type="submit" value="Update Or Delete Candidate Position" name="UpdateOrDeleteCandidatePosition" />
-        }
-        @using (Html.BeginForm("AddVotingStation", "VotingStation",FormMethod.Post, new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID}))
-        {
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnAddVotingStationStaffHome" type="submit" value="Add Voting Station" />
         }
-        @using (Html.BeginForm("UpdateDeleteVotingStation", "VotingStation",FormMethod.Post, new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID}))
+        @using (Html.BeginForm("UpdateDeleteVotingStation", "VotingStation", FormMethod.Post))
         {
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnUpdateDeleteVotingStation" type="submit" value="Update Or Delete A Voting Station" />
         }
-        @using (Html.BeginForm("RegisterStaff", "Staff",FormMethod.Post))
+        @using (Html.BeginForm("RegisterStaff", "Staff", FormMethod.Post))
         {
-            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID"/>
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnRegisterStaff" type="submit" value="Register Staff" />
         }

@@ -42,8 +42,20 @@
                 <td>@item.Party.PartyName</td>
                 <td>@item.Party.PartyAccronym</td>
                 <td>@item.CandidateFirstNames @item.CandidateLastName</td>
-                <td>InsertPartyLeaderImage</td>
-                <td>InsetPartyLogo</td>
+                <td>
+                    @{ 
+                        var base64 = Convert.ToBase64String(item.Party.PartyImage.PartyLeaderPicture);
+                        var imsrc = string.Format("data:image/giff: base64,{0}", base64);
+                    }
+                    <img src="@imsrc"/>
+                </td>
+                <td>
+                    @{
+                        var bases64 = Convert.ToBase64String(item.Party.PartyImage.PartyPicture);
+                        var imsrcs = string.Format("data:image/giff: base64,{0}", bases64);
+                    }
+                    <img src="@imsrcs" />
+                </td>
                 <td>
                     @using (Html.BeginForm("doVoteParty", "Voter", FormMethod.Post, new { PartyID = item.Party.PartyID, voterID = Model.voterView.voter.VoterID, VoterGUID = Model.voterView.voter.GUID }))
                     {

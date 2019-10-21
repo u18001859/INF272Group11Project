@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Provicial" targetNamespace="http://tempuri.org/Provicial.xsd" xmlns:mstns="http://tempuri.org/Provicial.xsd" xmlns="http://tempuri.org/Provicial.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Provicial" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="Provicial" msprop:Generator_UserDSName="Provicial">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ProvincialResults" msprop:Generator_TableClassName="ProvincialResultsDataTable" msprop:Generator_TableVarName="tableProvincialResults" msprop:Generator_TablePropName="ProvincialResults" msprop:Generator_RowDeletingName="ProvincialResultsRowDeleting" msprop:Generator_RowChangingName="ProvincialResultsRowChanging" msprop:Generator_RowEvHandlerName="ProvincialResultsRowChangeEventHandler" msprop:Generator_RowDeletedName="ProvincialResultsRowDeleted" msprop:Generator_UserTableName="ProvincialResults" msprop:Generator_RowChangedName="ProvincialResultsRowChanged" msprop:Generator_RowEvArgName="ProvincialResultsRowChangeEvent" msprop:Generator_RowClassName="ProvincialResultsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ElectionDate" msprop:Generator_ColumnVarNameInTable="columnElectionDate" msprop:Generator_ColumnPropNameInRow="ElectionDate" msprop:Generator_ColumnPropNameInTable="ElectionDateColumn" msprop:Generator_UserColumnName="ElectionDate" type="xs:string" minOccurs="0" />
+              <xs:element name="PartyName" msprop:Generator_ColumnVarNameInTable="columnPartyName" msprop:Generator_ColumnPropNameInRow="PartyName" msprop:Generator_ColumnPropNameInTable="PartyNameColumn" msprop:Generator_UserColumnName="PartyName" type="xs:string" minOccurs="0" />
+              <xs:element name="ProvinceName" msprop:Generator_ColumnVarNameInTable="columnProvinceName" msprop:Generator_ColumnPropNameInRow="ProvinceName" msprop:Generator_ColumnPropNameInTable="ProvinceNameColumn" msprop:Generator_UserColumnName="ProvinceName" type="xs:string" minOccurs="0" />
+              <xs:element name="CandidateName" msprop:Generator_ColumnVarNameInTable="columnCandidateName" msprop:Generator_ColumnPropNameInRow="CandidateName" msprop:Generator_ColumnPropNameInTable="CandidateNameColumn" msprop:Generator_UserColumnName="CandidateName" type="xs:string" minOccurs="0" />
+              <xs:element name="TotalVotes" msprop:Generator_ColumnVarNameInTable="columnTotalVotes" msprop:Generator_ColumnPropNameInRow="TotalVotes" msprop:Generator_ColumnPropNameInTable="TotalVotesColumn" msprop:Generator_UserColumnName="TotalVotes" type="xs:string" minOccurs="0" />
+              <xs:element name="VotingPercentage" msprop:Generator_ColumnVarNameInTable="columnVotingPercentage" msprop:Generator_ColumnPropNameInRow="VotingPercentage" msprop:Generator_ColumnPropNameInTable="VotingPercentageColumn" msprop:Generator_UserColumnName="VotingPercentage" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

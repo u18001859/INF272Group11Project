@@ -1,4 +1,4 @@
-﻿
+﻿@model INF272Group11Project.ViewModels.ReportViewModel
 @{
     Layout = null;
 }
@@ -17,23 +17,27 @@
     <label class="Slogan">The simple and better way to vote</label>
     <br />
     <ul class="NavigationBar">
-        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff")">Home</a></li>
-        <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff")">Update Personal Info</a></li>
-        <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff")">Change Password</a></li>
-        <li class="BarList"><a href="@Url.Action("Index", "Report")">Create a Report</a></li>
-        <li class="BarList"><a href="@Url.Action("TotalVotes","Candidate")">Total Votes</a></li>
-        <li class="BarList"><a href="@Url.Action("StaffHomePage","Staff")">National Results</a></li>
-        <li class="BarList"><a href="@Url.Action("StaffHomePage","Staff")">Provincial Results</a></li>
+        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff", new { StaffGUID = Model.StaffView.staff.GUID})">Home</a></li>
+        <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Update Personal Info</a></li>
+        <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Change Password</a></li>
+        <li class="BarList"><a href="@Url.Action("Index", "Report", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Create a Report</a></li>
+        <li class="BarList"><a href="@Url.Action("TotalVotes","Candidate", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Total Votes</a></li>
+        <li class="BarList"><a href="@Url.Action("NationalResults","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">National Results</a></li>
+        <li class="BarList"><a href="@Url.Action("ProvincialResults","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Provincial Results</a></li>
         <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
     </ul>
     <h1 class="SecondaryHead">Please select the kind of report you want to make</h1>
     <div class="Container">
-        @using (Html.BeginForm("ProvincialReport", "Report"))
+        @using (Html.BeginForm("ProvincialReport", "Report", FormMethod.Post))
         {
-        <input id="BtnProvincialResultsReport" type="submit" value="Provincial Results Report"/>
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
+            <input id="BtnProvincialResultsReport" type="submit" value="Provincial Results Report" />
         }
-        @using (Html.BeginForm("NationalReport","Report"))
+        @using (Html.BeginForm("NationalReport", "Report", FormMethod.Post))
         {
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnNationalResultReport" type="submit" value="National Results Report" />
         }
     </div>

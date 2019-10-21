@@ -1,4 +1,4 @@
-﻿
+﻿@model INF272Group11Project.ViewModels.ReportViewModel
 @{
     Layout = null;
 }
@@ -17,55 +17,39 @@
     <label class="Slogan">The simple and better way to vote</label>
     <br />
     <ul class="NavigationBar">
-        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff")">Home</a></li>
-        <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff")">Update Personal Info</a></li>
-        <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff")">Change Password</a></li>
-        <li class="BarList"><a href="@Url.Action("Index", "Report")">Create a Report</a></li>
-        <li class="BarList"><a href="@Url.Action("TotalVotes","Candidate")">Total Votes</a></li>
-        <li class="BarList"><a href="@Url.Action("StaffHomePage","Staff")">National Results</a></li>
-        <li class="BarList"><a href="@Url.Action("StaffHomePage","Staff")">Provincial Results</a></li>
+        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff", new { StaffGUID = Model.StaffView.staff.GUID})">Home</a></li>
+        <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Update Personal Info</a></li>
+        <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Change Password</a></li>
+        <li class="BarList"><a href="@Url.Action("Index", "Report", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Create a Report</a></li>
+        <li class="BarList"><a href="@Url.Action("TotalVotes","Candidate", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Total Votes</a></li>
+        <li class="BarList"><a href="@Url.Action("NationalResults","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">National Results</a></li>
+        <li class="BarList"><a href="@Url.Action("ProvincialResults","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Provincial Results</a></li>
         <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
     </ul>
     <h1 class="SecondaryHead">Please enter the information below in order to make a report</h1>
+    <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
+    <h1 class="SecondaryHead" style="color: green">@ViewBag.success</h1>
     <div class="Container">
-        @using (Html.BeginForm("MakeNationalReport", "Report"))
+        @using (Html.BeginForm("MakeNationalReport", "Report", FormMethod.Post))
         {
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <br />
             <br />
             <label>Select Election Start Date: </label>
-            <select id="dropdowntipo">
-                <option value="Election1">ElectionYear1</option>
-                <option value="Election2">ElectionYear2</option>
-                <option value="Election3">ElectionYear3</option>
-            </select>
+            @Html.TextBoxFor(x => x.StartDate, "yyyy-MM-dd", new { @Value = "2019-06-01", @type = "date", @class = "form-control" })
             <br />
             <br />
             <label>Select Election End Date: </label>
-            <select id="dropdowntipo">
-                <option value="Election1">ElectionYear1</option>
-                <option value="Election2">ElectionYear2</option>
-                <option value="Election3">ElectionYear3</option>
-            </select>
-            <br />
-            <br />
-            <label>Do You Want To Get Results Per Province?: </label>
-            <select id="dropdowntipo">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-            </select>
-            <br />
-            <br />
-            <label>Order Of Results</label>
-            <select id="dropdowntipo">
-                <option value="ascending">Ascending</option>
-                <option value="descending">Descending</option>
-            </select>
+            @Html.TextBoxFor(x => x.EndDate, "yyyy-MM-dd", new { @Value = "2019-06-01", @type = "date", @class = "form-control" })
             <br />
             <br />
             <input id="BtnCreateReport" type="submit" value="Create Report" />
         }
-        @using (Html.BeginForm("Index", "Report"))
+        @using (Html.BeginForm("Index", "Report", FormMethod.Post))
         {
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnCancel" type="submit" value="Cancel" />
         }
     </div>

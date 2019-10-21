@@ -1,64 +1,59 @@
 ﻿<!DOCTYPE html>
-
+@model INF272Group11Project.ViewModels.AddVotingStationVM
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/INF272Project.css" />
     <title>AddVotingStation</title>
 </head>
 <body>
-   
-        <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
-        <h1 class="PageHeading">Voting Made Easy!</h1>
-        <label class="Slogan">The simple and better way to vote</label>
 
-        <ul class="NavigationBar">
-            <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff")">Home</a></li>
-            <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff")">Update Personal Info</a></li>
-            <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff")">Change Password</a></li>
-            <li class="BarList"><a href="@Url.Action("Index", "Report")">Create a Report</a></li>
-            <li class="BarList"><a href="@Url.Action("TotalVotes","Results")">Total Votes</a></li>
-            <li class="BarList"><a href="@Url.Action("NationalResults","Results")">National Results</a></li>
-            <li class="BarList"><a href="@Url.Action("ProvincialResults","Results")">Provincial Results</a></li>
-            <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
-        </ul>
-        <h1 class="SecondaryHead">Please Search For A Voting Station</h1>
+    <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
+    <h1 class="PageHeading">Voting Made Easy!</h1>
+    <label class="Slogan">The simple and better way to vote</label>
+
+    <ul class="NavigationBar">
+        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff",new { StaffGUID = Model.StaffView.staff.GUID })">Home</a></li>
+        <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff",new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID })">Update Personal Info</a></li>
+        <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff",new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID })">Change Password</a></li>
+        <li class="BarList"><a href="@Url.Action("Index", "Report",new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID })">Create a Report</a></li>
+        <li class="BarList"><a href="@Url.Action("TotalVotes","Results",new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID })">Total Votes</a></li>
+        <li class="BarList"><a href="@Url.Action("NationalResults","Results",new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID })">National Results</a></li>
+        <li class="BarList"><a href="@Url.Action("ProvincialResults","Results",new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID })">Provincial Results</a></li>
+        <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
+    </ul>
+    <h1 class="SecondaryHead">Please Search For A Voting Station</h1>
+    <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
+    <h1 class="SecondaryHead" style="color: green">@ViewBag.success</h1>
+    @using (Html.BeginForm("SearchVotingStation", "VotingStation", FormMethod.Post))
+    {
+        <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+        <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
         <div class="Container">
             <br />
             <br />
             <label>Enter Voting Station Name: </label>
-            <input type="text" name="VotingStationName"/>
+            <input type="text" name="VotingStationName" />
             <br />
             <br />
             <label>Enter Street Address: </label>
-            <input type="text" name="StreetAddress"/>
+            <input type="text" name="StreetAddress" />
             <br />
             <br />
-            <label>Select Province: </label>
-            <select id="dropdowntipo">
-                <option value="Province1">Province1</option>
-                <option value="Province2">Province2</option>
-                <option value="Province3">Province3</option>
-            </select>
+            <label>Select A Province: </label>
+            @Html.DropDownList("ProvinceID", null, htmlAttributes: new { @class = "form-control" })
             <br />
             <br />
             <label>Select Town/City: </label>
-            <select id="dropdowntipo">
-                <option value="City/Town1">City/Town1</option>
-                <option value="City/Town2">City/Town2</option>
-                <option value="City/Town3">City/Town3</option>
-            </select>
+            @Html.DropDownList("CityOrTownID", null, htmlAttributes: new { @class = "form-control" })
             <br />
             <br />
             <label>Select Suburb: </label>
-            <select id="dropdowntipo">
-                <option value="Suburb1">Suburb1</option>
-                <option value="Suburb2">Suburb2</option>
-                <option value="Suburb3">Suburb3</option>
-            </select>
+            @Html.DropDownList("SuburbID", null, htmlAttributes: new { @class = "form-control" })
             <br />
             <br />
-            <input id="BtnSearch" type="submit"value="Search" name="Search"/>
+            <input id="BtnSearch" type="submit" value="Search" name="Search" />
         </div>
+    }
     <br />
     <br />
 
@@ -75,24 +70,31 @@
             <th>Closing Time:</th>
             <th>Update/Delete:</th>
         </tr>
+        
         <tr>
-            <td>PlaceHolder</td>
-            <td>PlaceHolder</td>
-            <td>PlaceHolder</td>
-            <td>PlaceHolder</td>
-            <td>PlaceHolder</td>
-            <td>PlaceHolder</td>
-            <td>PlaceHolder</td>
-            <td>PlaceHolder</td>
-            <td>PlaceHolder</td>
+            <td>@Model.VotingStation.VotingStationName</td>
+            <td>@Model.VotingStation.Province.Provincename</td>
+            <td>@Model.VotingStation.CityOrTown.CityOrTownName</td>
+            <td>@Model.VotingStation.Suburb.SuburbName</td>
+            <td>@Model.VotingStation.VotingStationStreetAddress</td>
+            <td>@Model.VotingStation.VotingStationLongitude</td>
+            <td>@Model.VotingStation.VotingStationLatitude</td>
+            <td>@Model.VotingStation.VotingStationOpeningTime</td>
+            <td>@Model.VotingStation.VotingStationClosingTime</td>
             <td>
-                @using (Html.BeginForm("UpdateVotingStation", "VotingStation"))
+                @using (Html.BeginForm("UpdateVotingStation", "VotingStation", FormMethod.Post))
                 {
-                <input type="submit" value="Update" name="Update"/>
+                    <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+                    <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
+                    <input type="hidden" value="@Model.VotingStation.VotingStationID" name="VotingStationID" />
+                    <input type="submit" value="Update" name="Update" />
                 }
-                @using (Html.BeginForm("StaffHomePage", "Staff"))
+                @using (Html.BeginForm("DeleteVotingStation", "VotingStation", FormMethod.Post))
                 {
-                    <input type="submit" value="Delete" name="Delete"/>
+                    <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+                    <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
+                    <input type="hidden" value="@Model.VotingStation.VotingStationID" name="VotingStationID" />
+                    <input type="submit" value="Delete" name="Delete" />
                 }
             </td>
         </tr>

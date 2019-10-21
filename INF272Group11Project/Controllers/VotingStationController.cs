@@ -10,29 +10,261 @@ namespace INF272Group11Project.Controllers
 {
     public class VotingStationController : Controller
     {
-        VotingSystemProjectEntities2 Resultsdb = new VotingSystemProjectEntities2();
-        AddVotingStationVM addStation = new AddVotingStationVM();
+        VotingSystemProjectEntities2 db = new VotingSystemProjectEntities2();
+        AddVotingStationVM AddVotingStationVM = new AddVotingStationVM();
         // GET: VotingStation
+        public ActionResult AddVotingStation(string StaffGUID, string id)
+        {
+            ViewBag.message = TempData["message"];
+            ViewBag.success = TempData["success"];
+            if (StaffGUID != null)
+            {
+                StaffGUIDControl staffGUIDVM = new StaffGUIDControl();
+                if (staffGUIDVM.IsLogedIn(db, StaffGUID))
+                {
+                    staffGUIDVM.RefreshGUID(db);
+                    AddVotingStationVM AVM = new AddVotingStationVM();
+                    AVM.StaffView = staffGUIDVM;
+                    ViewBag.ProvinceID = new SelectList(db.Provinces, "ProvinceID", "ProvinceName");
+                    ViewBag.CityOrTownID = new SelectList(db.CityOrTowns, "CityOrTownID", "CityOrTownName");
+                    ViewBag.SuburbID = new SelectList(db.Suburbs, "SuburbID", "SuburbName");
+                    return View(AVM);
+                }
+                else
+                {
+                    TempData["message"] = "An Errorc Occured Please Try Again";
+                    return RedirectToAction("StaffHomePage", "Staff", new { StaffGUID = StaffGUID });
+                }
+            }
+            else
+            {
+                TempData["message"] = "Your Session Has Expired Please Login Again!";
+                return RedirectToAction("StaffLogin", "Staff");
+            }
+
+        }
+
+        public ActionResult doAddVotingStation(string StaffGUID, string id, string VotingStationName, [Bind(Include = "SuburbID, ProvinceID, CityOrTownID")] VotingStation vs, string StreetAddress, string Longitude, string Latitude, string OpeningTime, string ClosingTime)
+        {
+            if (StaffGUID != null && id != null && VotingStationName != null && StreetAddress != null && Longitude != null && Latitude != null && OpeningTime != null && ClosingTime != null)
+            {
+                StaffGUIDControl staffGUID = new StaffGUIDControl();
+                if (staffGUID.IsLogedIn(db, StaffGUID))
+                {
+                    var searchVotingStation = db.VotingStations.Where(x => x.VotingStationName == VotingStationName).FirstOrDefault();
+                    if (searchVotingStation == null)
+                    {
+
+                        VotingStation A = new VotingStation();
+                        A.VotingStationName = VotingStationName;
+                        A.VotingStationLongitude = Convert.ToInt32(Longitude);
+                       A.VotingStationLatitude = Convert.ToInt32(Latitude);
+                        A.VotingStationOpeningTime = Convert.ToDateTime(OpeningTime);
+                        A.VotingStationClosingTime = Convert.ToDateTime(ClosingTime);
+                        A.VotingStationStreetAddress = StreetAddress;
+                        A.SuburbID = Convert.ToInt32(vs.SuburbID);
+                        A.ProvinceID = Convert.ToInt32(vs.ProvinceID);
+                        A.CityOrTownID = Convert.ToInt32(vs.CityOrTownID);
+                        db.VotingStations.Add(A);
+                        db.SaveChanges();
+
+                        TempData["success"] = "The Voting Station Has Been Added Successfully";
+                        return RedirectToAction("StaffHomePage", "Staff", new { StaffGUID = StaffGUID });
+                    }
+                    else
+                    {
+                        TempData["message"] = "The Voting Station Already Exists";
+                        return RedirectToAction("AddVotingStation", new { StaffGUID = StaffGUID, id = id });
+                    }
+                }
+                else
+                {
+                    TempData["message"] = "Your Session Has Expired, Please Login Again!";
+                    return RedirectToAction("StaffLogin","Staff");
+                }
+            }
+            else
+            {
+                TempData["message"] = "Please Fill In All of Your Details";
+                return RedirectToAction("AddVotingStation", new { StaffGUID = StaffGUID, id = id });
+            }
+
+        }
+        public ActionResult UpdateDeleteVotingStation(string StaffGUID, string id)
+        {
+            ViewBag.message = TempData["message"];
+            ViewBag.success = TempData["success"];
+            if (StaffGUID != null)
+            {
+                StaffGUIDControl staffGUIDVM = new StaffGUIDControl();
+                if (staffGUIDVM.IsLogedIn(db, StaffGUID))
+                {
+                    staffGUIDVM.RefreshGUID(db);
+                    AddVotingStationVM AVM = new AddVotingStationVM();
+                    AVM.StaffView = staffGUIDVM;
+                    ViewBag.ProvinceID = new SelectList(db.Provinces, "ProvinceID", "ProvinceName");
+                    ViewBag.CityOrTownID = new SelectList(db.CityOrTowns, "CityOrTownID", "CityOrTownName");
+                    ViewBag.SuburbID = new SelectList(db.Suburbs, "SuburbID", "SuburbName");
+                    AVM.VotingStation = TempData["TempSearch"] as VotingStation;
+                    return View(AVM);
+                }
+                else
+                {
+                    TempData["message"] = "An Errorc Occured Please Try Again";
+                    return RedirectToAction("StaffHomePage", "Staff", new { StaffGUID = StaffGUID });
+                }
+            }
+            else
+            {
+                TempData["message"] = "Your Session Has Expired Please Login Again!";
+                return RedirectToAction("StaffLogin", "Staff");
+            }
+        }
         [HttpPost]
-        public ActionResult AddVotingStation()
+        public ActionResult SearchVotingStation(string StaffGUID, string id, string VotingStationName, string StreetAddress, [Bind(Include = "SuburbID, ProvinceID, CityOrTownID")] VotingStation vs)
         {
-            
-            
-            return View();
+            ViewBag.message = TempData["message"];
+            ViewBag.success = TempData["success"];
+            if (StaffGUID != null)
+            {
+                if (VotingStationName != null && StreetAddress != null)
+                {
+                    var SearchVotingStation = db.VotingStations.Where(x => x.VotingStationName == VotingStationName).FirstOrDefault();
+                    if (SearchVotingStation != null)
+                    {
+                        TempData["TempSearch"] = SearchVotingStation;
+                        TempData["success"] = "The Station Was Successfully Found!";
+                        return RedirectToAction("UpdateOrDeleteVotingStation", new { StaffGUID = StaffGUID, id = id });
+                    }
+                    else
+                    {
+                        TempData["message"] = "The Voting Station You Have Searched For, Does Not Exist!";
+                        return RedirectToAction("UpdateOrDeleteVotingStation", new { StaffGUID = StaffGUID, id = id });
+                    }
+
+                }
+                else
+                {
+                    TempData["message"] = "Please Ensure Fill In All Fields!";
+                    return RedirectToAction("UpdateOrDeleteVotingStation", new { StaffGUID = StaffGUID, id = id });
+                }
+            }
+            else
+            {
+                TempData["message"] = "Your Session Has Expired Please Login Again";
+                return RedirectToAction("StaffLogin","Staff");
+            }
+        }
+        [HttpPost]
+        public ActionResult UpdateVotingStation(string StaffGUID, string id, string VotingStationID)
+        {
+            ViewBag.message = TempData["message"];
+            ViewBag.success = TempData["success"];
+            if (StaffGUID != null && id != null && VotingStationID != null)
+            {
+                StaffGUIDControl staffGUID = new StaffGUIDControl();
+                if (staffGUID.IsLogedIn(db, StaffGUID))
+                {
+                    staffGUID.RefreshGUID(db);
+                    var vids = Convert.ToInt32(VotingStationID);
+                    var searchVotingStation = db.VotingStations.Where(x => x.VotingStationID == vids).FirstOrDefault();
+                    if (searchVotingStation != null)
+                    {
+                        AddVotingStationVM add = new AddVotingStationVM();
+                        add.StaffView = staffGUID;
+                        add.VotingStation = searchVotingStation;
+                        return View(add);
+                    }
+                    else
+                    {
+                        TempData["message"] = "The Voting Station You Have Searched For, Does Not Exist!";
+                        return RedirectToAction("UpdateOrDeleteVotingStation", new { StaffGUID = StaffGUID, id = id });
+                    }
+
+                }
+                else
+                {
+                    TempData["message"] = "Your Session Has Expired, Please Login Again!";
+                    return RedirectToAction("StaffLogin", "Staff");
+                }
+            }
+            else
+            {
+                TempData["message"] = "Your Session Has Expired, Please Login Again!";
+                return RedirectToAction("StaffLogin","Staff");
+            }
         }
 
-        public ActionResult UpdateDeleteVotingStation()
+        public ActionResult doVotingSationUpdate(string StaffGUID, string id, string VotingStationID, string VotingStationName, [Bind(Include = "SuburbID, ProvinceID, CityOrTownID")] VotingStation vs, string StreetAddress, string Longitude, string Latitiude, DateTime OpeningTime, DateTime ClosingTime)
         {
-            //same with this one
-            return View();
-        }
+            if (StaffGUID != null && id != null && VotingStationID != null && VotingStationName != null && StreetAddress != null && Longitude != null && Latitiude != null && OpeningTime != null && ClosingTime != null)
+            {
+                var ids = Convert.ToInt32(VotingStationID);
+                var search = db.VotingStations.Where(x => x.VotingStationID == ids).FirstOrDefault();
+                if (search != null)
+                {
+                    var searchName = db.VotingStations.Where(j => j.VotingStationID != ids && j.VotingStationName == VotingStationName).FirstOrDefault();
+                    if (searchName == null)
+                    {
+                        search.VotingStationName = VotingStationName;
+                        search.VotingStationLongitude = Convert.ToInt32(Longitude);
+                        search.VotingStationLatitude = Convert.ToInt32(Latitiude);
+                        search.VotingStationOpeningTime = OpeningTime;
+                        search.VotingStationClosingTime = ClosingTime;
+                        search.VotingStationStreetAddress = StreetAddress;
+                        search.SuburbID = vs.SuburbID;
+                        search.ProvinceID = vs.ProvinceID;
+                        search.CityOrTownID = vs.CityOrTownID;
+                        db.VotingStations.Add(search);
+                        db.SaveChanges();
+                        TempData["success"] = "The Voting Station Has Been Successfully Updated!";
+                        return RedirectToAction("StaffHomePage", "Staff", new { StaffGUID = StaffGUID });
+                    }
+                    else
+                    {
+                        TempData["message"] = "";
+                        return RedirectToAction("UpdateVotingStation", new { StaffGUID = StaffGUID, id = id, VotingStationID = VotingStationID });
+                    }
+                }
+                else
+                {
+                    TempData["message"] = "The Voting Station does not exist!";
+                    return RedirectToAction("UpdateVotingStation", new { StaffGUID = StaffGUID, id = id, VotingStationID = VotingStationID });
+                }
 
-        public ActionResult UpdateVotingStation()
+            }
+            else
+            {
+                TempData["message"] = "Please Fill In All Of The Fields";
+                return RedirectToAction("UpdateVotingStation", new { StaffGUID = StaffGUID, id = id, VotingStationID = VotingStationID });
+            }
+
+
+        }
+        public ActionResult DeleteVotingStation(string StaffGUID, string id, string VotingStationID)
         {
-            //same with this one
-            return View();
+            if(StaffGUID != null && id != null && VotingStationID != null)
+            {
+                var ids = Convert.ToInt32(VotingStationID);
+                var search = db.VotingStations.Where(x => x.VotingStationID == ids).FirstOrDefault();
+                if(search != null)
+                {
+                    db.VotingStations.Remove(search);
+                    db.SaveChanges();
+                    TempData["success"] = "The Voting Station was Deleted Successfully!";
+                    return RedirectToAction("StaffHomePage","Staff", new { StaffGUID = StaffGUID});
+                }
+                else
+                {
+                    TempData["message"] = "The Voting Station Could Not Be Found! Please Try Search Again!";
+                    return RedirectToAction("UpdateOrDeleteVotingStation", new { SraffGUID = StaffGUID, id= id});
+                }
+            }
+            else
+            {
+                TempData["message"] = "Your Session Has Expired Please Login Again!";
+                return RedirectToAction("StaffLogin", "Staff");
+            }
         }
-
-        
     }
 }

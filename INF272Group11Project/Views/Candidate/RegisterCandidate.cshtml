@@ -1,7 +1,5 @@
 ﻿@model INF272Group11Project.ViewModels.CandidateVM
-@using INF272Group11Project.ViewModels
-@using System.Globalization
-@using System.Data
+
 
 @{
     Layout = null;
@@ -20,68 +18,57 @@
     <h1 class="PageHeading">Voting Made Easy!</h1>
     <label class="Slogan">The simpler and better way to vote</label>
     <ul class="NavigationBar">
-        <li class="BarList"><a href="@Url.Action("Index","Voter")">Home</a></li>
-        <li class="BarList"><a href="@Url.Action("RegisterVoter", "Voter")">Register To Vote</a></li>
-        <li class="BarList"><a href="@Url.Action("VoterLogin", "Voter")">Voter Login</a></li>
-        <li class="BarList"><a class="OnPage" href="@Url.Action("FindVotingStation", "Voter")">Find Voting Station</a></li>
-        <li class="BarList"><a href="@Url.Action("StaffLogin","Staff")">Staff Login</a></li>
+        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff", new { StaffGUID = Model.StaffView.staff.GUID})">Home</a></li>
+        <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Update Personal Info</a></li>
+        <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Change Password</a></li>
+        <li class="BarList"><a href="@Url.Action("Index", "Report", new {StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Create a Report</a></li>
+        <li class="BarList"><a href="@Url.Action("TotalVotes","Results",  new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Total Votes</a></li>
+        <li class="BarList"><a href="@Url.Action("NationalResults","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">National Results</a></li>
+        <li class="BarList"><a href="@Url.Action("ProvincialResults","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Provincial Results</a></li>
+        <li class="BarList"><a href="@Url.Action("SetElectionDate", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID })">Set Election Date</a></li>
+        <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
     </ul>
     <h1 class="SecondaryHead">Register Candidate</h1>
+    <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
+    <h1 class="SecondaryHead" style="color: green">@ViewBag.success</h1>
     <div class="Container">
         @using (Html.BeginForm("AddNewCandidate", "Candidate", FormMethod.Post))
         {
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <br />
-            <p class="error">
-                <label>@ViewBag.Error1</label>
-            </p>
+
             <label>First Names:</label>
-            @:&nbsp;
+
             <input type="text" id="txtFirstNames" name="FirstNames" />
             <br />
-            <p class="error">
-                <label>@ViewBag.Error2</label>
-            </p>
+
             <label>Last Name:</label>
-            @:&nbsp;
+
             <input type="text" id="txtLastName" name="LastName" />
             <br />
-            <p class="error">
-                <label>@ViewBag.Error3</label>
-            </p>
-            <label>Party:</label>
-            @:&nbsp;
 
-            @Html.DropDownListFor(i => i.SelectedPartyID, Model.Parties, "-Please select a party-", new { @class = "form-control", Name = "Party" })
+
+            <label>Select A Party:</label>
+            @Html.DropDownList("PartyID", null, htmlAttributes: new { @Class = "form-control" })
+            <br />
+
+            <label>Select A Candidate Position:</label>
+            @Html.DropDownList("CandidatePosition_ID", null, htmlAttributes: new { @Class = "form-Control" })
 
             <br />
-            <p class="error">
-                <label>@ViewBag.Error4</label>
-            </p>
-            <label>Position:</label>
-            @:&nbsp;
-
-            @Html.DropDownListFor(e => e.SelectedCandidatePosition_ID, Model.Positions, "-Please select a position-", new { @class = "form-control", Name = "Position" })
-
-            <br />
-            <p class="error">
-                <label>@ViewBag.Error5</label>
-            </p>
-            <label>Province:</label>
-            @:&nbsp;
-
-            @Html.DropDownListFor(t => t.SelectedProvinceID, Model.Provinces, "-Please select a province-", new { @class = "form-control", Name = "Province" })
-
+            <br /> 
+            <label>Select A Province: </label>
+            @Html.DropDownList("ProvinceID", null, htmlAttributes: new { @Class = "form-Control"})
+            
             <br />
             <br />
             <input type="submit" name="submitButton" id="btnRegister" value="Register" />
-            @:&nbsp;
-            @:&nbsp;
-            @:&nbsp;
-            @:&nbsp;
-            @:&nbsp;
-            @:&nbsp;
-            @:&nbsp;
-            @:&nbsp;
+            
+            }
+        @using (Html.BeginForm("StaffHomePage", "Staff", new { StaffGUID = Model.StaffView.staff.GUID}))
+        {
+
             <input type="submit" name="submitButton" id="btnCancel" value="Cancel" />
 
             <br />

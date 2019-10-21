@@ -16,13 +16,17 @@ namespace INF272Group11Project.Models
     {
         public int VotingStationID { get; set; }
         public string VotingStationName { get; set; }
-        public decimal VotingStationLatitude { get; set; }
-        public decimal VotingStationLongitude { get; set; }
+        public int VotingStationLatitude { get; set; }
+        public int VotingStationLongitude { get; set; }
         public System.DateTime VotingStationOpeningTime { get; set; }
         public System.DateTime VotingStationClosingTime { get; set; }
         public string VotingStationStreetAddress { get; set; }
         public Nullable<int> SuburbID { get; set; }
+        public Nullable<int> ProvinceID { get; set; }
+        public Nullable<int> CityOrTownID { get; set; }
     
+        public virtual CityOrTown CityOrTown { get; set; }
+        public virtual Province Province { get; set; }
         public virtual Suburb Suburb { get; set; }
     }
 }
