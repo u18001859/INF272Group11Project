@@ -38,7 +38,9 @@
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnRegisterNewParty" type="submit" value="Register New Party" />
         }
+
         @using (Html.BeginForm("UpdateOrDeleteParty", "Staff", FormMethod.Post))
+
         {
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
@@ -46,15 +48,19 @@
         }
         @using (Html.BeginForm("RegisterCandidate", "Candidate"))
         {
+
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
+
             <input id="BtnRegisterCandidate" type="submit" value="Register Candidate" name="RegisterCandidate" />
         }
         @using (Html.BeginForm("UpdateOrDeleteCandidate", "Candidate", FormMethod.Post))
         {
+
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnSearchCandidate" type="submit" value="Update Or Delete Candidate" name="UpdateOrDeleteCandidate" />
+
         }
         @using (Html.BeginForm("AddVotingStation", "VotingStation", FormMethod.Post))
         {
@@ -73,6 +79,12 @@
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnRegisterStaff" type="submit" value="Register Staff" />
+        }
+
+        @if ((string)TempData["Message"] != null)
+        {
+            <label>@TempData["Message"].ToString()</label>
+
         }
 
     </div>

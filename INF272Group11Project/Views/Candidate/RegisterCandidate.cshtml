@@ -1,4 +1,6 @@
 ﻿@model INF272Group11Project.ViewModels.CandidateVM
+
+
 @{
     Layout = null;
 }
@@ -46,6 +48,7 @@
             <input type="text" id="txtLastName" name="LastName" />
             <br />
 
+
             <label>Select A Party:</label>
             @Html.DropDownList("PartyID", null, htmlAttributes: new { @Class = "form-control" })
             <br />
@@ -57,6 +60,7 @@
             <br /> 
             <label>Select A Province: </label>
             @Html.DropDownList("ProvinceID", null, htmlAttributes: new { @Class = "form-Control"})
+            
             <br />
             <br />
             <input type="submit" name="submitButton" id="btnRegister" value="Register" />
@@ -66,6 +70,11 @@
         {
 
             <input type="submit" name="submitButton" id="btnCancel" value="Cancel" />
+
+            <br />
+            <label>@TempData["message"]</label>
+            <label>@TempData["success"]</label>
+
         }
     </div>
 </body>

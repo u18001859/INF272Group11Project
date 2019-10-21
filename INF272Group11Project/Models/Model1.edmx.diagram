@@ -4,6 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
+
       <Diagram DiagramId="71335683b486410f937390b2046a965a" Name="Diagram1">
         <EntityTypeShape EntityType="VotingSystemProjectModel.Candidate" Width="1.5" PointX="9.75" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="VotingSystemProjectModel.CandidatePosition" Width="1.5" PointX="7.5" PointY="19" IsExpanded="true" />
@@ -20,6 +21,7 @@
         <EntityTypeShape EntityType="VotingSystemProjectModel.Suburb" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
         <EntityTypeShape EntityType="VotingSystemProjectModel.Voter" Width="1.5" PointX="7.5" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="VotingSystemProjectModel.VotingStation" Width="1.5" PointX="10.5" PointY="8.75" IsExpanded="true" />
+
         <AssociationConnector Association="VotingSystemProjectModel.FK__Candidate__Candi__1FCDBCEB" ManuallyRouted="false" />
         <AssociationConnector Association="VotingSystemProjectModel.FK__Candidate__Party__20C1E124" ManuallyRouted="false" />
         <AssociationConnector Association="VotingSystemProjectModel.FK__Candidate__Provi__21B6055D" ManuallyRouted="false" />
@@ -41,6 +43,7 @@
         <AssociationConnector Association="VotingSystemProjectModel.FK__Staff__StaffPosi__286302EC" ManuallyRouted="false" />
         <AssociationConnector Association="VotingSystemProjectModel.FK__Voter__SuburbID__2D27B809" ManuallyRouted="false" />
         <AssociationConnector Association="VotingSystemProjectModel.FK__VotingSta__Subur__3C69FB99" ManuallyRouted="false" />
+
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

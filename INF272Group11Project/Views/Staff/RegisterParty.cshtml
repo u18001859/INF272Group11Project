@@ -1,4 +1,4 @@
-﻿
+﻿@model INF272Group11Project.ViewModels.PartyViewModel
 @{
     Layout = null;
 }
@@ -28,6 +28,7 @@
     </ul>
 
     <h1 class="SecondaryHead">Please Enter The New Party Information!</h1>
+    <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
     <div class="Container">
         @using (Html.BeginForm("AddNewParty", "Staff"))
         {
@@ -49,27 +50,16 @@
             <br />
             <br />
             <label>Headquarters Provice: </label>
-            <select id="dropdowntipo">
-                <option value="Province1">Province1</option>
-                <option value="Province2">Province2</option>
-                <option value="Province3">Province3</option>
-            </select>
+            @Html.DropDownList("Provinces", null, htmlAttributes: new { @Class = "form-control" })
             <br />
             <br />
             <label>Headquarters City/Town: </label>
-            <select id="dropdowntipo">
-                <option value="City/Town1">City/Town1</option>
-                <option value="City/Town2">City/Town2</option>
-                <option value="City/Town3">City/Town3</option>
-            </select>
+            @Html.DropDownList("CityOrTowns", null, htmlAttributes: new { @Class = "form-control" })
+
             <br />
             <br />
-            <label>Headquarter Suburb: </label>
-            <select id="dropdowntipo">
-                <option value="Suburb1">Suburb1</option>
-                <option value="Suburb2">Suburb2</option>
-                <option value="Suburb3">Suburb3</option>
-            </select>
+            <label>Select a Suburb:</label>
+            @Html.DropDownList("Suburbs", null, htmlAttributes: new { @Class = "form-control" })
             <br />
             <br />
             <label>Headquarters Street Address: </label>

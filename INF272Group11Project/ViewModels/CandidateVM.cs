@@ -37,5 +37,6 @@ namespace INF272Group11Project.ViewModels
 
         public Candidate candidate;
 
+        
     }
 }

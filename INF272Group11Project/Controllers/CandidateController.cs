@@ -47,9 +47,12 @@ namespace INF272Group11Project.Controllers
             {
                 TempData["message"] = "Your Session Has Expired! Please Login Again!";
                 return RedirectToAction("StaffLogin", "Staff");
+
+        
             }
         }
 
+       
 
 
         [HttpPost]
@@ -89,11 +92,13 @@ namespace INF272Group11Project.Controllers
             {
                 TempData["message"] = "Your Session Has Expired! Please Login Again!";
                 return RedirectToAction("StaffLogin", "Staff");
-            }
 
+       
+        }
         }
 
         [HttpGet]
+
         public ActionResult UpdateOrDeleteCandidate(string StaffGUID, string id)
         {
             if (StaffGUID != null)
@@ -309,5 +314,6 @@ namespace INF272Group11Project.Controllers
         }
            
         
-    }
-}
+
+       }
+       }

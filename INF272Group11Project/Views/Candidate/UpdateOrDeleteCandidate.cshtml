@@ -1,4 +1,5 @@
 ﻿@model INF272Group11Project.ViewModels.CandidateVM
+
 @{
     Layout = null;
 }
@@ -30,6 +31,7 @@
     <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
     <h1 class="SecondaryHead" style="color: green">@ViewBag.success</h1>
     <div class="Container">
+
         @using (Html.BeginForm("SearchCandidate", "Candidate", FormMethod.Post))
         {
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
@@ -92,7 +94,16 @@
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input type="submit" name="submitButton" id="btnCancel" value="Cancel" />
+
+            <br />
+            <br />
+
+            <label>@TempData["Message"] </label>
         }
+
+        <br />
+        <label>@TempData["message"]</label>
+        <label>@TempData["success"]</label>
     </div>
 </body>
 </html>

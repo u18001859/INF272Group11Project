@@ -15,5 +15,6 @@ namespace INF272Group11Project.ViewModels
 
         public List<VotingStation> ListvotingStation;
 
+
     }
 }

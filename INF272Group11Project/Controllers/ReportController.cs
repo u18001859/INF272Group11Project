@@ -11,6 +11,7 @@ using INF272Group11Project.Report;
 using static INF272Group11Project.ViewModels.ReportViewModel;
 using System.Data;
 
+//Apparently I need help with this one according to Seb so Im going to leave it for now
 namespace INF272Group11Project.Controllers
 {
     public class ReportController : Controller

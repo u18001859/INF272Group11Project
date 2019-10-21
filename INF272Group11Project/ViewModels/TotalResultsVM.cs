@@ -12,11 +12,13 @@ namespace INF272Group11Project.ViewModels
         public List<Party> Parties;
         public List<Candidate> Candidates;
         public List<NationalResult> Results;
+
         public List<Election> ListElection;
         public NationalResultsVM resultsView;
         public Election election;
 
         public StaffGUIDControl StaffView;
+
 
     }
 }
