@@ -3,15 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using INF272Group11Project.Models;
+using INF272Group11Project.ViewModels;
 
 namespace INF272Group11Project.Controllers
 {
     public class ResultsController : Controller
     {
         // GET: Results
-        public ActionResult TotalVotes()
+        VotingSystemProjectEntities2 db = new VotingSystemProjectEntities2();
+        public ActionResult TotalVotes(string StaffGUID, string id)
         {
-            return View();
+            if(StaffGUID != null)
+            {
+                StaffGUIDControl staffGUID = new StaffGUIDControl();
+                if (staffGUID.IsLogedIn(db, StaffGUID))
+                {
+                    staffGUID.RefreshGUID(db);
+                    TotalResultsVM totalResults = new TotalResultsVM();
+                    totalResults.StaffView = staffGUID;
+                    totalResults.ListElection = db.Elections.ToList();
+                    return View(totalResults);
+                }
+                else
+                {
+                    TempData["message"] = "Your Session Has Expired Please Login Again!";
+                    return RedirectToAction("StaffLogin", "Staff");
+                }
+            }
+            else
+            {
+                TempData["message"] = "Your Session Has Expired Please Login Again!";
+                return RedirectToAction("StaffLogin", "Staff");
+            }
         }
 
         public ActionResult NationalResults()
@@ -19,9 +43,9 @@ namespace INF272Group11Project.Controllers
             return View();
         }
 
-        public ActionResult ProvincialResults(string DropdownList)
+        public ActionResult ProvincialResults()
         {
-            //dropdownlist selection reloads form with results by province
+            
             return View();
         }
     }

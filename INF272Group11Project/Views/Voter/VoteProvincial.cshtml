@@ -33,7 +33,13 @@
             <td>@item.Party.PartyName</td>
             <td>@item.Party.PartyAccronym</td>
             <td>@item.CandidateFirstNames @item.CandidateLastName</td>
-            <td>Add Party Picture</td>
+            <td>
+                @{
+                    var bases64 = Convert.ToBase64String(item.Party.PartyImage.PartyPicture);
+                    var imsrcs = string.Format("data:image/giff: base64,{0}", bases64);
+                }
+                <img src="@imsrcs" />
+            </td>
             <td>
                 @using (Html.BeginForm("doVoteProvincial", "Voter", FormMethod.Post, new { VoterGUID = Model.voterView.voter.GUID, id = Model.voterView.voter.VoterID, PartyID = item.Party.PartyID, provinceID = item.ProvinceID}))
                 {
