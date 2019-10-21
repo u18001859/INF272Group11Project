@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using INF272Group11Project.Models;
+using INF272Group11Project.ViewModels;
 
 namespace INF272Group11Project.ViewModels
 {
-    public class StaffViewModel
+    public class FindVotingStationViewModel
     {
-        public StaffGUIDControl StaffView;
 
-        public List<Staff> ListStaff;
+        public VotingStation FindVotingStation;
 
-        public Party Party; 
     }
 }

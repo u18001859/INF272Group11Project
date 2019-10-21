@@ -34,11 +34,12 @@
         {
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
-            <input type="hidden" value="@Model.candidate.Candidate_ID" name="CandidateID" />
+            <input type="hidden" value="@Html.DisplayFor(model => model.candidate.Candidate_ID)" name="CandidateID" />
             <br />
 
             <label>First Names:</label>
             <input type="text" id="txtFirstNames" value="@Model.candidate.CandidateFirstNames" name="FirstNames" />
+            <br />
             <br />
             <label>Last Name:</label>
             <input type="text" id="txtLastName" value="@Model.candidate.CandidateLastName" name="LastName" />

@@ -21,9 +21,10 @@ namespace INF272Group11Project.Controllers
 
         // GET: Candidate
 
-
         public ActionResult RegisterCandidate(string StaffGUID, string id)
         {
+            ViewBag.message = TempData["message"];
+            ViewBag.success = TempData["success"];
             if (StaffGUID != null)
             {
                 StaffGUIDControl staffGUID = new StaffGUIDControl();
@@ -34,7 +35,7 @@ namespace INF272Group11Project.Controllers
                     candidateVM.StaffView = staffGUID;
                     ViewBag.PartyID = new SelectList(db.Parties, "PartyID", "PartyName");
                     ViewBag.ProvinceID = new SelectList(db.Provinces, "ProvinceID", "ProvinceName");
-                    ViewBag.CandidatePosition_ID = new SelectList(db.CandidatePositions, "CandidatePostion_ID", "CandidatePosition_Description");
+                    ViewBag.CandidatePosition_ID = new SelectList(db.CandidatePositions, "CandidatePosition_ID", "CandidatePosition_Description");
                     return View(candidateVM);
                 }
                 else
@@ -55,12 +56,14 @@ namespace INF272Group11Project.Controllers
         [HttpPost]
         public ActionResult AddNewCandidate(string StaffGUID, string id, string FirstNames, string LastName, [Bind(Include = "ProvinceID, CandidatePosition_ID, PartyID")]Candidate candidate)
         {
+            ViewBag.message = TempData["message"];
+            ViewBag.success = TempData["success"];
             if (StaffGUID != null)
             {
                 if (FirstNames != null && LastName != null && candidate.PartyID != null && candidate.ProvinceID != null && candidate.CandidatePosition_ID != null)
                 {
                     var search = db.Candidates.Where(x => x.CandidatePosition_ID == candidate.CandidatePosition_ID && x.PartyID == candidate.PartyID).FirstOrDefault();
-                    if (search != null)
+                    if (search == null)
                     {
                         Candidate candidate1 = new Candidate();
                         candidate1.CandidateFirstNames = FirstNames;
@@ -93,9 +96,11 @@ namespace INF272Group11Project.Controllers
 
         }
 
-        [HttpGet]
+        
         public ActionResult UpdateOrDeleteCandidate(string StaffGUID, string id)
         {
+            ViewBag.message = TempData["message"];
+            ViewBag.success = TempData["success"];
             if (StaffGUID != null)
             {
                 StaffGUIDControl staffGUID = new StaffGUIDControl();
@@ -107,7 +112,7 @@ namespace INF272Group11Project.Controllers
                     candidateVM.candidate = TempData["CanSearch"] as Candidate;
                     ViewBag.PartyID = new SelectList(db.Parties, "PartyID", "PartyName");
                     ViewBag.ProvinceID = new SelectList(db.Provinces, "ProvinceID", "ProvinceName");
-                    ViewBag.CandidatePosition_ID = new SelectList(db.CandidatePositions, "CandidatePostion_ID", "CandidatePosition_Description");
+                    ViewBag.CandidatePosition_ID = new SelectList(db.CandidatePositions, "CandidatePosition_ID", "CandidatePosition_Description");
                     return View(candidateVM);
                 }
                 else
@@ -122,24 +127,23 @@ namespace INF272Group11Project.Controllers
                 return RedirectToAction("StaffLogin", "Staff");
             }
         }
-
+        
         public ActionResult SearchCandidate(string StaffGUID, string id, [Bind(Include = "ProvinceID, CandidatePosition_ID, PartyID")]Candidate candidate)
         {
-            if (StaffGUID != null)
-            {
-                StaffGUIDControl staffGUID = new StaffGUIDControl();
-                if (staffGUID.IsLogedIn(db, StaffGUID))
-                {
-                    staffGUID.RefreshGUID(db);
-                    CandidateVM candidateVM = new CandidateVM();
-                    candidateVM.StaffView = staffGUID;
+            ViewBag.message = TempData["message"];
+            ViewBag.success = TempData["success"];
+            
 
                     if (candidate.PartyID != null && candidate.ProvinceID != null && candidate.CandidatePosition_ID != null)
                     {
-                        var search = db.Candidates.Where(x => x.CandidatePosition_ID == candidate.CandidatePosition_ID && x.ProvinceID == candidate.ProvinceID && x.PartyID == candidate.PartyID).FirstOrDefault();
+                        int cpid = Convert.ToInt32(candidate.CandidatePosition_ID);
+                        int pid = Convert.ToInt32(candidate.PartyID);
+                        int prid = Convert.ToInt32(candidate.ProvinceID);
+                        Candidate search = db.Candidates.Where(x => x.CandidatePosition_ID == cpid && x.ProvinceID == prid && x.PartyID == pid).FirstOrDefault();
                         if (search != null)
                         {
                             TempData["CanSearch"] = search;
+                            TempData["success"] = "Candidate Was Successfully Found!";
                             return RedirectToAction("UpdateOrDeleteCandidate", new { StaffGUID = StaffGUID, id = id });
                         }
                         else
@@ -154,24 +158,13 @@ namespace INF272Group11Project.Controllers
                         TempData["message"] = "Please Ensure That You have Entered All Your Data";
                         return RedirectToAction("UpdateOrDeleteCandidate", new { StaffGUID = StaffGUID, id = id });
                     }
-                }
-                else
-                {
-                    TempData["message"] = "Your Session Has Expired! Please Login Again!";
-                    return RedirectToAction("StaffLogin", "Staff");
-                }
-            }
-            else
-            {
-                TempData["message"] = "Your Session Has Expired! Please Login Again!";
-                return RedirectToAction("StaffLogin", "Staff");
-            }
         }
 
         [HttpPost]
         public ActionResult UpdateCandidate(string CandidateID, string id, string StaffGUID)
         {
-            //viewbags to fill fields with already existing data
+            ViewBag.message = TempData["message"];
+            ViewBag.success = TempData["success"];
 
             if (StaffGUID != null)
             {
@@ -188,7 +181,7 @@ namespace INF272Group11Project.Controllers
                         candidateVM.candidate = search;
                         ViewBag.PartyID = new SelectList(db.Parties, "PartyID", "PartyName");
                         ViewBag.ProvinceID = new SelectList(db.Provinces, "ProvinceID", "ProvinceName");
-                        ViewBag.CandidatePosition_ID = new SelectList(db.CandidatePositions, "CandidatePostion_ID", "CandidatePosition_Description");
+                        ViewBag.CandidatePosition_ID = new SelectList(db.CandidatePositions, "CandidatePosition_ID", "CandidatePosition_Description");
                         return View(candidateVM);
                     }
                     else
@@ -213,6 +206,8 @@ namespace INF272Group11Project.Controllers
         [HttpPost]
         public ActionResult Update(string CandidateID, string FirstNames, string LastName, string StaffGUID, string id, [Bind(Include = "ProvinceID, CandidatePosition_ID, PartyID")]Candidate candidate)
         {
+            ViewBag.message = TempData["message"];
+            ViewBag.success = TempData["success"];
             if (CandidateID != null && FirstNames != null && LastName != null && candidate.CandidatePosition_ID != null && candidate.PartyID != null && candidate.ProvinceID != null)
             {
 
@@ -237,8 +232,8 @@ namespace INF272Group11Project.Controllers
                                 s.ProvinceID = candidate.ProvinceID;
                                 s.PartyID = candidate.PartyID;
                                 db.SaveChanges();
-                                TempData["success"] = "The Candidate Was Successfully Updated";
-                                return RedirectToAction("StaffHomePage", "Staff", new { StaffGUID = StaffGUID, id = id });
+                                TempData["success"] = "The Candidate Was Successfully Updated!";
+                                return RedirectToAction("StaffHomePage", "Staff", new { StaffGUID = candidateVM.StaffView.staff.GUID, id = id });
                             }
                             else
                             {
@@ -276,7 +271,9 @@ namespace INF272Group11Project.Controllers
         [HttpPost]
         public ActionResult DeleteCandidate(string CandidateID, string StaffGUID, string id)
         {
-            if(StaffGUID != null)
+            ViewBag.message = TempData["message"];
+            ViewBag.success = TempData["success"];
+            if (StaffGUID != null)
             {
                 if(CandidateID != null)
                 {
@@ -284,7 +281,8 @@ namespace INF272Group11Project.Controllers
                     Candidate search = db.Candidates.Where(x => x.Candidate_ID == ids).FirstOrDefault();
                     if(search != null)
                     {
-                        db.Candidates.Remove(search);
+                        Candidate candidate = db.Candidates.Find(ids);
+                        db.Candidates.Remove(candidate);
                         db.SaveChanges();
                         TempData["success"] = "The Candidate Has Been Removed!";
                         return RedirectToAction("StaffHomePage","Staff", new { StaffGUID});

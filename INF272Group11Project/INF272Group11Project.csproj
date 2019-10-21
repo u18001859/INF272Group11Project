@@ -200,6 +200,7 @@
     </Compile>
     <Compile Include="ViewModels\AddVotingStationVM.cs" />
     <Compile Include="ViewModels\CandidateVM.cs" />
+    <Compile Include="ViewModels\FindVotingStationViewModel.cs" />
     <Compile Include="ViewModels\NationalResultsVM.cs" />
     <Compile Include="ViewModels\ProvincialResultsVM.cs" />
     <Compile Include="ViewModels\RegisterVoterVM.cs" />

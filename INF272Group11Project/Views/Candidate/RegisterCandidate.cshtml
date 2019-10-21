@@ -35,34 +35,34 @@
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <br />
-
+            <br />
             <label>First Names:</label>
 
             <input type="text" id="txtFirstNames" name="FirstNames" />
             <br />
-
+            <br />
             <label>Last Name:</label>
 
             <input type="text" id="txtLastName" name="LastName" />
             <br />
-
+            <br />
             <label>Select A Party:</label>
             @Html.DropDownList("PartyID", null, htmlAttributes: new { @Class = "form-control" })
             <br />
-
+            <br />
             <label>Select A Candidate Position:</label>
             @Html.DropDownList("CandidatePosition_ID", null, htmlAttributes: new { @Class = "form-Control" })
 
             <br />
-            <br /> 
+            <br />
             <label>Select A Province: </label>
-            @Html.DropDownList("ProvinceID", null, htmlAttributes: new { @Class = "form-Control"})
+            @Html.DropDownList("ProvinceID", null, htmlAttributes: new { @Class = "form-Control" })
             <br />
             <br />
             <input type="submit" name="submitButton" id="btnRegister" value="Register" />
-            
-            }
-        @using (Html.BeginForm("StaffHomePage", "Staff", new { StaffGUID = Model.StaffView.staff.GUID}))
+
+        }
+        @using (Html.BeginForm("StaffHomePage", "Staff", new { StaffGUID = Model.StaffView.staff.GUID }))
         {
 
             <input type="submit" name="submitButton" id="btnCancel" value="Cancel" />

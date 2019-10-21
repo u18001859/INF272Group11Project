@@ -44,17 +44,17 @@
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnUpdateParty" type="submit" value="Update Or Delete Party" />
         }
-        @using (Html.BeginForm("RegisterCandidate", "Candidate"))
+        @using (Html.BeginForm("RegisterCandidate", "Candidate", FormMethod.Post))
         {
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnRegisterCandidate" type="submit" value="Register Candidate" name="RegisterCandidate" />
         }
-        @using (Html.BeginForm("UpdateOrDeleteCandidate", "Candidate", FormMethod.Post))
+        @using (Html.BeginForm("UpdateOrDeleteCandidate", "Candidate"))
         {
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
-            <input id="BtnSearchCandidate" type="submit" value="Update Or Delete Candidate" name="UpdateOrDeleteCandidate" />
+            <input id="BtnSearchCandidate" type="submit" value="Update Or Delete Candidate" name="SearchCandidate" />
         }
         @using (Html.BeginForm("AddVotingStation", "VotingStation", FormMethod.Post))
         {

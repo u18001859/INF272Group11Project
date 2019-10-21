@@ -1,4 +1,4 @@
-﻿
+﻿@model INF272Group11Project.ViewModels.StaffViewModel
 @{
     Layout = null;
 }
@@ -28,9 +28,13 @@
     </ul>
 
     <h1 class="SecondaryHead">Please Enter The New Party Information!</h1>
+    <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
+    <h1 class="SecondaryHead" style="color: green">@ViewBag.success</h1>
     <div class="Container">
-        @using (Html.BeginForm("AddNewParty", "Staff"))
+        @using (Html.BeginForm("AddNewParty", "Staff", FormMethod.Post))
         {
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <br />
             <label>Party Name: </label>
             <input id="txtPartyName" type="text" name="PartyName" />
@@ -49,27 +53,15 @@
             <br />
             <br />
             <label>Headquarters Provice: </label>
-            <select id="dropdowntipo">
-                <option value="Province1">Province1</option>
-                <option value="Province2">Province2</option>
-                <option value="Province3">Province3</option>
-            </select>
+            @Html.DropDownList("ProvinceID", null, htmlAttributes: new { @class = "form-control" })
             <br />
             <br />
             <label>Headquarters City/Town: </label>
-            <select id="dropdowntipo">
-                <option value="City/Town1">City/Town1</option>
-                <option value="City/Town2">City/Town2</option>
-                <option value="City/Town3">City/Town3</option>
-            </select>
+            @Html.DropDownList("CityOrTownID", null, htmlAttributes: new { @class = "form-control" })
             <br />
             <br />
             <label>Headquarter Suburb: </label>
-            <select id="dropdowntipo">
-                <option value="Suburb1">Suburb1</option>
-                <option value="Suburb2">Suburb2</option>
-                <option value="Suburb3">Suburb3</option>
-            </select>
+            @Html.DropDownList("SuburbID", null, htmlAttributes: new { @class = "form-control" })
             <br />
             <br />
             <label>Headquarters Street Address: </label>
@@ -84,6 +76,8 @@
         }
         @using (Html.BeginForm("StaffHomePage", "Staff"))
         {
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnCancel" type="submit" value="Cancel" />
         }
     </div>

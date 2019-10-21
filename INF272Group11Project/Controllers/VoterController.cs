@@ -25,7 +25,12 @@ namespace INF272Group11Project.Controllers
 
         public ActionResult FindVotingStation()
         {
-            return View();
+            ViewBag.message = TempData["message"];
+            ViewBag.success = TempData["success"];
+            FindVotingStationViewModel find = new FindVotingStationViewModel();
+            find.FindVotingStation = TempData["VotingStation"] as VotingStation;
+
+            return View(find);
         }
 
         public ActionResult RegisterVoter()
@@ -456,7 +461,7 @@ namespace INF272Group11Project.Controllers
                         votingViewModel.voterView = voterVM;
 
                         votingViewModel.listcandidate = db.Candidates.Include(y => y.Party).Include(j => j.Party.PartyImage).Where(x => x.CandidatePosition_ID == 1).ToList();
-
+                        votingViewModel.partiesImages = db.PartyImages.ToList();
 
                         ViewBag.message = TempData["message"];
                         ViewBag.success = TempData["success"];
@@ -465,23 +470,22 @@ namespace INF272Group11Project.Controllers
                     else
                     {
                         TempData["message"] = "You have already voted!";
-                        return RedirectToAction("VoterHomePage", new { VoterGUID = registerVoter.voterView.voter.GUID });
+                        return RedirectToAction("VoterHomePage","Voter", new { VoterGUID = VoterGUID });
                     }
                 }
                 else
                 {
                     TempData["message"] = "An Error Occured Please try again";
-                    return RedirectToAction("VoterHomePage", new { VoterGUID = registerVoter.voterView.voter.GUID });
+                    return RedirectToAction("VoterHomePage", "Voter", new { VoterGUID = VoterGUID });
                 }
             }
             else
             {
                 TempData["message"] = "You can only vote on the set election date";
-                return RedirectToAction("VoterHomePage", new { VoterGUID = registerVoter.voterView.voter.GUID});
+                return RedirectToAction("VoterHomePage", new { VoterGUID = VoterGUID});
             }
         }
 
-        [HttpPost]
         public ActionResult doVoteParty(string PartyID, string VoterGUID, string VoterID)
         {
             if (VoterGUID != null && PartyID != null && VoterID != null)
@@ -494,7 +498,8 @@ namespace INF272Group11Project.Controllers
                     votingViewModel.voterView = voterVM;
                     if(votingViewModel.GetElectionDate() != null)
                     {
-                        var v = db.Voters.Where(x => x.VoterID == Convert.ToInt32(VoterID)).FirstOrDefault();
+                        int ids = Convert.ToInt32(VoterID);
+                        var v = db.Voters.Where(x => x.VoterID == ids).FirstOrDefault();
                         if (v != null)
                         {
                             //Gets the Election and increases the total votes by 1
@@ -505,7 +510,7 @@ namespace INF272Group11Project.Controllers
                             nr.PartyID = Convert.ToInt32(PartyID);
                             nr.NationalResultsTotalVotes = 1;
                             v.VotePartyStatus = true;
-
+                            db.NationalResults.Add(nr);
                             db.SaveChanges();
                             TempData["success"] = "You have successfully voted for National Government";
                             return RedirectToAction("VoterHomePage", new { VoterGUID = votingViewModel.voterView.voter.GUID, id = votingViewModel.voterView.voter.VoterID });
@@ -513,21 +518,21 @@ namespace INF272Group11Project.Controllers
                         else
                         {
                             TempData["message"] = "An Error Occured Please Try Again!";
-                            return RedirectToAction("VoteParty", new { VoterGUID = registerVoter.voterView.voter.GUID, id = registerVoter.voterView.voter.VoterID });
+                            return RedirectToAction("VoteParty", new { VoterGUID = votingViewModel.voterView.voter.GUID, id = registerVoter.voterView.voter.VoterID });
                         
                         }
                     }
                     else
                     {
                         TempData["message"] = "An Error Occured Please Try Again!";
-                        return RedirectToAction("VoteParty", new { VoterGUID = registerVoter.voterView.voter.GUID, id = registerVoter.voterView.voter.VoterID });
+                        return RedirectToAction("VoteParty", new { VoterGUID = votingViewModel, id = registerVoter.voterView.voter.VoterID });
                     }
                     
                 }
                 else
                 {
                     TempData["message"] = "An Error Occured Please Try Again";
-                    return RedirectToAction("VoteParty", new { VoterGUID = registerVoter.voterView.voter.GUID, id = registerVoter.voterView.voter.VoterID });
+                    return RedirectToAction("VoteParty", new { VoterGUID = VoterGUID, id = VoterID });
                 }
                     
             }
@@ -550,42 +555,41 @@ namespace INF272Group11Project.Controllers
                     if (voterVM.IsLogedIn(db, VoterGUID) && voterVM.voter.VoteProvinceStatus == false)
                     {
                         voterVM.RefreshGUID(db);
-
+                        int ids = Convert.ToInt32(id);
                         votingViewModel.voterView = voterVM;
-                        var v = db.Voters.Where(l => l.VoterID == Convert.ToInt32(id)).FirstOrDefault();
+                        var v = db.Voters.Where(l => l.VoterID == ids).FirstOrDefault();
                         if (v != null)
                         {
-                            votingViewModel.listcandidate = db.Candidates.Include(y => y.Party).Include(k => k.Party.PartyImage).Where(x => x.ProvinceID == v.ProvinceID).ToList();
+                            votingViewModel.listcandidate = db.Candidates.Include(y => y.Party).Include(k => k.Party.PartyImage).Where(x => x.ProvinceID == v.ProvinceID && x.CandidatePosition_ID != 1).ToList();
                             return View(votingViewModel);
                         }
                         else
                         {
                             TempData["message"] = "You have already voted!";
-                            return RedirectToAction("VoterHomePage", new { VoterGUID = registerVoter.voterView.voter.GUID });
+                            return RedirectToAction("VoterHomePage", new { VoterGUID = votingViewModel.voterView.voter.GUID });
                         }
                     }
                     else
                     {
                         TempData["message"] = "You have already voted!";
-                        return RedirectToAction("VoterHomePage", new { VoterGUID = registerVoter.voterView.voter.GUID });
+                        return RedirectToAction("VoterHomePage", new { VoterGUID = VoterGUID });
 
                     }
                 }
                 else
                 {
                     TempData["message"] = "An Error Occured Please try again";
-                    return RedirectToAction("VoterHomePage", new { VoterGUID = registerVoter.voterView.voter.GUID });
+                    return RedirectToAction("VoterHomePage", new { VoterGUID = VoterGUID});
                 }
             }
             else
             {
                 TempData["message"] = "You can only vote on the set election date";
-                return RedirectToAction("VoterHomePage", new { VoterGUID = registerVoter.voterView.voter.GUID });
+                return RedirectToAction("VoterHomePage", new { VoterGUID = VoterGUID });
             
             }
         }
 
-        [HttpPost]
         public ActionResult doVoteProvincial(string VoterGUID, string id, string PartyID, string provinceID)
         {
             if (VoterGUID != null && PartyID != null && id != null)
@@ -598,7 +602,8 @@ namespace INF272Group11Project.Controllers
                     votingViewModel.voterView = voterVM;
                     if (votingViewModel.GetElectionDate() != null)
                     {
-                        var v = db.Voters.Where(x => x.VoterID == Convert.ToInt32(id)).FirstOrDefault();
+                        int ids = Convert.ToInt32(id);
+                        var v = db.Voters.Where(x => x.VoterID == ids).FirstOrDefault();
                         if (v != null)
                         {
                             //Gets the Election and increases the total votes by 1
@@ -609,36 +614,36 @@ namespace INF272Group11Project.Controllers
                             pr.ProvincialResultsTotalVotes = 1;
                             pr.ProvinceID = Convert.ToInt32(provinceID);
                             v.VoteProvinceStatus = true;
-
+                            db.ProvincialResults.Add(pr);
                             db.SaveChanges();
-                            TempData["success"] = "You have successfully voted for National Government";
+                            TempData["success"] = "You have successfully voted for a Provincial Government!";
                             return RedirectToAction("VoterHomePage", new { VoterGUID = votingViewModel.voterView.voter.GUID, id = votingViewModel.voterView.voter.VoterID });
                         }
                         else
                         {
                             TempData["message"] = "An Error Occured Please Try Again!";
-                            return RedirectToAction("VoteProvincial", new { VoterGUID = registerVoter.voterView.voter.GUID, id = registerVoter.voterView.voter.VoterID });
+                            return RedirectToAction("VoteProvincial", new { VoterGUID = votingViewModel.voterView.voter.GUID, id = votingViewModel.voterView.voter.VoterID });
 
                         }
                     }
                     else
                     {
                         TempData["message"] = "An Error Occured Please Try Again!";
-                        return RedirectToAction("VoteProvincial", new { VoterGUID = registerVoter.voterView.voter.GUID, id = registerVoter.voterView.voter.VoterID });
+                        return RedirectToAction("VoteProvincial", new { VoterGUID = votingViewModel.voterView.voter.GUID, id = votingViewModel.voterView.voter.VoterID });
                     }
 
                 }
                 else
                 {
                     TempData["message"] = "An Error Occured Please Try Again";
-                    return RedirectToAction("VoteProvincial", new { VoterGUID = registerVoter.voterView.voter.GUID, id = registerVoter.voterView.voter.VoterID });
+                    return RedirectToAction("VoteProvincial", new { VoterGUID = VoterGUID, id = id });
                 }
 
             }
             else
             {
                 TempData["message"] = "An Error Occured Please try again!";
-                return RedirectToAction("VoteProvincial", new { VoterGUID = registerVoter.voterView.voter.GUID, id = registerVoter.voterView.voter.VoterID });
+                return RedirectToAction("VoteProvincial", new { VoterGUID = VoterGUID, id = id });
             }
         }
 
@@ -646,6 +651,34 @@ namespace INF272Group11Project.Controllers
         public ActionResult ForgotPasswordGetID()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult SearchForStation(string IDNumber)
+        {
+            var idnumEncrypt = registerVoter.HashedData(IDNumber);
+            var v = db.Voters.Where(x => x.VoterIDNumber == idnumEncrypt).FirstOrDefault();
+            if(v != null)
+            {
+                var station = db.VotingStations.Where(j => j.ProvinceID == v.ProvinceID && j.CityOrTownID == v.CityorTownID && j.SuburbID == v.SuburbID).FirstOrDefault();
+                if(station != null)
+                {
+
+                    TempData["VotingStation"] = station;
+                    TempData["success"] = "We Found Your Voting Station!";
+                    return RedirectToAction("FindVotingStation","Voter");
+                }
+                else
+                {
+                    TempData["message"] = "We could not Locate a Voting station in your Area. Please Vote Online Instead";
+                    return RedirectToAction("FindVotingStation", "Voter");
+                }
+            }
+            else
+            {
+                TempData["message"] = "We could not Locate a Voting station in your area. Please Vote Online Instead!";
+                return RedirectToAction("FindVotingStation", "Voter");
+            }
         }
     }
 }
