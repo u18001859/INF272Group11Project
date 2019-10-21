@@ -32,10 +32,10 @@
     <h1 class="SecondaryHead" style="color: green">@ViewBag.success</h1>
     <div class="Container">
 
-        @using (Html.BeginForm("RegisterParty", "Staff", FormMethod.Post))
+        @using (Html.BeginForm("RegisterParty", "Staff",FormMethod.Post))
         {
-            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
-            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID"/>
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id"/>
             <input id="BtnRegisterNewParty" type="submit" value="Register New Party" />
         }
 

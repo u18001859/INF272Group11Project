@@ -1,4 +1,4 @@
-﻿@model INF272Group11Project.ViewModels.PartyViewModel
+﻿@model INF272Group11Project.ViewModels.StaffViewModel
 @{
     Layout = null;
 }
@@ -30,8 +30,10 @@
     <h1 class="SecondaryHead">Please Enter The New Party Information!</h1>
     <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
     <div class="Container">
-        @using (Html.BeginForm("AddNewParty", "Staff"))
+        @using (Html.BeginForm("AddNewParty", "Staff", FormMethod.Post))
         {
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <br />
             <label>Party Name: </label>
             <input id="txtPartyName" type="text" name="PartyName" />
@@ -58,7 +60,7 @@
 
             <br />
             <br />
-            <label>Select a Suburb:</label>
+            @Html.LabelFor(Model => Model.StaffView.staff.StaffID, "Select a Suburb: ", htmlAttributes: new {@Class= "control-label col-md-2" })
             @Html.DropDownList("Suburbs", null, htmlAttributes: new { @Class = "form-control" })
             <br />
             <br />
@@ -74,6 +76,7 @@
         }
         @using (Html.BeginForm("StaffHomePage", "Staff"))
         {
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input id="BtnCancel" type="submit" value="Cancel" />
         }
     </div>

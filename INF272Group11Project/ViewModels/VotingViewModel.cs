@@ -8,7 +8,7 @@ namespace INF272Group11Project.ViewModels
 {
     public class VotingViewModel
     {
-        VotingSystemProjectEntities2 db = new VotingSystemProjectEntities2();
+        VotingSystemProjectEntities3 db = new VotingSystemProjectEntities3();
        public Party party;
         
         public PartyImage PartyImage;

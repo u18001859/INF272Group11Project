@@ -10,7 +10,7 @@ namespace INF272Group11Project.ViewModels
     {
         public Voter voter;
 
-        public void RefreshGUID(VotingSystemProjectEntities2 db)
+        public void RefreshGUID(VotingSystemProjectEntities3 db)
         {
             db.Configuration.ProxyCreationEnabled = false;
 
@@ -29,7 +29,7 @@ namespace INF272Group11Project.ViewModels
             }
         }
 
-        public bool IsLogedIn(VotingSystemProjectEntities2 db)
+        public bool IsLogedIn(VotingSystemProjectEntities3 db)
         {
             db.Configuration.ProxyCreationEnabled = false;
             var guid = db.Voters.Where(x => x.GUID == voter.GUID && x.GUIDTimeStamp > DateTime.Now).Count();
@@ -38,7 +38,7 @@ namespace INF272Group11Project.ViewModels
             return false;
 
         }
-        public bool IsLogedIn(VotingSystemProjectEntities2 db, string userGUID)
+        public bool IsLogedIn(VotingSystemProjectEntities3 db, string userGUID)
         {
             db.Configuration.ProxyCreationEnabled = false;
             voter = db.Voters.Where(x => x.GUID == userGUID && x.GUIDTimeStamp > DateTime.Now).FirstOrDefault();
