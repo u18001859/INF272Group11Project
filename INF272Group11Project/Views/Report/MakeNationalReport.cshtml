@@ -27,7 +27,7 @@
         <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
     </ul>
     <h1 class="SecondaryHead">Here is a preview of the report!</h1>
-    @using (Html.BeginForm("ExportPDFProvince", "Report"))
+    @using (Html.BeginForm("ExportPDFNational", "Report"))
     {
         <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
         <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
@@ -55,7 +55,7 @@
                         <th>Vote Percentage:</th>
                     </tr>
 
-                    @foreach (INF272Group11Project.ViewModels.ReportViewModel.NationalReport groupItem in group)
+                    @foreach (INF272Group11Project.ViewModels.ReportViewModel.NationalReports groupItem in group)
                     {
                         <tr>
                             <td>@groupItem.ElectionDate</td>
@@ -71,12 +71,6 @@
         </div>
 
         <input id="BtnPrintReport" type="submit" value="ExportPDF" />
-    }
-    @using (Html.BeginForm("Index", "Report"))
-    {
-        <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
-        <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
-        <input id="BtnCancel" type="submit" value="Cancel" />
     }
 </body>
 </html>

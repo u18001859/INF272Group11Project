@@ -38,15 +38,57 @@ namespace INF272Group11Project.Controllers
             }
         }
 
-        public ActionResult NationalResults()
+        public ActionResult NationalResults(string StaffGUID, string id)
         {
-            return View();
+            if (StaffGUID != null)
+            {
+                StaffGUIDControl staffGUID = new StaffGUIDControl();
+                if (staffGUID.IsLogedIn(db, StaffGUID))
+                {
+                    staffGUID.RefreshGUID(db);
+                    NationalResultsVM NationalResults = new NationalResultsVM();
+                    NationalResults.StaffView = staffGUID;
+                    NationalResults.Results = db.NationalResults.ToList();
+                    return View(NationalResults);
+                }
+                else
+                {
+                    TempData["message"] = "Your Session Has Expired Please Login Again!";
+                    return RedirectToAction("StaffLogin", "Staff");
+                }
+            }
+            else
+            {
+                TempData["message"] = "Your Session Has Expired Please Login Again!";
+                return RedirectToAction("StaffLogin", "Staff");
+            }
+        
         }
 
-        public ActionResult ProvincialResults()
+        public ActionResult ProvincialResults(string StaffGUID, string id)
         {
-            
-            return View();
+            if (StaffGUID != null)
+            {
+                StaffGUIDControl staffGUID = new StaffGUIDControl();
+                if (staffGUID.IsLogedIn(db, StaffGUID))
+                {
+                    staffGUID.RefreshGUID(db);
+                    ProvincialResultsVM NationalResults = new ProvincialResultsVM();
+                    NationalResults.StaffView = staffGUID;
+                    NationalResults.Results = db.ProvincialResults.ToList();
+                    return View(NationalResults);
+                }
+                else
+                {
+                    TempData["message"] = "Your Session Has Expired Please Login Again!";
+                    return RedirectToAction("StaffLogin", "Staff");
+                }
+            }
+            else
+            {
+                TempData["message"] = "Your Session Has Expired Please Login Again!";
+                return RedirectToAction("StaffLogin", "Staff");
+            }
         }
     }
 }

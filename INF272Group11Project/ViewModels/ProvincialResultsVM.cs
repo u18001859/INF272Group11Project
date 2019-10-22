@@ -11,7 +11,9 @@ namespace INF272Group11Project.ViewModels
     {
         public List<Party> Parties;
         public List<Candidate> Candidates;
-        public List<NationalResult> Results;
+        public List<ProvincialResult> Results;
         public NationalResultsVM resultsView;
+
+        public StaffGUIDControl StaffView;
     }
 }

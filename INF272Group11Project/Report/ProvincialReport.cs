@@ -16,14 +16,14 @@ namespace INF272Group11Project.Report {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class NationalReport : ReportClass {
+    public class ProvincialReport : ReportClass {
         
-        public NationalReport() {
+        public ProvincialReport() {
         }
         
         public override string ResourceName {
             get {
-                return "NationalReport.rpt";
+                return "ProvincialReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace INF272Group11Project.Report {
         
         public override string FullResourceName {
             get {
-                return "INF272Group11Project.Report.NationalReport.rpt";
+                return "INF272Group11Project.Report.ProvincialReport.rpt";
             }
             set {
                 // Do nothing
@@ -106,9 +106,9 @@ namespace INF272Group11Project.Report {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedNationalReport : Component, ICachedReport {
+    public class CachedProvincialReport : Component, ICachedReport {
         
-        public CachedNationalReport() {
+        public CachedProvincialReport() {
         }
         
         [Browsable(false)]
@@ -145,7 +145,7 @@ namespace INF272Group11Project.Report {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            NationalReport rpt = new NationalReport();
+            ProvincialReport rpt = new ProvincialReport();
             rpt.Site = this.Site;
             return rpt;
         }
