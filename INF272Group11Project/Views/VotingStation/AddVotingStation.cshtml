@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+
 @model INF272Group11Project.ViewModels.AddVotingStationVM
 <html>
 <head>
@@ -24,14 +25,16 @@
     <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
     <h1 class="SecondaryHead" style="color: green">@ViewBag.success</h1>
         <div class="Container">
+
             @using (Html.BeginForm("doAddVotingStation", "VotingStation", FormMethod.Post))
+
             {
                 <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID"/>
                 <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id"/>
                 <br />
                 <br />
                 <lable>Voting Station Name: </lable>
-                <input type="text" name="VotingStationName" />
+                @Html.EditorFor(model => model.VotingStationName, new { @class = "control-label" })
                 <br />
                 <br />
                 <label>Select a Province: </label>
@@ -69,7 +72,7 @@
                 <br />
                 <input id="BtnAddVotingStation" type="submit" value="Add" name="Add" />
             }
-            @using (Html.BeginForm("StaffHomePage", "Staff"))
+            @using (Html.BeginForm("AddVotingStation", "VotingStation"))
             {
                 <input id="BtnCancel" type="submit" value="Cancel" name="Cancel" />
             }

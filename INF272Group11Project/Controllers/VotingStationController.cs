@@ -41,6 +41,7 @@ namespace INF272Group11Project.Controllers
                 TempData["message"] = "Your Session Has Expired Please Login Again!";
                 return RedirectToAction("StaffLogin", "Staff");
             }
+
         }
 
         public ActionResult doAddVotingStation(string StaffGUID, string id, string VotingStationName, [Bind(Include = "SuburbID, ProvinceID, CityOrTownID")] VotingStation vs, string StreetAddress, string Longitude, string Latitude, string OpeningTime, string ClosingTime)
@@ -207,7 +208,6 @@ namespace INF272Group11Project.Controllers
                 TempData["message"] = "Your Session Has Expired, Please Login Again!";
                 return RedirectToAction("StaffLogin","Staff");
             }
-
         }
 
         public ActionResult doVotingStationUpdate(string StaffGUID, string id, string VotingStationID, string VotingStationName, [Bind(Include = "SuburbID, ProvinceID, CityOrTownID")] VotingStation vs, string StreetAddress, string Longitude, string Latitude, string OpeningTime, string ClosingTime)

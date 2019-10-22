@@ -6,15 +6,10 @@ using INF272Group11Project.Models;
 
 namespace INF272Group11Project.ViewModels
 {
-    public class AddVotingStationVM
+    public class PartyViewModel
     {
-
         public StaffGUIDControl StaffView;
-
-        public  VotingStation VotingStation;
-
-        public List<VotingStation> ListvotingStation;
-
+        public List<Party> Listparty;
 
     }
 }
