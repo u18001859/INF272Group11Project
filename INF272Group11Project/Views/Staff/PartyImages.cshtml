@@ -27,12 +27,14 @@
     </ul>
 
     <h1 class="SecondaryHead">Please Add an image that will be Used for the Party</h1>
-    
+
     <div class="Container">
-        @using (Html.BeginForm("AddImages", "Staff", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("AddImages", "Staff",FormMethod.Post,new { enctype = "multipart/form-data" }))
         {
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
+            <input type="hidden" value="@ViewBag.party" name="Party" />
+
             <br />
             <br />
             <label>Upload Party Logo Image: </label>
@@ -47,6 +49,8 @@
         }
         @using (Html.BeginForm("StaffHomePage", "Staff"))
         {
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnCancel" type="submit" value="Cancel" />
         }
     </div>

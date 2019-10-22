@@ -29,6 +29,7 @@
 
     <h1 class="SecondaryHead">Please Enter The New Party Information!</h1>
     <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
+    <h1 class="SecondaryHead" style="color: green">@ViewBag.success</h1>
     <div class="Container">
         @using (Html.BeginForm("AddNewParty", "Staff", FormMethod.Post))
         {
@@ -52,16 +53,16 @@
             <br />
             <br />
             <label>Headquarters Provice: </label>
-            @Html.DropDownList("Provinces", null, htmlAttributes: new { @Class = "form-control" })
+            @Html.DropDownList("ProvinceID", null, htmlAttributes: new { @class = "form-control" })
             <br />
             <br />
             <label>Headquarters City/Town: </label>
-            @Html.DropDownList("CityOrTowns", null, htmlAttributes: new { @Class = "form-control" })
+            @Html.DropDownList("CityOrTownID", null, htmlAttributes: new { @class = "form-control" })
+            <br />
+            <br />
+            <label>Headquarter Suburb: </label>
+            @Html.DropDownList("SuburbID", null, htmlAttributes: new { @class = "form-control" })
 
-            <br />
-            <br />
-            @Html.LabelFor(Model => Model.StaffView.staff.StaffID, "Select a Suburb: ", htmlAttributes: new {@Class= "control-label col-md-2" })
-            @Html.DropDownList("Suburbs", null, htmlAttributes: new { @Class = "form-control" })
             <br />
             <br />
             <label>Headquarters Street Address: </label>
@@ -77,6 +78,9 @@
         @using (Html.BeginForm("StaffHomePage", "Staff"))
         {
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
+
             <input id="BtnCancel" type="submit" value="Cancel" />
         }
     </div>

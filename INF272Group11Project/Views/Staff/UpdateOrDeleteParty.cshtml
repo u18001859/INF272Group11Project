@@ -1,4 +1,6 @@
-﻿@model INF272Group11Project.ViewModels.PartyViewModel
+
+﻿@model INF272Group11Project.ViewModels.StaffViewModel
+
 @{
     Layout = null;
 }
@@ -17,38 +19,75 @@
     <label class="Slogan">The simple and better way to vote</label>
     <br />
     <ul class="NavigationBar">
-        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff", new { StaffGUID = Model.StaffView.staff.GUID })">Home</a></li>
+
+        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff", new { StaffGUID = Model.StaffView.staff.GUID})">Home</a></li>
         <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Update Personal Info</a></li>
         <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Change Password</a></li>
-        <li class="BarList"><a href="@Url.Action("Index", "Report", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Create a Report</a></li>
-        <li class="BarList"><a href="@Url.Action("TotalVotes","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Total Votes</a></li>
+        <li class="BarList"><a href="@Url.Action("Index", "Report", new {StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Create a Report</a></li>
+        <li class="BarList"><a href="@Url.Action("TotalVotes","Results",  new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Total Votes</a></li>
         <li class="BarList"><a href="@Url.Action("NationalResults","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">National Results</a></li>
         <li class="BarList"><a href="@Url.Action("ProvincialResults","Results", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Provincial Results</a></li>
+        <li class="BarList"><a href="@Url.Action("SetElectionDate", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID })">Set Election Date</a></li>
         <li class="BarList"><a href="@Url.Action("Logout", "Voter")">Logout</a></li>
     </ul>
     <h1 class="SecondaryHead">Please Select a Party and Click "Update" Or "Delete"</h1>
+    <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
+    <h1 class="SecondaryHead" style="color: green">@ViewBag.success</h1>
     <div class="Container">
-        @using (Html.BeginForm("StaffHomePage", "Staff"))
+
+
+        @using (Html.BeginForm("SearchParty", "Staff"))
         {
-            @using (Html.BeginForm("UpdateParty", "Staff"))
-            {
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
+            <br />
+            <br />
+            <label>Select a Party: </label>
+            @Html.DropDownList("PartyID", null, htmlAttributes: new { @Class = "form-conrol" })
+            <br />
+            <br />
+            <input id="BtnUpdateParty" type="submit" value="Search" />
 
-                <br />
-                <br />
-                <label>Select a Party: </label>
-                @Html.DropDownList("Parties", null, htmlAttributes: new { @Class = "form-control" })
-                <br />
-                <br />
-                <input id="BtnUpdateParty" type="submit" value="Update Party" name="PartyName" />
-            }
-
-            <input id="BtnDeleteParty" type="submit" value="Delete Party" />
-        }
-
-        @using (Html.BeginForm("StaffHomePage", "Staff"))
-        {
-            <input id="BtnCancel" type="submit" value="Cancel" />
         }
     </div>
+    <br />
+    <br />
+    <table>
+        <tr>
+            <th>Party Name:</th>
+            <th>Accronym</th>
+            <th>StreetAddress:</th>
+            <th>Telephone:</th>
+            <th>Website:</th>
+            <th>Email:</th>
+            <th>Update/Delete:</th>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayFor(model => model.Party.PartyName)</td>
+            <td>@Html.DisplayFor(model => model.Party.PartyAccronym)</td>
+            <td>@Html.DisplayFor(model => model.Party.PartyStreetAddress)</td>
+            <td>@Html.DisplayFor(model => model.Party.PartyTelephone)</td>
+            <td>@Html.DisplayFor(model => model.Party.PartyWebsite)</td>
+            <td>@Html.DisplayFor(model => model.Party.PartyEmail)</td>
+
+            <td>
+                @using (Html.BeginForm("UpateParty", "Staff"))
+                {
+                    <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+                    <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
+                    <input type="hidden" value="@Html.DisplayFor(model => model.Party.PartyID)" name="PartyID" />
+                    <input type="submit" value="Update" name="Update" />
+                }
+                @using (Html.BeginForm("DeletePatry", "Staff"))
+                {
+                    <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
+                    <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
+                    <input type="hidden" value="@Html.DisplayFor(model => model.Party.PartyID)" name="PartyID" />
+                    <input type="submit" value="Delete" name="Delete" />
+                }
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

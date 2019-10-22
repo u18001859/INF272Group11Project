@@ -19,12 +19,13 @@ namespace INF272Group11Project.ViewModels
         public NationalResult NationalResult { get; set; }
         public ProvincialResult ProvincialResult { get; set; }
 
-        public List<IGrouping<string, NationalReport>> nationalReports { get; set; }
-        public List<IGrouping<string,ProvincialReport>> provincialReports { get; set; }
+        public List<IGrouping<string, NationalReports>> nationalReports { get; set; }
+        public List<IGrouping<string,ProvincialReports>> provincialReports { get; set; }
 
         public Dictionary<string, int> data { get; set; }
 
-        public class NationalReport
+
+        public class NationalReports
         {
             public DateTime ElectionDate { get; set; }
             public string PartyName { get; set; }
@@ -34,7 +35,7 @@ namespace INF272Group11Project.ViewModels
 
 
         }
-        public class ProvincialReport
+        public class ProvincialReports
         {
             public DateTime ElectionDate { get; set; }
             public string ProvinceName { get; set; }

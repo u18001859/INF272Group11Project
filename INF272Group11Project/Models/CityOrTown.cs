@@ -17,6 +17,7 @@ namespace INF272Group11Project.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CityOrTown()
         {
+            this.Parties = new HashSet<Party>();
             this.Suburbs = new HashSet<Suburb>();
             this.Voters = new HashSet<Voter>();
             this.VotingStations = new HashSet<VotingStation>();
@@ -27,6 +28,8 @@ namespace INF272Group11Project.Models
         public Nullable<int> ProvinceID { get; set; }
     
         public virtual Province Province { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Party> Parties { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Suburb> Suburbs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

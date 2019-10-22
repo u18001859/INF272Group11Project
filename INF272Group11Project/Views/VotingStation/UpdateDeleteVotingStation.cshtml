@@ -68,36 +68,39 @@
             <th>Latitude:</th>
             <th>Opening Time:</th>
             <th>Closing Time:</th>
-            <th>Update/Delete:</th>
+            <th>Update/Delete</th>
         </tr>
-        
         <tr>
-            <td>@Model.VotingStation.VotingStationName</td>
-            <td>@Model.VotingStation.Province.Provincename</td>
-            <td>@Model.VotingStation.CityOrTown.CityOrTownName</td>
-            <td>@Model.VotingStation.Suburb.SuburbName</td>
-            <td>@Model.VotingStation.VotingStationStreetAddress</td>
-            <td>@Model.VotingStation.VotingStationLongitude</td>
-            <td>@Model.VotingStation.VotingStationLatitude</td>
-            <td>@Model.VotingStation.VotingStationOpeningTime</td>
-            <td>@Model.VotingStation.VotingStationClosingTime</td>
+            <td>@Html.DisplayFor(model => model.VotingStation.VotingStationName)</td>
+            <td>@Html.DisplayFor(model => model.VotingStation.Province.ProvinceName)</td>
+            <td>@Html.DisplayFor(model => model.VotingStation.CityOrTown.CityOrTownName)</td>
+            <td>@Html.DisplayFor(model => model.VotingStation.Suburb.SuburbName)</td>
+            <td>@Html.DisplayFor(model => model.VotingStation.VotingStationStreetAddress)</td>
+            <td>@Html.DisplayFor(model => model.VotingStation.VotingStationLongitude)</td>
+            <td>@Html.DisplayFor(model => model.VotingStation.VotingStationLatitude)</td>
+            <td>@Html.DisplayFor(model => model.VotingStation.VotingStationOpeningTime)</td>
+            <td>@Html.DisplayFor(model => model.VotingStation.VotingStationClosingTime)</td>
             <td>
-                @using (Html.BeginForm("UpdateVotingStation", "VotingStation", FormMethod.Post))
+                @using (Html.BeginForm("UpdateVotingStation", "VotingStation"))
                 {
                     <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
                     <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
-                    <input type="hidden" value="@Model.VotingStation.VotingStationID" name="VotingStationID" />
+                    <input type="hidden" value="@Html.DisplayFor(model => model.VotingStation.VotingStationID)" name="VotingStationID" />
                     <input type="submit" value="Update" name="Update" />
                 }
-                @using (Html.BeginForm("DeleteVotingStation", "VotingStation", FormMethod.Post))
+                @using (Html.BeginForm("DeleteVotingStation", "VotingStation"))
                 {
                     <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
                     <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
-                    <input type="hidden" value="@Model.VotingStation.VotingStationID" name="VotingStationID" />
+                    <input type="hidden" value="@Html.DisplayFor(model => model.VotingStation.VotingStationID)" name="VotingStationID" />
                     <input type="submit" value="Delete" name="Delete" />
                 }
             </td>
         </tr>
     </table>
+    <br />
+    <br />
+
+    
 </body>
 </html>

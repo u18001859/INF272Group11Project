@@ -17,7 +17,7 @@
     <label class="Slogan">The simple and better way to vote</label>
     <br />
     <ul class="NavigationBar">
-        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff", new { StaffGUID = Model.StaffView.staff.GUID })">Home</a></li>
+        <li class="BarList"><a class="OnPage" href="@Url.Action("StaffHomePage","Staff", new { StaffGUID = Model.StaffView.staff.GUID})">Home</a></li>
         <li class="BarList"><a href="@Url.Action("UpdateStaffInfo", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Update Personal Info</a></li>
         <li class="BarList"><a href="@Url.Action("ChangePasswordStaff", "Staff", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Change Password</a></li>
         <li class="BarList"><a href="@Url.Action("Index", "Report", new { StaffGUID = Model.StaffView.staff.GUID, id = Model.StaffView.staff.StaffID})">Create a Report</a></li>
@@ -28,7 +28,7 @@
     </ul>
     <h1 class="SecondaryHead">Here is a preview of the report!</h1>
     
-        @using (Html.BeginForm("ExportPDFNational", "Report"))
+        @using (Html.BeginForm("ExportPDFProvincial", "Report"))
         {
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
@@ -45,7 +45,7 @@
             </div>
 
             <div class="panel panel-info">
-                @foreach (var group in Model.nationalReports)
+                @foreach (var group in Model.provincialReports)
                 {
                     <h4>@group.Key</h4>
                     <table class="table table-striped">
@@ -58,7 +58,7 @@
                             <th>Vote Percentage:</th>
                         </tr>
 
-                        @foreach (INF272Group11Project.ViewModels.ReportViewModel.ProvincialReport groupItem in group)
+                       @foreach (INF272Group11Project.ViewModels.ReportViewModel.ProvincialReports groupItem in group)
                         {
                             <tr>
                                 <td>@groupItem.ElectionDate</td>
@@ -72,16 +72,10 @@
 
                     </table>
                 }
-                <h3>Grand Total: <strong>@Model.nationalReports.Sum(group => group.Sum(item => item.TotalVotes)).ToString()</strong></h3>
+                <h3>Grand Total: <strong>@Model.provincialReports.Sum(group => group.Sum(item => item.TotalVotes)).ToString()</strong></h3>
             </div>
 
             <input id="BtnPrintReport" type="submit" value="ExportPDF" />
-        }
-        @using (Html.BeginForm("Index", "Report"))
-        {
-            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
-            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
-            <input id="BtnCancel" type="submit" value="Cancel" />
         }
     </body>
 </html>

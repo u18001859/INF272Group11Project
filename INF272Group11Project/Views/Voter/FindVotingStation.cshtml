@@ -1,4 +1,4 @@
-﻿
+﻿@model INF272Group11Project.ViewModels.FindVotingStationViewModel
 @{
     Layout = null;
 }
@@ -10,21 +10,10 @@
     <meta name="viewport" content="width=device-width" />
     <title>FindVotingStation</title>
     <link rel="stylesheet" href="~/Content/INF272Project.css" type="text/css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-          integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
-          crossorigin="" />
-
-    <script>
-        var map = L.map('map')
-            .setView([13.7542, 100.493], 12);
-
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-    </script>
 
     
-</head>
+
+   </head>
 <body>
     <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
     <h1 class="PageHeading">Voter Home Page!</h1>
@@ -37,36 +26,43 @@
         <li class="BarList"><a class="OnPage" href="@Url.Action("FindVotingStation", "Voter")">Find Voting Station</a></li>
         <li class="BarList"><a href="@Url.Action("StaffLogin","Staff")">Staff Login</a></li>
     </ul>
-    <h1 class="SecondaryHead">Please Search For A Voting Station</h1>
+    <h1 class="SecondaryHead">Please Enter your ID Number And Search For A Voting Station!</h1>
+    <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
+    <h1 class="SecondaryHead" style="color: green">@ViewBag.success</h1>
     <div class="Container">
+        @using (Html.BeginForm("SearchForStation", "Voter", FormMethod.Post))
+        {
         <br />
         <br />
         <label>ID Number: </label>
-        <input id="txtIDNumber" type="text" name="txtIDNumber" />
+        <input id="txtIDNumber" type="text" name="IDNumber" />
         <br />
         <br />
         <input id="BtnSearch" type="submit" value="Search" />
         <br />
+        }
     </div>
     <br />
-    <div id="GoogleMap">
-    </div>
-
-    <div>
-        <h2>Voting Station Info</h2>
-        <table>
-            <tr>
-                <th>Name:</th>
-                <th>Street Address:</th>
-                <th>Opening Time:</th>
-                <th>Closing Time:</th>
-            </tr>
-        </table>
-    </div>
-
-    <div id="map"></div>
-    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
-            integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
-            crossorigin=""></script>
+    <br />
+    <table>
+        <tr>
+            <th>Voting Station Name:</th>
+            <th>Province:</th>
+            <th>City/Town:</th>
+            <th>Suburb:</th>
+            <th>Voting Station Street Address:</th>
+            <th>Opening Time:</th>
+            <th>Closing Time:</th>
+        </tr>
+        <tr>
+            <td>@Html.DisplayFor(model => model.FindVotingStation.VotingStationName)</td>
+            <td>@Html.DisplayFor(model => model.FindVotingStation.Province.ProvinceName)</td>
+            <td>@Html.DisplayFor(model => model.FindVotingStation.Suburb.SuburbName)</td>
+            <td>@Html.DisplayFor(model => model.FindVotingStation.CityOrTown.CityOrTownName)</td>
+            <td>@Html.DisplayFor(model => model.FindVotingStation.VotingStationStreetAddress)</td>
+            <td>@Html.DisplayFor(model => model.FindVotingStation.VotingStationOpeningTime.TimeOfDay)</td>
+            <td>@Html.DisplayFor(model => model.FindVotingStation.VotingStationClosingTime.TimeOfDay)</td>
+        </tr>
+    </table>
 </body>
 </html>

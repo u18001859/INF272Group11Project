@@ -13,6 +13,8 @@ namespace INF272Group11Project.ViewModels
         
         public PartyImage PartyImage;
 
+        public List<PartyImage> partiesImages;
+
         public List<Candidate> listcandidate;
 
         public VoterVM voterView;
@@ -21,6 +23,7 @@ namespace INF272Group11Project.ViewModels
         {
             return db.Elections.Where(x => x.ElectionDate == DateTime.Today).FirstOrDefault();
         }
+
 
 
     }

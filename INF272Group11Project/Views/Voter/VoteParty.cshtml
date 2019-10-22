@@ -18,9 +18,10 @@
     <label class="Slogan">The simple and better way to vote</label>
     <br />
     <ul class="NavigationBar">
-        <li class="BarList"><a href="@Url.Action("VoterHomePage","Voter", new {VoterGUID = Model.voterView.voter.GUID})">Home</a></li>
-        <li class="BarList"><a class="OnPage" href="@Url.Action("VoteParty","Voter", new {VoterGUID = Model.voterView.voter.GUID, id = Model.voterView.voter.VoterID})">Vote</a></li>
-        <li class="BarList"><a href="@Url.Action("UpdateVoterInfo", "Voter", new {VoterGUID = Model.voterView.voter.GUID, id = Model.voterView.voter.VoterID})">Update Personal Info</a></li>
+        <li class="BarList"><a href="@Url.Action("VoterHomePage","Voter", new { VoterGUID = Model.voterView.voter.GUID})"></a></li>
+        <li class="BarList"><a class="OnPage" href="@Url.Action("VoteParty","Voter", new {VoterGUID = Model.voterView.voter.GUID, id =  Model.voterView.voter.VoterID})">National Vote</a></li>
+        <li class="BarList"><a class="OnPage" href="@Url.Action("VoteProvincial","Voter", new {VoterGUID = Model.voterView.voter.GUID, id =  Model.voterView.voter.VoterID})">Provincial Vote</a></li>
+        <li class="BarList"><a href="@Url.Action("UpdateVoterInfo", "Voter", new {VoterGUID = Model.voterView.voter.GUID, id =  Model.voterView.voter.VoterID})">Update Personal Info</a></li>
         <li class="BarList"><a href="@Url.Action("ChangePasswordVoter", "Voter", new {VoterGUID = Model.voterView.voter.GUID, id = Model.voterView.voter.VoterID})">Change Password</a></li>
         <li class="BarList"><a href="@Url.Action("Logout","Voter")">Logout</a></li>
     </ul>
@@ -45,20 +46,23 @@
                 <td>
                     @{ 
                         var base64 = Convert.ToBase64String(item.Party.PartyImage.PartyLeaderPicture);
-                        var imsrc = string.Format("data:image/giff: base64,{0}", base64);
+                        var imsrc = string.Format("data:image/png;base64,{0}", base64);
                     }
-                    <img src="@imsrc"/>
+                    <img src="@imsrc" width="100" height="100"/>
                 </td>
                 <td>
                     @{
                         var bases64 = Convert.ToBase64String(item.Party.PartyImage.PartyPicture);
-                        var imsrcs = string.Format("data:image/giff: base64,{0}", bases64);
+                        var imsrcs = string.Format("data:image/png;base64,{0}", bases64);
                     }
-                    <img src="@imsrcs" />
+                    <img src="@imsrcs" height="100" width="100"/>
                 </td>
                 <td>
-                    @using (Html.BeginForm("doVoteParty", "Voter", FormMethod.Post, new { PartyID = item.Party.PartyID, voterID = Model.voterView.voter.VoterID, VoterGUID = Model.voterView.voter.GUID }))
+                    @using (Html.BeginForm("doVoteParty", "Voter"))
                     {
+                        <input type="hidden" value="@Model.voterView.voter.GUID" name="VoterGUID"/>
+                        <input type="hidden" value="@Model.voterView.voter.VoterID" name="VoterID"/>
+                        <input type="hidden" value="@item.Party.PartyID" name="PartyID"/>
                         <input id="BtnVoteParty" type="submit" value="Vote" />
                     }
                 </td>

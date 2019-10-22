@@ -75,7 +75,7 @@ namespace INF272Group11Project.Controllers
                     else
                     {
                         TempData["message"] = "The Voting Station Already Exists";
-                        return RedirectToAction("AddVotingStation", new { StaffGUID = StaffGUID, id = id });
+                        return RedirectToAction("AddVotingStation", "VotingStation", new { StaffGUID = StaffGUID, id = id });
                     }
                 }
                 else
@@ -87,7 +87,7 @@ namespace INF272Group11Project.Controllers
             else
             {
                 TempData["message"] = "Please Fill In All of Your Details";
-                return RedirectToAction("AddVotingStation", new { StaffGUID = StaffGUID, id = id });
+                return RedirectToAction("AddVotingStation", "VotingStation", new { StaffGUID = StaffGUID, id = id });
             }
 
         }
@@ -126,28 +126,29 @@ namespace INF272Group11Project.Controllers
         {
             ViewBag.message = TempData["message"];
             ViewBag.success = TempData["success"];
+
             if (StaffGUID != null)
             {
-                if (VotingStationName != null && StreetAddress != null)
+                if (VotingStationName != null && StreetAddress != null && vs.ProvinceID != null && vs.SuburbID != null && vs.CityOrTownID != null)
                 {
-                    var SearchVotingStation = db.VotingStations.Where(x => x.VotingStationName == VotingStationName).FirstOrDefault();
+                    var SearchVotingStation = db.VotingStations.Where(x => x.VotingStationName == VotingStationName && x.ProvinceID == vs.ProvinceID && x.SuburbID == vs.SuburbID && x.CityOrTownID == vs.CityOrTownID && x.VotingStationStreetAddress == StreetAddress).FirstOrDefault();
                     if (SearchVotingStation != null)
                     {
                         TempData["TempSearch"] = SearchVotingStation;
                         TempData["success"] = "The Station Was Successfully Found!";
-                        return RedirectToAction("UpdateOrDeleteVotingStation", new { StaffGUID = StaffGUID, id = id });
+                        return RedirectToAction("UpdateDeleteVotingStation", new { StaffGUID = StaffGUID, id = id });
                     }
                     else
                     {
-                        TempData["message"] = "The Voting Station You Have Searched For, Does Not Exist!";
-                        return RedirectToAction("UpdateOrDeleteVotingStation", new { StaffGUID = StaffGUID, id = id });
+                        TempData["message"] = "The Voting Station You Have Searched For, Does Not Exist! Please Ensure That All Information Is Correct";
+                        return RedirectToAction("UpdateDeleteVotingStation", new { StaffGUID = StaffGUID, id = id });
                     }
 
                 }
                 else
                 {
                     TempData["message"] = "Please Ensure Fill In All Fields!";
-                    return RedirectToAction("UpdateOrDeleteVotingStation", new { StaffGUID = StaffGUID, id = id });
+                    return RedirectToAction("UpdateDeleteVotingStation", new { StaffGUID = StaffGUID, id = id });
                 }
             }
             else
@@ -161,26 +162,40 @@ namespace INF272Group11Project.Controllers
         {
             ViewBag.message = TempData["message"];
             ViewBag.success = TempData["success"];
-            if (StaffGUID != null && id != null && VotingStationID != null)
+            if (StaffGUID != null && id != null)
             {
-                StaffGUIDControl staffGUID = new StaffGUIDControl();
-                if (staffGUID.IsLogedIn(db, StaffGUID))
+                if (VotingStationID != null)
                 {
-                    staffGUID.RefreshGUID(db);
-                    var vids = Convert.ToInt32(VotingStationID);
-                    var searchVotingStation = db.VotingStations.Where(x => x.VotingStationID == vids).FirstOrDefault();
-                    if (searchVotingStation != null)
+
+                
+                StaffGUIDControl staffGUID = new StaffGUIDControl();
+                    if (staffGUID.IsLogedIn(db, StaffGUID))
                     {
-                        AddVotingStationVM add = new AddVotingStationVM();
-                        add.StaffView = staffGUID;
-                        add.VotingStation = searchVotingStation;
-                        return View(add);
+                        staffGUID.RefreshGUID(db);
+                        var vids = Convert.ToInt32(VotingStationID);
+                        var searchVotingStation = db.VotingStations.Where(x => x.VotingStationID == vids).FirstOrDefault();
+                        if (searchVotingStation != null)
+                        {
+                            AddVotingStationVM add = new AddVotingStationVM();
+                            add.StaffView = staffGUID;
+                            add.VotingStation = searchVotingStation;
+                            ViewBag.ProvinceID = new SelectList(db.Provinces, "ProvinceID", "ProvinceName");
+                            ViewBag.CityOrTownID = new SelectList(db.CityOrTowns, "CityOrTownID", "CityOrTownName");
+                            ViewBag.SuburbID = new SelectList(db.Suburbs, "SuburbID", "SuburbName");
+                            return View(add);
+                        }
+                        else
+                        {
+                            TempData["message"] = "The Voting Station You Have Searched For, Does Not Exist!";
+                            return RedirectToAction("UpdateDeleteVotingStation", "VotingStation", new { StaffGUID = StaffGUID, id = id });
+                        }
                     }
                     else
                     {
-                        TempData["message"] = "The Voting Station You Have Searched For, Does Not Exist!";
-                        return RedirectToAction("UpdateOrDeleteVotingStation", new { StaffGUID = StaffGUID, id = id });
+                        TempData["message"] = "The Please Search for a Voting Station!";
+                        return RedirectToAction("UpdateDeleteVotingStation", "VotingStation", new { StaffGUID = StaffGUID, id = id });
                     }
+                
 
                 }
                 else
@@ -196,9 +211,9 @@ namespace INF272Group11Project.Controllers
             }
         }
 
-        public ActionResult doVotingSationUpdate(string StaffGUID, string id, string VotingStationID, string VotingStationName, [Bind(Include = "SuburbID, ProvinceID, CityOrTownID")] VotingStation vs, string StreetAddress, string Longitude, string Latitiude, DateTime OpeningTime, DateTime ClosingTime)
+        public ActionResult doVotingStationUpdate(string StaffGUID, string id, string VotingStationID, string VotingStationName, [Bind(Include = "SuburbID, ProvinceID, CityOrTownID")] VotingStation vs, string StreetAddress, string Longitude, string Latitude, string OpeningTime, string ClosingTime)
         {
-            if (StaffGUID != null && id != null && VotingStationID != null && VotingStationName != null && StreetAddress != null && Longitude != null && Latitiude != null && OpeningTime != null && ClosingTime != null)
+            if (StaffGUID != null && id != null && VotingStationID != null && VotingStationName != null && StreetAddress != null && Longitude != null && Latitude != null && OpeningTime != null && ClosingTime != null)
             {
                 var ids = Convert.ToInt32(VotingStationID);
                 var search = db.VotingStations.Where(x => x.VotingStationID == ids).FirstOrDefault();
@@ -209,9 +224,9 @@ namespace INF272Group11Project.Controllers
                     {
                         search.VotingStationName = VotingStationName;
                         search.VotingStationLongitude = Convert.ToInt32(Longitude);
-                        search.VotingStationLatitude = Convert.ToInt32(Latitiude);
-                        search.VotingStationOpeningTime = OpeningTime;
-                        search.VotingStationClosingTime = ClosingTime;
+                        search.VotingStationLatitude = Convert.ToInt32(Latitude);
+                        search.VotingStationOpeningTime = Convert.ToDateTime(OpeningTime);
+                        search.VotingStationClosingTime = Convert.ToDateTime(ClosingTime);
                         search.VotingStationStreetAddress = StreetAddress;
                         search.SuburbID = vs.SuburbID;
                         search.ProvinceID = vs.ProvinceID;
@@ -223,43 +238,53 @@ namespace INF272Group11Project.Controllers
                     }
                     else
                     {
-                        TempData["message"] = "";
-                        return RedirectToAction("UpdateVotingStation", new { StaffGUID = StaffGUID, id = id, VotingStationID = VotingStationID });
+                        TempData["message"] = "Voting Sation Could Not be Found!";
+                        return RedirectToAction("UpdateVotingStation", "VotingStation", new { StaffGUID = StaffGUID, id = id, VotingStationID = VotingStationID });
                     }
                 }
                 else
                 {
                     TempData["message"] = "The Voting Station does not exist!";
-                    return RedirectToAction("UpdateVotingStation", new { StaffGUID = StaffGUID, id = id, VotingStationID = VotingStationID });
+                    return RedirectToAction("UpdateVotingStation", "VotingStation", new { StaffGUID = StaffGUID, id = id, VotingStationID = VotingStationID });
                 }
 
             }
             else
             {
                 TempData["message"] = "Please Fill In All Of The Fields";
-                return RedirectToAction("UpdateVotingStation", new { StaffGUID = StaffGUID, id = id, VotingStationID = VotingStationID });
+                return RedirectToAction("UpdateVotingStation", "VotingStation", new { StaffGUID = StaffGUID, id = id, VotingStationID = VotingStationID });
             }
 
 
         }
         public ActionResult DeleteVotingStation(string StaffGUID, string id, string VotingStationID)
         {
-            if(StaffGUID != null && id != null && VotingStationID != null)
+            if(StaffGUID != null && id != null)
             {
-                var ids = Convert.ToInt32(VotingStationID);
-                var search = db.VotingStations.Where(x => x.VotingStationID == ids).FirstOrDefault();
-                if(search != null)
+                if (VotingStationID != null)
                 {
-                    db.VotingStations.Remove(search);
-                    db.SaveChanges();
-                    TempData["success"] = "The Voting Station was Deleted Successfully!";
-                    return RedirectToAction("StaffHomePage","Staff", new { StaffGUID = StaffGUID});
+                    var ids = Convert.ToInt32(VotingStationID);
+                    VotingStation search = db.VotingStations.Where(x => x.VotingStationID == ids).FirstOrDefault();
+                    if (search != null)
+                    {
+
+                        db.VotingStations.Remove(search);
+                        db.SaveChanges();
+                        TempData["success"] = "The Voting Station was Deleted Successfully!";
+                        return RedirectToAction("StaffHomePage", "Staff", new { StaffGUID = StaffGUID });
+                    }
+                    else
+                    {
+                        TempData["message"] = "The Voting Station Could Not Be Found! Please Try Search Again!";
+                        return RedirectToAction("UpdateDeleteVotingStation", "VotingStation", new { SraffGUID = StaffGUID, id = id });
+                    }
                 }
                 else
                 {
-                    TempData["message"] = "The Voting Station Could Not Be Found! Please Try Search Again!";
-                    return RedirectToAction("UpdateOrDeleteVotingStation", new { SraffGUID = StaffGUID, id= id});
+                    TempData["message"] = "The Please Search for a Voting Station!";
+                    return RedirectToAction("UpdateDeleteVotingStation", "VotingStation", new { StaffGUID = StaffGUID, id = id });
                 }
+            
             }
             else
             {

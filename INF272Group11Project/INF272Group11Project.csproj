@@ -215,13 +215,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>National.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Report\NationalReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NationalReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\Provicial.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Provicial.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Report\ProvincialReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProvincialReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ViewModels\AddVotingStationVM.cs" />
     <Compile Include="ViewModels\CandidateVM.cs" />
+    <Compile Include="ViewModels\FindVotingStationViewModel.cs" />
     <Compile Include="ViewModels\NationalResultsVM.cs" />
     <Compile Include="ViewModels\ProvincialResultsVM.cs" />
 
@@ -348,6 +361,16 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Report\NationalReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NationalReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\ProvincialReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ProvincialReport.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

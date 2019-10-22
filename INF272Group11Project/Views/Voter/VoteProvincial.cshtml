@@ -15,8 +15,19 @@
     <img id="Logo" src="~/kisscc0-voting-computer-icons-election-logo-button-vote-icon-5b72245f890da6.8607747415342070715614.png" alt="Logo" />
     <h1 class="PageHeading">Voter Home Page!</h1>
     <label class="Slogan">The simple and better way to vote</label>
+    <br />
+    <ul class="NavigationBar">
+        <li class="BarList"><a href="@Url.Action("VoterHomePage","Voter", new { VoterGUID = Model.voterView.voter.GUID})"></a></li>
+        <li class="BarList"><a class="OnPage" href="@Url.Action("VoteParty","Voter", new {VoterGUID = Model.voterView.voter.GUID, id =  Model.voterView.voter.VoterID})">National Vote</a></li>
+        <li class="BarList"><a class="OnPage" href="@Url.Action("VoteProvincial","Voter", new {VoterGUID = Model.voterView.voter.GUID, id =  Model.voterView.voter.VoterID})">Provincial Vote</a></li>
+        <li class="BarList"><a href="@Url.Action("UpdateVoterInfo", "Voter", new {VoterGUID = Model.voterView.voter.GUID, id =  Model.voterView.voter.VoterID})">Update Personal Info</a></li>
+        <li class="BarList"><a href="@Url.Action("ChangePasswordVoter", "Voter", new {VoterGUID = Model.voterView.voter.GUID, id = Model.voterView.voter.VoterID})">Change Password</a></li>
+        <li class="BarList"><a href="@Url.Action("Logout","Voter")">Logout</a></li>
+    </ul>
+    <br />
+    <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
     <h1 class="SecondaryHead">Vote for Provincial Government By Clicking The Vote Button!</h1>
-    
+
     <table>
         <tr>
             <th>Party Name:</th>
@@ -29,24 +40,28 @@
         {
 
 
-        <tr>
-            <td>@item.Party.PartyName</td>
-            <td>@item.Party.PartyAccronym</td>
-            <td>@item.CandidateFirstNames @item.CandidateLastName</td>
-            <td>
-                @{
-                    var bases64 = Convert.ToBase64String(item.Party.PartyImage.PartyPicture);
-                    var imsrcs = string.Format("data:image/giff: base64,{0}", bases64);
-                }
-                <img src="@imsrcs" />
-            </td>
-            <td>
-                @using (Html.BeginForm("doVoteProvincial", "Voter", FormMethod.Post, new { VoterGUID = Model.voterView.voter.GUID, id = Model.voterView.voter.VoterID, PartyID = item.Party.PartyID, provinceID = item.ProvinceID}))
-                {
-                    <input id="BtnVote" type="submit" value="Vote"/>
-                }
-            </td>
-        </tr>
+            <tr>
+                <td>@item.Party.PartyName</td>
+                <td>@item.Party.PartyAccronym</td>
+                <td>@item.CandidateFirstNames @item.CandidateLastName</td>
+                <td>
+                    @{
+                        var bases64 = Convert.ToBase64String(item.Party.PartyImage.PartyPicture);
+                        var imsrcs = string.Format("data:image/png;base64,{0}", bases64);
+                    }
+                    <img src="@imsrcs" height="100" width="100" />
+                </td>
+                <td>
+                    @using (Html.BeginForm("doVoteProvincial", "Voter", FormMethod.Post))
+                    {
+                        <input type="hidden" value="@Model.voterView.voter.GUID" name="VoterGUID" />
+                        <input type="hidden" value="@Model.voterView.voter.VoterID" name="id" />
+                        <input type="hidden" value="@item.Party.PartyID" name="PartyID" />
+                        <input type="hidden" value="@item.ProvinceID" name="ProvinceID" />
+                        <input id="BtnVote" type="submit" value="Vote" />
+                    }
+                </td>
+            </tr>
         }
     </table>
 </body>

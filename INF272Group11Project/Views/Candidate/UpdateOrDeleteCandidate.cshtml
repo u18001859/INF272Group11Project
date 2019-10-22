@@ -1,5 +1,4 @@
 ﻿@model INF272Group11Project.ViewModels.CandidateVM
-
 @{
     Layout = null;
 }
@@ -31,29 +30,27 @@
     <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
     <h1 class="SecondaryHead" style="color: green">@ViewBag.success</h1>
     <div class="Container">
-
-        @using (Html.BeginForm("SearchCandidate", "Candidate", FormMethod.Post))
+        @using (Html.BeginForm("SearchCandidate", "Candidate"))
         {
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <label>Select A Party:</label>
             @Html.DropDownList("PartyID", null, htmlAttributes: new { @Class = "form-control" })
             <br />
-
+            <br />
             <label>Select A Candidate Position:</label>
             @Html.DropDownList("CandidatePosition_ID", null, htmlAttributes: new { @Class = "form-Control" })
-
             <br />
             <br />
             <label>Select A Province: </label>
             @Html.DropDownList("ProvinceID", null, htmlAttributes: new { @Class = "form-Control" })
             <br />
             <br />
-            <br />
             <input type="submit" name="submitButton" id="btSearch" value="Search" />
         }
-        <br />
-        <br />
+        </div>
+    <br />
+    <br />
         <table>
             <tr>
                 <th>Candidate First Names:</th>
@@ -61,49 +58,33 @@
                 <th>Candidate Position:</th>
                 <th>Party: </th>
                 <th>Province: </th>
-                <th></th>
+                <th>Update/Delete</th>
             </tr>
 
             <tr>
-                <td>@Model.candidate.CandidateFirstNames</td>
-                <td>@Model.candidate.CandidateLastName</td>
-                <td>@Model.candidate.CandidatePosition.CandidatePosition_Description</td>
-                <td>@Model.candidate.Party.PartyName</td>
-                <td>@Model.candidate.Province.ProvinceName</td>
+                <td>@Html.DisplayFor(model => model.candidate.CandidateFirstNames)</td>
+                <td>@Html.DisplayFor(model => model.candidate.CandidateLastName)</td>
+                <td>@Html.DisplayFor(model => model.candidate.CandidatePosition.CandidatePosition_Description)</td>
+                <td>@Html.DisplayFor(model => model.candidate.Party.PartyName)</td>
+                <td>@Html.DisplayFor(model => model.candidate.Province.ProvinceName)</td>
                 <td>
                     @using (Html.BeginForm("UpdateCandidate", "Candidate", FormMethod.Post))
                     {
                         <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
                         <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
-                        <input type="hidden" value="@Model.candidate.Candidate_ID" name="CandidateID" />
+                        <input type="hidden" value="@Html.DisplayFor(model => model.candidate.Candidate_ID)" name="CandidateID" />
                         <input type="submit" value="Update" name="Update" />
                     }
                     @using (Html.BeginForm("DeleteCandidate", "Candidate", FormMethod.Post))
                     {
                         <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
                         <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
-                        <input type="hidden" value="@Model.candidate.Candidate_ID" name="CandidateID" />
+                        <input type="hidden" value="@Html.DisplayFor(model => model.candidate.Candidate_ID)" name="CandidateID" />
                         <input type="submit" value="Delete" name="Delete" />
                     }
                 </td>
             </tr>
         </table>
-
-        @using (Html.BeginForm("StaffHomePage", "Staff"))
-        {
-            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
-            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
-            <input type="submit" name="submitButton" id="btnCancel" value="Cancel" />
-
-            <br />
-            <br />
-
-            <label>@TempData["Message"] </label>
-        }
-
-        <br />
-        <label>@TempData["message"]</label>
-        <label>@TempData["success"]</label>
-    </div>
+    
 </body>
 </html>

@@ -30,11 +30,15 @@ namespace INF272Group11Project.Models
         public string PartyWebsite { get; set; }
         public string PartyEmail { get; set; }
         public Nullable<int> SuburbID { get; set; }
+        public Nullable<int> ProvinceID { get; set; }
+        public Nullable<int> CityOrTownID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Candidate> Candidates { get; set; }
+        public virtual CityOrTown CityOrTown { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NationalResult> NationalResults { get; set; }
+        public virtual Province Province { get; set; }
         public virtual Suburb Suburb { get; set; }
         public virtual PartyImage PartyImage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

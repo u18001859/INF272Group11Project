@@ -13,6 +13,7 @@ namespace INF272Group11Project.ViewModels
         public List<NationalResult> Results;
         public NationalResultsVM resultsView;
 
+        public StaffGUIDControl StaffView;
         
     }
 }

@@ -24,15 +24,15 @@
     <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
     <h1 class="SecondaryHead" style="color: green">@ViewBag.success</h1>
     <div class="Container">
-        @using (Html.BeginForm("DoVotingStationUpdate", "VotingStation", FormMethod.Post))
+        @using (Html.BeginForm("doVotingStationUpdate", "VotingStation"))
         {
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
-            <input type="hidden" value="@Model.VotingStation.VotingStationID" name="VotingStationID" />
+            <input type="hidden" value="@Html.DisplayFor(model => model.VotingStation.VotingStationID)" name="VotingStationID" />
             <br />
             <br />
             <lable>Voting Station Name: </lable>
-            <input type="text" name="VotingStationName" />
+            <input type="text" value="@Model.VotingStation.VotingStationName" name="VotingStationName" />
             <br />
             <br />
             <label>Select Province: </label>
@@ -48,26 +48,26 @@
             <br />
             <br />
             <label>Enter Street Address: </label>
-            <input type="text" name="StreetAddress" />
+            <input type="text" value="@Model.VotingStation.VotingStationStreetAddress" name="StreetAddress" />
             <br />
             <br />
             <label>Longitude: </label>
-            <input type="text" name="Longitude" />
+            <input type="number" value="@Model.VotingStation.VotingStationLongitude" name="Longitude" />
             <br />
             <br />
             <label>Latitude: </label>
-            <input type="text" name="Latitude" />
+            <input type="number" value="@Model.VotingStation.VotingStationLatitude" name="Latitude" />
             <br />
             <br />
             <label>Opening Time: </label>
-            <input type="time" name="OpeningTime" />
+            <input type="time" value="@Model.VotingStation.VotingStationOpeningTime.TimeOfDay" name="OpeningTime" />
             <br />
             <br />
             <label>Closing Time: </label>
-            <input type="time" name="ClosingTime" />
+            <input type="time" value="@Model.VotingStation.VotingStationClosingTime.TimeOfDay" name="ClosingTime" />
             <br />
             <br />
-            <input id="BtnUpdate" type="submit" value="Update" name="Add" />
+            <input id="BtnUpdate" type="submit" value="Update" name="Update" />
         }
         @using (Html.BeginForm("StaffHomePage", "Staff", new { StaffGUID = Model.StaffView.staff.GUID }))
         {

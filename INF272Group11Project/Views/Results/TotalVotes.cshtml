@@ -30,8 +30,8 @@
             @foreach (var item in Model.ListElection)
             {
             <tr>
-                <td>@Model.</td>
-                <td>@Model.election.TotalVotes</td>
+                <td>@item.ElectionDate</td>
+                <td>@item.TotalVotes</td>
             </tr>
             }
         </table>

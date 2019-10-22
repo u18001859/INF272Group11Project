@@ -31,36 +31,37 @@
     <h1 class="SecondaryHead" style="color: red">@ViewBag.message</h1>
     <h1 class="SecondaryHead" style="color: green">@ViewBag.success</h1>
     <div class="Container">
+        <br />
+        @using (Html.BeginForm("RegisterParty", "Staff", FormMethod.Post))
 
-        @using (Html.BeginForm("RegisterParty", "Staff",FormMethod.Post))
         {
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID"/>
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id"/>
             <input id="BtnRegisterNewParty" type="submit" value="Register New Party" />
         }
-
+        <br />
+        <br />
         @using (Html.BeginForm("UpdateOrDeleteParty", "Staff", FormMethod.Post))
-
         {
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnUpdateParty" type="submit" value="Update Or Delete Party" />
         }
-        @using (Html.BeginForm("RegisterCandidate", "Candidate"))
+        <br />
+        <br />
+        @using (Html.BeginForm("RegisterCandidate", "Candidate", FormMethod.Post))
         {
-
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
-
             <input id="BtnRegisterCandidate" type="submit" value="Register Candidate" name="RegisterCandidate" />
         }
-        @using (Html.BeginForm("UpdateOrDeleteCandidate", "Candidate", FormMethod.Post))
+        <br />
+        <br />
+        @using (Html.BeginForm("UpdateOrDeleteCandidate", "Candidate"))
         {
-
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
-            <input id="BtnSearchCandidate" type="submit" value="Update Or Delete Candidate" name="UpdateOrDeleteCandidate" />
-
+            <input id="BtnSearchCandidate" type="submit" value="Update Or Delete Candidate" name="SearchCandidate" />
         }
         @using (Html.BeginForm("AddVotingStation", "VotingStation", FormMethod.Post))
         {
@@ -68,23 +69,21 @@
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnAddVotingStationStaffHome" type="submit" value="Add Voting Station" />
         }
+        <br />
+        <br />
         @using (Html.BeginForm("UpdateDeleteVotingStation", "VotingStation", FormMethod.Post))
         {
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnUpdateDeleteVotingStation" type="submit" value="Update Or Delete A Voting Station" />
         }
+        <br />
+        <br />
         @using (Html.BeginForm("RegisterStaff", "Staff", FormMethod.Post))
         {
             <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
             <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
             <input id="BtnRegisterStaff" type="submit" value="Register Staff" />
-        }
-
-        @if ((string)TempData["Message"] != null)
-        {
-            <label>@TempData["Message"].ToString()</label>
-
         }
 
     </div>

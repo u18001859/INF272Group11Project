@@ -11,7 +11,7 @@ namespace INF272Group11Project.ViewModels
 
         public StaffGUIDControl StaffView;
 
-        public VotingStation VotingStation;
+        public  VotingStation VotingStation;
 
         public List<VotingStation> ListvotingStation;
 
