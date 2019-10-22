@@ -13,8 +13,9 @@ namespace INF272Group11Project.Controllers
 {
     public class StaffController : Controller
     {
-        // GET: Staff
+
         VotingSystemProjectEntities2 db = new VotingSystemProjectEntities2();
+
         StaffEncryption staffEncryptionVM = new StaffEncryption();
 
         public ActionResult StaffHomePage(string StaffGUID)
@@ -27,7 +28,9 @@ namespace INF272Group11Project.Controllers
                     staffGUIDControl.RefreshGUID(db);
                     StaffViewModel staffVM = new StaffViewModel();
                     staffVM.StaffView = staffGUIDControl;
+
                     staffVM.ListStaff = db.Staffs.ToList();
+
                     ViewBag.message = TempData["message"];
                     ViewBag.success = TempData["success"];
                     return View(staffVM);
@@ -47,6 +50,7 @@ namespace INF272Group11Project.Controllers
                     StaffViewModel staffVM = new StaffViewModel();
                     staffVM.StaffView = staffGUID;
                     staffVM.ListStaff = db.Staffs.ToList();
+
                     ViewBag.message = TempData["message"];
                     ViewBag.success = TempData["success"];
                     return View(staffVM);
@@ -97,12 +101,210 @@ namespace INF272Group11Project.Controllers
                     TempData["GUIDControl"] = staffGUIDControl;
 
                     return RedirectToAction("StaffHomePage", "Staff");
+                    
                 }
                 else
                 {
                     TempData["message"] = "Your Username or Password was incorrect!";
                     return RedirectToAction("StaffLogin");
                 }
+
+            }
+
+        }
+        [HttpPost]
+        public ActionResult ForgotPassword(string UserName)
+        {
+            var check = db.Staffs.Where(x => x.Staff_UserName == UserName).FirstOrDefault();
+            if (check != null)
+            {
+
+                var question = check.SecurityQuestionID;
+                if (question != null)
+                {
+                    var securityquestion = db.SecurityQuestions.Where(j => j.SecurityQuestionID == question).FirstOrDefault();
+                    if (securityquestion != null)
+                    {
+                        var answer = securityquestion.SecurityQuestion1;
+                        ViewBag.answer = answer;
+                        ViewBag.Username = UserName;
+                        ViewBag.message = TempData["message"];
+                        return View(check);
+                    }
+                    else
+                    {
+                        TempData["message"] = "An Unknown Error Took Place, Please try again";
+                        return RedirectToAction("StaffLogin");
+                    }
+                }
+                else
+                {
+                    TempData["message"] = "An Unknown Error Took Place, Please try again";
+                    return RedirectToAction("StaffLogin");
+                }
+            }
+            else
+            {
+                TempData["message"] = "Your Username was not found";
+                return RedirectToAction("StaffLogin");
+            }
+        }
+        [HttpPost]
+        public ActionResult doForgotPasswordUpdate(string Username, string Answer, string NewPassword, string ConfirmNewPassword)
+        {
+
+            Staff s = db.Staffs.Where(x => x.Staff_UserName == Username && x.StaffSecurityQuestionAnswer == Answer).FirstOrDefault();
+            if (Username != null && Answer != null && NewPassword != null && ConfirmNewPassword != null)
+            {
+
+                if (s != null)
+                {
+                    if (NewPassword == ConfirmNewPassword)
+                    {
+                        var hassedPassword = staffEncryptionVM.HashedData(NewPassword);
+                        s.Staff_Password = hassedPassword;
+                        db.SaveChanges();
+                        TempData["success"] = "Your Password Has Been Updated";
+                        return RedirectToAction("StaffLogin");
+                    }
+                    else
+                    {
+                        TempData["message"] = "Your Passwords do not Match!";
+                        return RedirectToAction("ForgotPassword", new
+                        { UserName = s.Staff_UserName });
+                    }
+                }
+                else
+                {
+                    TempData["message"] = "An Error Has Occured! Please Try Again!";
+                    return RedirectToAction("StaffLogin");
+                }
+            }
+            else
+            {
+                TempData["message"] = "Please Fill in your details";
+                return RedirectToAction("ForgotPassword", new
+                {
+                    UserName = s.Staff_UserName
+                });
+            }
+
+        }
+
+        public ActionResult ChangePasswordStaff(string StaffGUID, string id)
+        {
+            if (StaffGUID != null)
+            {
+                StaffGUIDControl staffGUID = new StaffGUIDControl();
+                if (staffGUID.IsLogedIn(db, StaffGUID))
+                {
+                    staffGUID.RefreshGUID(db);
+                    StaffViewModel staffView = new StaffViewModel();
+                    staffView.StaffView = staffGUID;
+                    var ids = Convert.ToInt32(id);
+                    Staff s = db.Staffs.Where(x => x.StaffID == ids).FirstOrDefault();
+                    if (s != null)
+                    {
+                        var searchAnswer = s.SecurityQuestionID;
+                        if (searchAnswer != null)
+                        {
+
+                            var searchForDec = db.SecurityQuestions.Where(k => k.SecurityQuestionID == searchAnswer).FirstOrDefault();
+                            if (searchForDec != null)
+                            {
+                                ViewBag.Answer = searchForDec.SecurityQuestion1;
+                                return View(staffView);
+                            }
+                            else
+                            {
+                                TempData["message"] = "An Error Occured Please Try Again";
+                                return RedirectToAction("StaffHomePage", new { StaffGUID = StaffGUID });
+                            }
+                        }
+                        else
+                        {
+                            TempData["message"] = "An Error Occured Please Try Again";
+                            return RedirectToAction("StaffHomePage", new { StaffGUID = StaffGUID });
+                        }
+
+                    }
+                    else
+                    {
+                        TempData["message"] = "An Error Occured Please Try Again";
+                        return RedirectToAction("StaffHomePage", new
+                        {
+                            StaffGUID = StaffGUID
+                        });
+                    }
+
+                }
+                else
+                {
+                    TempData["message"] = "An Error Occured Please Login Again";
+                    return RedirectToAction("StaffLogin");
+                }
+
+            }
+            else
+            {
+                TempData["message"] = "An Error Occured Please Try Again";
+                return RedirectToAction("StaffHomePage", new
+                {
+                    StaffGUID = StaffGUID
+                });
+            }
+        }
+        [HttpPost]
+        public ActionResult doUpdatePassword(string StaffGUID, string id, string Answer, string NewPassword, string ConfirmNewPassword)
+        {  
+          
+                  if (StaffGUID != null)
+            {
+                StaffGUIDControl staffGUID = new StaffGUIDControl();
+                if (staffGUID.IsLogedIn(db, StaffGUID))
+                {
+                    staffGUID.RefreshGUID(db);
+                    StaffViewModel staffView = new StaffViewModel();
+                    staffView.StaffView = staffGUID;
+                    var ids = Convert.ToInt32(id);
+                    Staff s = db.Staffs.Where(j => j.StaffID == ids && j.StaffSecurityQuestionAnswer == Answer).FirstOrDefault();
+                    if (s != null)
+                    {
+                        if (NewPassword == ConfirmNewPassword)
+                        {
+                            var hassedPassword = staffEncryptionVM.HashedData(NewPassword);
+                            s.Staff_Password = hassedPassword;
+                            db.SaveChanges();
+                            TempData["success"] = "Your Password Has Been Updated!";
+                            return RedirectToAction("StaffHomePage", new { StaffGUID = staffView.StaffView.staff.GUID });
+                        }
+                        else
+                        {
+                            TempData["message"] = "Your Passwords Do Not March. Try Again!";
+                            return RedirectToAction("ChangePasswordStaff", new { StaffGUID = StaffGUID, id = id });
+                        }
+
+                    }
+                    else
+                    {
+                        TempData["message"] = "Your Security Question Answer was Wrong.Try Again!";
+                        return RedirectToAction("ChangePasswordStaff", new { StaffGUID = StaffGUID, id = id });
+                    }
+                }
+                else
+                {
+                    TempData["message"] = "An Error Occured Please Try Again!";
+                    return RedirectToAction("StaffHomePage", new
+                    {
+                        StaffGUID = StaffGUID
+                    });
+                }
+            }
+            else
+            {
+                TempData["message"] = "An Error Occured Please Login Again!";
+                return RedirectToAction("StaffLogin");
+            }
 
             }
 
@@ -394,7 +596,9 @@ namespace INF272Group11Project.Controllers
                 else
                 {
                     TempData["message"] = "Your username is already in use!";
+<
                     return RedirectToAction("RegisterStaff", "Staff", new
+
                     {
                         StaffGUID = StaffGUID,
                         id = id
@@ -404,6 +608,7 @@ namespace INF272Group11Project.Controllers
             else
             {
                 TempData["message"] = "Please Fill In All of your Details";
+
                 return RedirectToAction("RegisterStaff", "Staff", new
                 {
                     StaffGUID = StaffGUID,
@@ -555,18 +760,23 @@ namespace INF272Group11Project.Controllers
                 else
                 {
                     TempData["message"] = "An Error Occured Please Login In Again!";
+
                     return RedirectToAction("StaffLogin", "Staff");
+
                 }
             }
             else
             {
                 TempData["message"] = "An Error Occured Please Login In Again!";
+
                 return RedirectToAction("StaffLogin", "Staff");
+
             }
 
         }
         [HttpPost]
         public ActionResult AddNewParty(string StaffGUID, string id, string PartyName, string PartyAcronym, string PhoneNumber, string Email, [Bind(Include = "ProvinceID, CityOrTownID, SuburbID")] Party party, string StreetAddress, string Website)
+
         {
 
             if (PartyName != "" && PartyAcronym != "" && PhoneNumber != "" && Email != "" && StreetAddress != "" && Website != "")
@@ -604,47 +814,60 @@ namespace INF272Group11Project.Controllers
                                         string t = s.PartyID.ToString();
                                         
                                         return RedirectToAction("PartyImages", "Staff", new { StaffGUID = StaffGUID, id = id, party = t });
+
                                     }
                                     else
                                     {
                                         TempData["message"] = "Website is already in use, please use a different one.";
+
                                         return RedirectToAction("RegisterParty", "Staff", new { StaffGUID = StaffGUID, id = id });
+
                                     }
                                 }
                                 else
                                 {
                                     TempData["message"] = "StreetAddress is already in use, please use a different one.";
+
                                     return RedirectToAction("RegisterParty", "Staff", new { StaffGUID = StaffGUID, id = id });
+
                                 }
                             }
                             else
                             {
                                 TempData["message"] = "Email is already in use, please use a different one.";
+
                                 return RedirectToAction("RegisterParty", "Staff", new { StaffGUID = StaffGUID, id = id });
+
                             }
                         }
                         else
                         {
                             TempData["message"] = "The Phone Number is already in use please use a different one.";
+
                             return RedirectToAction("RegisterParty", "Staff", new { StaffGUID = StaffGUID, id = id });
+
                         }
                     }
                     else
                     {
                         TempData["message"] = "Please enter a valid phone number";
+
                         return RedirectToAction("RegisterParty", "Staff", new { StaffGUID = StaffGUID, id = id });
+
                     }
                 }
                 else
                 {
                     TempData["message"] = "The party already exists, please create a new one!";
                     return RedirectToAction("RegisterParty", "Staff", new { StaffGUID = StaffGUID, id = id });
+
                 }
             }
             else
             {
                 TempData["message"] = "Please fill in all the data!";
                 return RedirectToAction("RegisterParty", "Staff", new { StaffGUID = StaffGUID, id = id });
+
             }
 
         }
@@ -680,7 +903,8 @@ namespace INF272Group11Project.Controllers
         
         public ActionResult AddImages(string StaffGUID, string id, PartyImage model, HttpPostedFileBase Logo, HttpPostedFileBase LeadPic, string party)
         {
-           
+
+            var db = new VotingSystemProjectEntities3();
             if (Logo != null && LeadPic != null)
             {
                 model.partyID = Convert.ToInt32(party);
@@ -702,6 +926,7 @@ namespace INF272Group11Project.Controllers
         }
 
 
+
         public ActionResult DeleteParty(string StaffGUID, string id, string PartyID, string PartyName)
         {
             if (StaffGUID != null)
@@ -712,6 +937,7 @@ namespace INF272Group11Project.Controllers
                     staffGUID.RefreshGUID(db);
                     StaffViewModel staffView = new StaffViewModel();
                     staffView.StaffView = staffGUID;
+
                     int ids = Convert.ToInt32(PartyID);
                     Party p = db.Parties.Where(x => x.PartyID == ids).FirstOrDefault();
                     PartyImage pi = db.PartyImages.Where(j => j.partyID == ids).FirstOrDefault();
@@ -723,6 +949,7 @@ namespace INF272Group11Project.Controllers
                         
                         TempData["success"] = "The Party Was Successfully Deleted!";
                         return RedirectToAction("StaffHomePage",  new { StaffGUID = staffView.StaffView.staff.GUID });
+
                     }
                     else
                     {
@@ -736,6 +963,7 @@ namespace INF272Group11Project.Controllers
                     return RedirectToAction("StaffLogin");
                 }
             }
+
             else
             {
                 TempData["message"] = "Your Session Has Expired Please Login Again!";
@@ -1018,7 +1246,7 @@ namespace INF272Group11Project.Controllers
                 return RedirectToAction("StaffLogin");
             }
         }
-        
+
         public ActionResult SetElectionDate(string StaffGUID, string id)
         {
             ViewBag.message = TempData["message"];
@@ -1104,10 +1332,12 @@ namespace INF272Group11Project.Controllers
                         }
                         db.SaveChanges();
                         TempData["success"] = "The Eelection Date Has Been Set!";
+
                         return RedirectToAction("StaffHomePage", new
                         {
                             StaffGUID = StaffGUID
                         });
+
                     }
                     else
                     {
@@ -1116,11 +1346,14 @@ namespace INF272Group11Project.Controllers
                         db.Elections.Add(election);
                         db.SaveChanges();
                         TempData["success"] = "The Eelection Date Has Been Set!";
+
                         return RedirectToAction("StaffHomePage", new
                         {
                             StaffGUID = StaffGUID
                         });
 
+
+                        return RedirectToAction("StaffHomePage", new { StaffGUID = StaffGUID });
 
                     }
 
@@ -1128,11 +1361,13 @@ namespace INF272Group11Project.Controllers
                 else
                 {
                     TempData["message"] = "This ElectionDate Already Exists Please Select A different One!";
+
                     return RedirectToAction("SetElectionDate", new
                     {
                         StaffGUID = StaffGUID,
                         id = id
                     });
+
                 }
 
 

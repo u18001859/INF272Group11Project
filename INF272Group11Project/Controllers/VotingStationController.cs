@@ -10,6 +10,7 @@ namespace INF272Group11Project.Controllers
 {
     public class VotingStationController : Controller
     {
+
         VotingSystemProjectEntities2 db = new VotingSystemProjectEntities2();
         AddVotingStationVM AddVotingStationVM = new AddVotingStationVM();
         // GET: VotingStation

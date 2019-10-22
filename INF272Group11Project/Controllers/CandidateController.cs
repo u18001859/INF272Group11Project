@@ -17,9 +17,10 @@ namespace INF272Group11Project.Controllers
     {
         //CANDIDATE CRUD
 
-        VotingSystemProjectEntities2 db = new VotingSystemProjectEntities2();
+        VotingSystemProjectEntities3 db = new VotingSystemProjectEntities3();
 
         // GET: Candidate
+
 
         public ActionResult RegisterCandidate(string StaffGUID, string id)
         {
@@ -158,6 +159,19 @@ namespace INF272Group11Project.Controllers
                         TempData["message"] = "Please Ensure That You have Entered All Your Data";
                         return RedirectToAction("UpdateOrDeleteCandidate", new { StaffGUID = StaffGUID, id = id });
                     }
+                }
+                else
+                {
+                    TempData["message"] = "Your Session Has Expired! Please Login Again!";
+                    return RedirectToAction("StaffLogin", "Staff");
+                }
+            }
+            else
+            {
+                TempData["message"] = "Your Session Has Expired! Please Login Again!";
+                return RedirectToAction("StaffLogin", "Staff");
+            }
+
         }
 
         [HttpPost]
@@ -210,6 +224,7 @@ namespace INF272Group11Project.Controllers
             ViewBag.success = TempData["success"];
             if (CandidateID != null && FirstNames != null && LastName != null && candidate.CandidatePosition_ID != null && candidate.PartyID != null && candidate.ProvinceID != null)
             {
+
 
                 if (StaffGUID != null)
                 {
@@ -266,6 +281,7 @@ namespace INF272Group11Project.Controllers
                 return RedirectToAction("UpdateCandidate", new { StaffGUID = StaffGUID, CandidateID = CandidateID, id = id });
             }
 
+
         }
 
         [HttpPost]
@@ -292,6 +308,7 @@ namespace INF272Group11Project.Controllers
                         TempData["message"] = "The Candidate Was Not Found, Please Try Again";
                         return RedirectToAction("UpdateOrDeleteCandidate", new { StaffGUID = StaffGUID, id = id });
                     }
+
                 }
                 else
                 {
@@ -303,6 +320,7 @@ namespace INF272Group11Project.Controllers
             {
                 TempData["message"] = "Your Session Has Expired! Please Login Again!";
                 return RedirectToAction("StaffLogin", "Staff");
+
             }
         }
            

@@ -14,7 +14,7 @@ namespace INF272Group11Project.Controllers
     
     public class VoterController : Controller
     {
-        VotingSystemProjectEntities2 db = new VotingSystemProjectEntities2();
+        VotingSystemProjectEntities3 db = new VotingSystemProjectEntities3();
         RegisterVoterVM registerVoter = new RegisterVoterVM();
         // GET: Voter
         //The Index ActionResult is the main homepage for the project.
@@ -348,7 +348,7 @@ namespace INF272Group11Project.Controllers
 
             registerVoter.voterView = voterVM;
 
-            using (VotingSystemProjectEntities2 db = new VotingSystemProjectEntities2())
+            using (VotingSystemProjectEntities3 db = new VotingSystemProjectEntities3())
             {
                 var ans = registerVoter.HashedData(Answer);
                 var vid = Convert.ToInt32(id);
@@ -418,7 +418,7 @@ namespace INF272Group11Project.Controllers
         [HttpPost]
         public ActionResult doForgotPasswordUpdate(string Answer, string NewPassword, string ConfirmNewPassword, string IDNumber)
         {
-            using (VotingSystemProjectEntities2 db = new VotingSystemProjectEntities2())
+            using (VotingSystemProjectEntities3 db = new VotingSystemProjectEntities3())
             {
                 var ans = registerVoter.HashedData(Answer);
                 var idnum = registerVoter.HashedData(IDNumber);

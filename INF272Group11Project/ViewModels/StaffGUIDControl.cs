@@ -11,7 +11,7 @@ namespace INF272Group11Project.ViewModels
         public Staff staff;
 
 
-        public void RefreshGUID(VotingSystemProjectEntities1 db)
+        public void RefreshGUID(VotingSystemProjectEntities3 db)
 
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -34,7 +34,7 @@ namespace INF272Group11Project.ViewModels
         }
 
 
-        public bool IsLogedIn(VotingSystemProjectEntities2 db)
+        public bool IsLogedIn(VotingSystemProjectEntities3 db)
         {
             db.Configuration.ProxyCreationEnabled = false;
             var guid = db.Staffs.Where(x => x.GUID == staff.GUID && x.GUIDTimeStamp > DateTime.Now).Count();
@@ -46,7 +46,7 @@ namespace INF272Group11Project.ViewModels
 
         }
 
-        public bool IsLogedIn(VotingSystemProjectEntities2 db, string userGUID)
+        public bool IsLogedIn(VotingSystemProjectEntities3 db, string userGUID)
         {
             db.Configuration.ProxyCreationEnabled = false;
             staff = db.Staffs.Where(x => x.GUID == userGUID && x.GUIDTimeStamp > DateTime.Now).FirstOrDefault();

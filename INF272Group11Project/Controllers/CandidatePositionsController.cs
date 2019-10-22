@@ -12,7 +12,7 @@ namespace INF272Group11Project.Views.Candidate
 {
     public class CandidatePositionsController : Controller
     {
-        private VotingSystemProjectEntities2 db = new VotingSystemProjectEntities2();
+        private VotingSystemProjectEntities3 db = new VotingSystemProjectEntities3();
 
         // GET: CandidatePositions
         public ActionResult Index()

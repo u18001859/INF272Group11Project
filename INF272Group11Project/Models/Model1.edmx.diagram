@@ -33,6 +33,7 @@
         <AssociationConnector Association="VotingSystemProjectModel.FK__NationalR__Party__3B75D760" ManuallyRouted="false" />
         <AssociationConnector Association="VotingSystemProjectModel.FK__Party__ProvinceI__1920BF5C" ManuallyRouted="false" />
         <AssociationConnector Association="VotingSystemProjectModel.FK__Party__SuburbID__182C9B23" ManuallyRouted="false" />
+
         <AssociationConnector Association="VotingSystemProjectModel.FK__PartyImag__party__1CF15040" ManuallyRouted="false" />
         <AssociationConnector Association="VotingSystemProjectModel.FK__Provincia__Party__37A5467C" ManuallyRouted="false" />
         <AssociationConnector Association="VotingSystemProjectModel.FK__Provincia__Provi__36B12243" ManuallyRouted="false" />
@@ -43,6 +44,7 @@
         <AssociationConnector Association="VotingSystemProjectModel.FK__Staff__StaffPosi__2A4B4B5E" ManuallyRouted="false" />
         <AssociationConnector Association="VotingSystemProjectModel.FK__Voter__SuburbID__2F10007B" ManuallyRouted="false" />
         <AssociationConnector Association="VotingSystemProjectModel.FK__VotingSta__Subur__3E52440B" ManuallyRouted="false" />
+
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

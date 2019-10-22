@@ -33,9 +33,10 @@
     <div class="Container">
         <br />
         @using (Html.BeginForm("RegisterParty", "Staff", FormMethod.Post))
+
         {
-            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID" />
-            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id" />
+            <input type="hidden" value="@Model.StaffView.staff.GUID" name="StaffGUID"/>
+            <input type="hidden" value="@Model.StaffView.staff.StaffID" name="id"/>
             <input id="BtnRegisterNewParty" type="submit" value="Register New Party" />
         }
         <br />

@@ -33,4 +33,4 @@ namespace INF272Group11Project.ViewModels
             }
         }
     }
-r
+}

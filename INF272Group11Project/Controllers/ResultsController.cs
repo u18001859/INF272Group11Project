@@ -10,6 +10,7 @@ namespace INF272Group11Project.Controllers
 {
     public class ResultsController : Controller
     {
+
         // GET: Results
         VotingSystemProjectEntities2 db = new VotingSystemProjectEntities2();
         public ActionResult TotalVotes(string StaffGUID, string id)
